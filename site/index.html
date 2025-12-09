@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A framework for decentralized trust and self-sovereign identity">
+        <meta name="description" content="Home Page">
       
       
         <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
@@ -16,16 +16,18 @@
       
       
       
+        <link rel="next" href="architecture/">
+      
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="img/STF_logo_nobg.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Sovereign Trust Framework</title>
+        <title>Sovereign Trust Framework Home Page - Sovereign Trust Framework</title>
       
     
     
@@ -50,6 +52,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="style/custom.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -92,8 +96,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="img/STF_logo_nobg.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -110,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Sovereign Trust Framework Home Page
             
           </span>
         </div>
@@ -238,6 +241,124 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="references/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="stfx-crypto/" class="md-tabs__link">
+          
+  
+  
+  Core Modules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="VID-IMPLEMENTATION-ANALYSIS/" class="md-tabs__link">
+          
+  
+  
+  Identity
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="stfx-crypto-api-analysis/" class="md-tabs__link">
+          
+  
+  
+  Design Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="architecural_principles/" class="md-tabs__link">
+          
+  
+  
+  Architectural Principles
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -262,8 +383,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="img/STF_logo_nobg.png" alt="logo">
 
     </a>
     Sovereign Trust Framework
@@ -350,10 +470,94 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ssi-defines-the-actors-toip-defines-the-digital-trust-stack-stf-orchestrates-the-interactions-where-trust-actually-emerges" class="md-nav__link">
+  <a href="#introduction-to-the-sovereign-trust-framework-stf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        “SSI defines the actors. ToIP defines the digital trust stack. STF orchestrates the interactions where trust actually emerges.”
+        Introduction to the Sovereign Trust Framework (STF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to the Sovereign Trust Framework (STF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-foundation-and-the-hourglass-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Foundation and the "Hourglass" Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stf-high-level-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STF High-Level Vision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STF High-Level Vision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation-stfx-crates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation: STFX Crates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Design Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Design Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-layer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Layer Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stf-modules-stfx-crates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STF Modules (STFX Crates)
       
     </span>
   </a>
@@ -361,10 +565,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-stf" class="md-nav__link">
+  <a href="#toip-alignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is STF?
+        ToIP Alignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ToIP Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-hourglass-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP "Hourglass" Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toip-layer-1-trust-support-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Layer 1: Trust Support Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-kits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Kits
       
     </span>
   </a>
@@ -372,10 +615,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
+  <a href="#architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project Status
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Documentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cryptographic-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cryptographic Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime &amp; Transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ongoing-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ongoing Work
       
     </span>
   </a>
@@ -396,6 +722,668 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-crypto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Crypto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Runtime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="VID-IMPLEMENTATION-ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VID Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-crypto-api-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto API Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STFX-CRYPTO-DESIGN-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Design Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-crypto-implementation-layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Implementation Layers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STFX-CRYPTO-VISUAL-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Visual Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STFX-CRYPTO-DOCUMENTATION-INDEX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Documentation Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stfx-runtime_decision_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Decision Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="00-RESOLUTION-OVER-MODULARIZATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resolution Over Modularization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architectural Principles
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architectural Principles
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecural_principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arch_DIP_SOLID/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DIP & SOLID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -428,10 +1416,94 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ssi-defines-the-actors-toip-defines-the-digital-trust-stack-stf-orchestrates-the-interactions-where-trust-actually-emerges" class="md-nav__link">
+  <a href="#introduction-to-the-sovereign-trust-framework-stf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        “SSI defines the actors. ToIP defines the digital trust stack. STF orchestrates the interactions where trust actually emerges.”
+        Introduction to the Sovereign Trust Framework (STF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to the Sovereign Trust Framework (STF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-foundation-and-the-hourglass-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Foundation and the "Hourglass" Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stf-high-level-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STF High-Level Vision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STF High-Level Vision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation-stfx-crates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation: STFX Crates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Design Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Design Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-layer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Layer Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stf-modules-stfx-crates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STF Modules (STFX Crates)
       
     </span>
   </a>
@@ -439,10 +1511,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-stf" class="md-nav__link">
+  <a href="#toip-alignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is STF?
+        ToIP Alignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ToIP Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-hourglass-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP "Hourglass" Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toip-layer-1-trust-support-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Layer 1: Trust Support Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-kits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Kits
       
     </span>
   </a>
@@ -450,10 +1561,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
+  <a href="#architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project Status
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Documentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cryptographic-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cryptographic Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime &amp; Transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ongoing-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ongoing Work
       
     </span>
   </a>
@@ -492,21 +1686,193 @@
 
 
 <h1 id="sovereign-trust-framework-stf">Sovereign Trust Framework (STF)<a class="headerlink" href="#sovereign-trust-framework-stf" title="Permanent link">&para;</a></h1>
-<h3 id="ssi-defines-the-actors-toip-defines-the-digital-trust-stack-stf-orchestrates-the-interactions-where-trust-actually-emerges">“SSI defines the actors. ToIP defines the digital trust stack. STF orchestrates the interactions where trust actually emerges.”<a class="headerlink" href="#ssi-defines-the-actors-toip-defines-the-digital-trust-stack-stf-orchestrates-the-interactions-where-trust-actually-emerges" title="Permanent link">&para;</a></h3>
+<p><strong>Trait-Driven, Modular Foundation for Trust Over IP (ToIP) and Self-Sovereign Identity (SSI)</strong></p>
 <hr />
-<h2 id="what-is-stf">What is STF?<a class="headerlink" href="#what-is-stf" title="Permanent link">&para;</a></h2>
-<p>The <strong>Sovereign Trust Framework</strong> is a <strong>standardization &amp; interoperability framework</strong> for ToIP.<br />
-It builds on:</p>
+<h2 id="introduction-to-the-sovereign-trust-framework-stf">Introduction to the Sovereign Trust Framework (STF)<a class="headerlink" href="#introduction-to-the-sovereign-trust-framework-stf" title="Permanent link">&para;</a></h2>
+<div style="float: right; width: 300px; margin: 0 0 1rem 1rem;">
+  <video width="100%" controls autoplay muted style="border-radius: 4px;">
+    <source src="videos/stf_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<p>The <strong>Sovereign Trust Framework (STF)</strong> is an innovative orchestration layer designed to enhance <strong>Self-Sovereign Identity (SSI)</strong> systems by integrating and extending components from the <a href="https://trustoverip.org/">Trust Over IP (ToIP)</a> Foundation's technology stack. STF focuses on providing modular, trait-driven abstractions for building interoperable, policy-driven trust systems that enable secure, privacy-preserving interactions in decentralized ecosystems.</p>
+<p>STF contributes to ToIP by providing:
+- <strong>Modular trait-based interfaces</strong> for cryptography, identity, runtime, and transport
+- <strong>Protocol-agnostic foundations</strong> supporting TSP, DIDComm, HTTP, BLE, and future protocols
+- <strong>Maximum reusability</strong> of existing battle-tested Rust crates
+- <strong>Deployment flexibility</strong> across servers, cloud, embedded devices, and WASM
+- <strong>Clean abstractions</strong> that facilitate adoption without competing with existing standards</p>
+<h3 id="toip-foundation-and-the-hourglass-model">ToIP Foundation and the "Hourglass" Model<a class="headerlink" href="#toip-foundation-and-the-hourglass-model" title="Permanent link">&para;</a></h3>
+<p>STFX primarily focuses on ToIP's foundational layers (Layer 0 and Layer 1), respecting the <strong>"hourglass" philosophy</strong> adopted by ToIP. This hourglass approach makes <strong>Layer 2 (Trust Spanning Layer)</strong> the central convergence point of the ToIP stack.</p>
+<p><strong>Key ToIP Requirement:</strong> A ToIP endpoint system MUST communicate with another ToIP endpoint system using the <strong>Trust Spanning Protocol (TSP)</strong> [REQ L2.1].</p>
+<p>This design creates:
+- <strong>Diversity below Layer 2</strong>: Many cryptographic algorithms, transport mechanisms, and identity formats
+- <strong>Convergence at Layer 2</strong>: Universal messaging protocol (TSP) as the narrow waist
+- <strong>Diversity above Layer 2</strong>: Many applications, use cases, trust frameworks, and governance models</p>
+<p>STF provides the foundational abstractions enabling this architecture without enforcing specific implementations.</p>
+<hr />
+<h2 id="stf-high-level-vision">STF High-Level Vision<a class="headerlink" href="#stf-high-level-vision" title="Permanent link">&para;</a></h2>
+<p>STF addresses ToIP's requirement [REQ A.2]: <em>"In a ToIP endpoint system, the higher layers of the ToIP protocol stack MUST communicate with the lower layers via defined interfaces."</em></p>
+<p><strong>Key Observations:</strong>
+- ToIP/SSI is a rapidly evolving area with diverse developments across applications, prototypes, and specifications
+- Current implementations (DIDComm, various DID methods) must be supported while enabling new approaches
+- ToIP Layer 2 centers on TSP, but existing implementations like DIDComm remain important
+- Well-defined layer interfaces are critical for portability, modularity, and evolution</p>
+<p><strong>STF Approach:</strong>
+- Define <strong>trait-based interfaces</strong> for Layer 0 (runtime/transport) and Layer 1 (crypto/identity)
+- Enable Layer 2/3/4 implementations to remain <strong>self-contained, modular, and abstract</strong>
+- Support TSP as primary Layer 2 protocol while accommodating DIDComm and future protocols
+- Maximize <strong>reusability</strong> of existing Rust crates rather than reimplementation</p>
+<p>Since ToIP has no official layer interfaces, STF defines foundational trait interfaces based on TSP requirements and SSI best practices.</p>
+<h3 id="implementation-stfx-crates">Implementation: STFX Crates<a class="headerlink" href="#implementation-stfx-crates" title="Permanent link">&para;</a></h3>
+<p>STF is implemented through a collection of <strong>STFX</strong> (STF eXtensions) Rust crates that provide concrete trait definitions and implementations following the two-layer pattern.</p>
+<hr />
+<h2 id="core-design-principles">Core Design Principles<a class="headerlink" href="#core-design-principles" title="Permanent link">&para;</a></h2>
+<p>STF follows <strong>SOLID principles</strong> with a focus on:</p>
 <ul>
-<li><strong>Self-Sovereign Identity (SSI)</strong> </li>
-<li><strong>Trust over IP (ToIP)</strong> </li>
+<li><strong>Single Responsibility</strong>: Each trait has one clear purpose</li>
+<li><strong>Interface Segregation</strong>: Clients depend only on traits they use (e.g., <code>Signer</code> ≠ <code>SignatureVerifier</code>)</li>
+<li><strong>Dependency Inversion</strong>: Depend on traits, not concrete implementations</li>
 </ul>
-<p>STF adds the missing layer:<br />
-<strong>structured interactions and trust logic</strong> that allow these actors to exchange, evaluate, and prove trust without relying on central authorities.</p>
+<h3 id="two-layer-pattern">Two-Layer Pattern<a class="headerlink" href="#two-layer-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Layer 1 (Base Traits)</strong>: Minimal, ISP-compliant abstractions</li>
+<li><strong>Layer 2 (Helper Wrappers)</strong>: Convenience structs combining traits</li>
+</ul>
 <hr />
-<h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">&para;</a></h2>
-<p>Early draft. Evolving. Contributions welcome.</p>
+<h2 id="stf-modules-stfx-crates">STF Modules (STFX Crates)<a class="headerlink" href="#stf-modules-stfx-crates" title="Permanent link">&para;</a></h2>
+<p>STF provides <strong>five foundational modules</strong> implemented as STFX crates:</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Purpose</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>stfx-crypto</strong></td>
+<td>Cryptographic operations (signing, encryption, hashing, KDF)</td>
+<td><a href="stfx-crypto/">stfx-crypto.md</a></td>
+</tr>
+<tr>
+<td><strong>stfx-vid</strong></td>
+<td>Verifiable identity (creation, resolution, verification)</td>
+<td><a href="VID-IMPLEMENTATION-ANALYSIS/">VID Analysis</a></td>
+</tr>
+<tr>
+<td><strong>stfx-runtime</strong></td>
+<td>Async execution abstraction (Tokio, Embassy, async-std)</td>
+<td><a href="stfx-runtime/">stfx-runtime.md</a></td>
+</tr>
+<tr>
+<td><strong>stfx-transport</strong></td>
+<td>Transport mechanisms (HTTP, BLE, NFC, WebSockets)</td>
+<td><a href="stfx-transport/">stfx-transport.md</a></td>
+</tr>
+<tr>
+<td><strong>Trust Decision Engines</strong></td>
+<td>Trust evaluation frameworks (future component)</td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
 <hr />
+<h2 id="toip-alignment">ToIP Alignment<a class="headerlink" href="#toip-alignment" title="Permanent link">&para;</a></h2>
+<p>STF implements the complete ToIP technology stack foundation:</p>
+<table>
+<thead>
+<tr>
+<th>ToIP Layer</th>
+<th>STF Module (STFX Crate)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer 0: Foundation</strong></td>
+<td><code>stfx-runtime</code>, <code>stfx-transport</code></td>
+</tr>
+<tr>
+<td><strong>Layer 1: Trust Support</strong></td>
+<td><code>stfx-crypto</code>, <code>stfx-vid</code></td>
+</tr>
+<tr>
+<td><strong>Layer 2: Trust Spanning</strong></td>
+<td>Integration kits (TSP, DIDComm)</td>
+</tr>
+<tr>
+<td><strong>Layer 3: Trust Tasks</strong></td>
+<td>Trust Decision Engines (future)</td>
+</tr>
+<tr>
+<td><strong>Layer 4: Applications</strong></td>
+<td>Built on STF Layers 0-3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="toip-hourglass-philosophy">ToIP "Hourglass" Philosophy<a class="headerlink" href="#toip-hourglass-philosophy" title="Permanent link">&para;</a></h3>
+<p>STF respects ToIP's <strong>hourglass model</strong> where <strong>Layer 2 (Trust Spanning)</strong> is the narrow waist:
+- <strong>Below Layer 2</strong>: Maximum diversity (many crypto algorithms, transports, identity formats)
+- <strong>Layer 2</strong>: Convergence on universal messaging — ToIP requires endpoints communicate via <strong>Trust Spanning Protocol (TSP)</strong> [REQ L2.1]
+- <strong>Above Layer 2</strong>: Application diversity (many use cases, trust frameworks, governance models)</p>
+<h3 id="toip-layer-1-trust-support-functions">ToIP Layer 1: Trust Support Functions<a class="headerlink" href="#toip-layer-1-trust-support-functions" title="Permanent link">&para;</a></h3>
+<p>ToIP Layer 1 provides "trust support functions" that STF abstracts through <code>stfx-crypto</code> and <code>stfx-vid</code> crates:</p>
+<p><strong>Machine-to-Machine Trust:</strong>
+- Cryptographic hardware modules for key material generation
+- Secure storage of secrets and cryptographic materials
+- Secure computing environments
+- Communication functions for deployment environments</p>
+<p><strong>Human-to-Human Trust:</strong>
+- Identity binding mechanisms (biometrics, hardware attestation)
+- Trusted Platform Modules (TPM) and confidential computing
+- Hardware-based trust attestation systems</p>
+<p>STF provides trait abstractions enabling these functions while remaining implementation-agnostic.</p>
+<hr />
+<h2 id="integration-kits">Integration Kits<a class="headerlink" href="#integration-kits" title="Permanent link">&para;</a></h2>
+<p><strong>Integration kits</strong> combine STF traits (from STFX crates) into protocol-specific bundles:
+- <strong>TSPCrypto</strong>: Combines signing, verification, encryption for TSP
+- <strong>DIDCommCrypto</strong>: Combines HPKE + ChaCha20 for DIDComm
+- <strong>TSPVIDHandler</strong>: Combines identity traits for TSP</p>
+<p>Integration kits live primarily in <strong>protocol repositories</strong> with reference implementations in STF when appropriate.</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p>For comprehensive architectural details, including:
+- SOLID principles application
+- Two-layer pattern specifications
+- Module dependency graph
+- Complete ToIP stack mapping
+- Integration kit patterns and governance</p>
+<p>See the <strong><a href="architecture/">STF Architecture</a></strong> page.</p>
+<hr />
+<h2 id="technical-documentation">Technical Documentation<a class="headerlink" href="#technical-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="cryptographic-layer">Cryptographic Layer<a class="headerlink" href="#cryptographic-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="stfx-crypto/">stfx-crypto</a></strong> — Trait specifications and design</li>
+<li><strong><a href="stfx-crypto-api-analysis/">Crypto API Analysis</a></strong> — Design decisions</li>
+<li><strong><a href="stfx-crypto-implementation-layers/">Implementation Layers</a></strong> — Layer analysis</li>
+</ul>
+<h3 id="identity-layer">Identity Layer<a class="headerlink" href="#identity-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="VID-IMPLEMENTATION-ANALYSIS/">VID Implementation Analysis</a></strong> — Identity abstraction design</li>
+</ul>
+<h3 id="runtime-transport">Runtime &amp; Transport<a class="headerlink" href="#runtime-transport" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="stfx-runtime/">stfx-runtime</a></strong> — Async execution abstraction</li>
+<li><strong><a href="stfx-transport/">stfx-transport</a></strong> — Transport mechanisms</li>
+</ul>
+<h3 id="architectural-decisions">Architectural Decisions<a class="headerlink" href="#architectural-decisions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="architecture/">Architecture Overview</a></strong> — Complete architecture</li>
+<li><strong><a href="architecural_principles/">Architectural Principles</a></strong> — Design principles</li>
+<li><strong><a href="arch_DIP_SOLID/">SOLID &amp; DIP</a></strong> — SOLID principles application</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>A list of relevant references can be found in the <a href="references/">References</a> page.</p>
+<h2 id="ongoing-work">Ongoing Work<a class="headerlink" href="#ongoing-work" title="Permanent link">&para;</a></h2>
+<p>Visit the GitHub repository at:</p>
+<p><strong><a href="https://github.com/sovereigntrustframework">https://github.com/sovereigntrustframework</a></strong></p>
 <h2 id="author-license">Author &amp; License<a class="headerlink" href="#author-license" title="Permanent link">&para;</a></h2>
 <p>Author: <strong><a href="www.cardosoalexandre.com">Alexandre Cardoso</a></strong> </p>
 <p>License: <strong>Apache 2.0</strong></p>
@@ -516,6 +1882,9 @@ It builds on:</p>
 
 
 
+
+  
+  
 
 
 
@@ -544,11 +1913,6 @@ It builds on:</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       

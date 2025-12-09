@@ -6,31 +6,33 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A framework for decentralized trust and self-sovereign identity">
+        <meta name="description" content="The canonical identity model used inside STF Layer 1 (STF-IDENTITY) for privacy-preserving identity abstraction.">
       
       
         <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
       
       
+        <link rel="canonical" href="https://sovereigntrustframework.org/STF-IDENTITY/canonicaldid/">
+      
       
       
       
         
       
       
-      <link rel="icon" href="/img/STF_logo_nobg.png">
+      <link rel="icon" href="../../img/STF_logo_nobg.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Sovereign Trust Framework</title>
+        <title>Canonical DID (cDID) - Sovereign Trust Framework</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="/style/custom.css">
+      <link rel="stylesheet" href="../../style/custom.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -75,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#canonical-did-cdid" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +92,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+    <a href="../.." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
       
-  <img src="/img/STF_logo_nobg.png" alt="logo">
+  <img src="../../img/STF_logo_nobg.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Canonical DID (cDID)
             
           </span>
         </div>
@@ -217,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -236,7 +243,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -255,7 +262,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/references/" class="md-tabs__link">
+      <a href="../../references/" class="md-tabs__link">
         
   
   
@@ -276,7 +283,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/stfx-crypto/" class="md-tabs__link">
+        <a href="../../stfx-crypto/" class="md-tabs__link">
           
   
   
@@ -296,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/VID-IMPLEMENTATION-ANALYSIS/" class="md-tabs__link">
+        <a href="../../VID-IMPLEMENTATION-ANALYSIS/" class="md-tabs__link">
           
   
   
@@ -316,7 +323,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/stfx-crypto-api-analysis/" class="md-tabs__link">
+        <a href="../../stfx-crypto-api-analysis/" class="md-tabs__link">
           
   
   
@@ -336,7 +343,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/architecural_principles/" class="md-tabs__link">
+        <a href="../../architecural_principles/" class="md-tabs__link">
           
   
   
@@ -370,9 +377,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+    <a href="../.." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
       
-  <img src="/img/STF_logo_nobg.png" alt="logo">
+  <img src="../../img/STF_logo_nobg.png" alt="logo">
 
     </a>
     Sovereign Trust Framework
@@ -399,7 +406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -426,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -453,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/references/" class="md-nav__link">
+      <a href="../../references/" class="md-nav__link">
         
   
   
@@ -534,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-crypto/" class="md-nav__link">
+      <a href="../../stfx-crypto/" class="md-nav__link">
         
   
   
@@ -562,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-runtime/" class="md-nav__link">
+      <a href="../../stfx-runtime/" class="md-nav__link">
         
   
   
@@ -590,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-transport/" class="md-nav__link">
+      <a href="../../stfx-transport/" class="md-nav__link">
         
   
   
@@ -679,7 +686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/VID-IMPLEMENTATION-ANALYSIS/" class="md-nav__link">
+      <a href="../../VID-IMPLEMENTATION-ANALYSIS/" class="md-nav__link">
         
   
   
@@ -768,7 +775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-crypto-api-analysis/" class="md-nav__link">
+      <a href="../../stfx-crypto-api-analysis/" class="md-nav__link">
         
   
   
@@ -796,7 +803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/STFX-CRYPTO-DESIGN-SUMMARY/" class="md-nav__link">
+      <a href="../../STFX-CRYPTO-DESIGN-SUMMARY/" class="md-nav__link">
         
   
   
@@ -824,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-crypto-implementation-layers/" class="md-nav__link">
+      <a href="../../stfx-crypto-implementation-layers/" class="md-nav__link">
         
   
   
@@ -852,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/STFX-CRYPTO-VISUAL-SUMMARY/" class="md-nav__link">
+      <a href="../../STFX-CRYPTO-VISUAL-SUMMARY/" class="md-nav__link">
         
   
   
@@ -880,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/STFX-CRYPTO-DOCUMENTATION-INDEX/" class="md-nav__link">
+      <a href="../../STFX-CRYPTO-DOCUMENTATION-INDEX/" class="md-nav__link">
         
   
   
@@ -908,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/stfx-runtime_decision_analysis/" class="md-nav__link">
+      <a href="../../stfx-runtime_decision_analysis/" class="md-nav__link">
         
   
   
@@ -936,7 +943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/00-RESOLUTION-OVER-MODULARIZATION/" class="md-nav__link">
+      <a href="../../00-RESOLUTION-OVER-MODULARIZATION/" class="md-nav__link">
         
   
   
@@ -1025,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/architecural_principles/" class="md-nav__link">
+      <a href="../../architecural_principles/" class="md-nav__link">
         
   
   
@@ -1053,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/arch_DIP_SOLID/" class="md-nav__link">
+      <a href="../../arch_DIP_SOLID/" class="md-nav__link">
         
   
   
@@ -1098,6 +1105,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1110,8 +1119,303 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="canonical-did-cdid">Canonical DID (cDID)<a class="headerlink" href="#canonical-did-cdid" title="Permanent link">&para;</a></h1>
+<p>The <strong>canonical DID (cDID)</strong> is the internal, never-exposed, privacy-preserving identity anchor used by the <strong>Sovereign Trust Framework (STF)</strong>.<br />
+It is the foundation of <strong>STF-IDENTITY</strong>, providing a common internal identity abstraction independent of DID methods, transport protocols, or VID formats.</p>
+<p>The cDID provides:</p>
+<ul>
+<li>A <strong>stable identity anchor</strong> for local trust and reputation  </li>
+<li><strong>Strong unlinkability</strong> across sessions and relationships  </li>
+<li><strong>Mapping</strong> between external identifiers (DIDs, VIDs, others)  </li>
+<li>Integration with STF-POLICY (VSTP) and STF-COMM layers  </li>
+<li>A <strong>unifying identity representation</strong> for all STF components  </li>
+</ul>
+<p>The cDID is <strong>never shared over the network</strong> and <strong>never written to a ledger</strong>.</p>
+<hr />
+<h1 id="1-purpose-of-the-canonical-did">1. Purpose of the Canonical DID<a class="headerlink" href="#1-purpose-of-the-canonical-did" title="Permanent link">&para;</a></h1>
+<p>STF is identity-agnostic: DIDs, VIDs, peer DIDs, ephemeral identifiers, and transport-native IDs may all appear in Layer 2.</p>
+<p>However, STF requires <strong>one stable, internal identifier</strong> for:</p>
+<ul>
+<li>Policy evaluation (STF-POL)  </li>
+<li>Reputation aggregation (STF-REPUTE)  </li>
+<li>Attestation weighting (STF-ATT)  </li>
+<li>Message verification context (STF-Message)  </li>
+<li>Local identity indexing (STF-IDX)  </li>
+</ul>
+<p>Thus the cDID serves as:</p>
+<p><strong>“A canonical internal representation of an external identity, derived in a privacy-preserving way.”</strong></p>
+<hr />
+<h1 id="2-what-the-cdid-is-not">2. What the cDID Is <em>Not</em><a class="headerlink" href="#2-what-the-cdid-is-not" title="Permanent link">&para;</a></h1>
+<p>To clarify its role:</p>
+<p>❌ It is <strong>not</strong> a public DID<br />
+❌ It is <strong>not</strong> resolvable<br />
+❌ It is <strong>not</strong> a fixed identifier shared between devices<br />
+❌ It is <strong>not</strong> method-specific<br />
+❌ It is <strong>not</strong> used for routing or transport  </p>
+<p>The cDID is <strong>local-only</strong> and <strong>device-bound</strong>.</p>
+<hr />
+<h1 id="3-how-cdid-fits-into-stf-identity-layer">3. How cDID Fits into STF Identity Layer<a class="headerlink" href="#3-how-cdid-fits-into-stf-identity-layer" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>external identifiers → eDID (ephemeral) → cDID (canonical, internal)
+</code></pre></div>
+<p>Supported external identifiers:</p>
+<ul>
+<li>DID (all methods)</li>
+<li>DID:peer</li>
+<li>TSP VID</li>
+<li>Derived session identifiers</li>
+<li>Application-native identifiers (optional)</li>
+<li>Phone/email (optional mapping, privacy-safe if hashed)</li>
+<li>QR-scanned contact handles</li>
+<li>Local contact book entries</li>
+</ul>
+<p>The canonical DID becomes the <strong>internal identity anchor</strong>.</p>
+<hr />
+<h1 id="4-formal-definition-of-cdid">4. Formal Definition of cDID<a class="headerlink" href="#4-formal-definition-of-cdid" title="Permanent link">&para;</a></h1>
+<p>A <strong>cDID</strong> is a deterministic, salted, device-local identifier generated from an input identity:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cDID = hash( normalize(external_identifier) + salt_epoch + device_secret )
+</code></pre></div>
+<p>Characteristics:</p>
+<ul>
+<li><strong>Deterministic within an epoch</strong>  </li>
+<li><strong>Different across devices</strong>  </li>
+<li><strong>Different across epochs</strong>  </li>
+<li><strong>Impossible to reconstruct externally</strong>  </li>
+<li><strong>Impossible to link across epochs</strong>  </li>
+</ul>
+<p>The normalization step ensures input format neutrality.</p>
+<hr />
+<h1 id="5-normalization-function">5. Normalization Function<a class="headerlink" href="#5-normalization-function" title="Permanent link">&para;</a></h1>
+<p>The input identifier must be canonicalized before hashing.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>normalized_id = Normalize(external_identifier)
+</code></pre></div>
+<p>Normalization rules:</p>
+<ol>
+<li>Trim whitespace.</li>
+<li>Lowercase unless case-sensitive DID spec requires otherwise.</li>
+<li>Collapse equivalent encodings (<code>did:key:z...</code> vs multibase raw key).</li>
+<li>For VIDs, turn them into UTF-8 safe binary form.</li>
+<li>For QR-based identifiers or phone/email:</li>
+<li>Normalize email: lowercase, remove dots for Gmail-like systems.</li>
+<li>Normalize phone: E.164 format.</li>
+</ol>
+<p>This ensures stable results even if identifiers come in multiple formats.</p>
+<hr />
+<h1 id="6-derivation-algorithm-reference-implementation">6. Derivation Algorithm (Reference Implementation)<a class="headerlink" href="#6-derivation-algorithm-reference-implementation" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>function derive_cdid(external_identifier):
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    normalized = Normalize(external_identifier)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    epoch_salt = current_salt()
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    input = normalized || epoch_salt || device_secret
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    return H(input)
+</code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>H</code> = SHA-256 / BLAKE3 (configurable)</li>
+<li><code>device_secret</code> = secret key only stored locally</li>
+<li><code>epoch_salt</code> = rotating salt (see section below)</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>256-bit canonical identity string</li>
+<li>Represented as: <code>cdid:z&lt;multibase-encoded-value&gt;</code></li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cdid:z4Bx9Kk2vWuF1g8qZdD9tP9yLN8oGfP7F2kzMhZq9mSs
+</code></pre></div>
+<hr />
+<h1 id="7-salt-rotation">7. Salt Rotation<a class="headerlink" href="#7-salt-rotation" title="Permanent link">&para;</a></h1>
+<p>The cDID must evolve over time to preserve unlinkability.</p>
+<p><strong>Salt rotation schedule:</strong></p>
+<ul>
+<li>Rotate every <strong>N days</strong> (default: 30 days)</li>
+<li>Rotation triggered when:</li>
+<li>time threshold reached  </li>
+<li>device recovers a backup  </li>
+<li>user rotates keys manually  </li>
+</ul>
+<p><strong>Salt storage:</strong></p>
+<ul>
+<li>Each salt epoch stored locally:</li>
+<li><code>salt_2025-01</code></li>
+<li><code>salt_2025-02</code></li>
+<li>Keeps a finite window (e.g., last 3 epochs) to maintain backward compatibility.</li>
+</ul>
+<p><strong>Important:</strong><br />
+Old cDIDs remain functional for reputation but cannot be linked to new ones externally.</p>
+<hr />
+<h1 id="8-storage-model">8. Storage Model<a class="headerlink" href="#8-storage-model" title="Permanent link">&para;</a></h1>
+<p>All cDID data resides under <strong>STF-STORAGE</strong>, protected via:</p>
+<ul>
+<li>OS secure storage  </li>
+<li>hardware secure module (TPM/SE/Keystore) where available  </li>
+<li>encrypted local database  </li>
+</ul>
+<p>Storage structure:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/identity/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    device_secret
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    epoch_salts/
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        salt_2025-01
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        salt_2025-02
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        ...
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    mapping/
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        cdid_index.db   (stores mapping external→cDID)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        reversed_mapping.db (optional, encrypted, prevents leaks)
+</code></pre></div>
+<p>Privacy protections:</p>
+<ul>
+<li>No external identifier is stored in plaintext</li>
+<li>External identifiers hashed and salted with a different salt</li>
+<li>Mapping is one-way unless device_secret is known</li>
+</ul>
+<hr />
+<h1 id="9-how-cdid-interacts-with-other-stf-components">9. How cDID Interacts with Other STF Components<a class="headerlink" href="#9-how-cdid-interacts-with-other-stf-components" title="Permanent link">&para;</a></h1>
+<h2 id="91-with-stf-message-l2">9.1 With STF-Message (L2)<a class="headerlink" href="#91-with-stf-message-l2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>When a message arrives with DID/VID:</li>
+<li>normalize and derive cDID  </li>
+<li>load associated state (session keys, policies, reputation, etc.)  </li>
+<li>Outgoing messages <strong>never contain the cDID</strong>.</li>
+</ul>
+<h2 id="92-with-stf-transport-l2">9.2 With STF-Transport (L2)<a class="headerlink" href="#92-with-stf-transport-l2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>VID → cDID mapping performed before message envelope processing  </li>
+<li>DIDComm route resolution uses the mapped cDID for session context  </li>
+</ul>
+<h2 id="93-with-stf-policy-l3">9.3 With STF-POLICY (L3)<a class="headerlink" href="#93-with-stf-policy-l3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Policy evaluation uses cDID as the <strong>subject</strong>  </li>
+<li>Canonical claims attach to the cDID  </li>
+<li>Rego rules refer to cDID instead of DID  </li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>allow_response {
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   trust_score[cDID] &gt; 75
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>}
+</code></pre></div>
+<h2 id="94-with-stf-repute-l3">9.4 With STF-REPUTE (L3)<a class="headerlink" href="#94-with-stf-repute-l3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Reputation is stored per-cDID  </li>
+<li>Attestations apply to canonical identities  </li>
+</ul>
+<h2 id="95-with-stf-att-l3">9.5 With STF-ATT (L3)<a class="headerlink" href="#95-with-stf-att-l3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Attestations are bound to cDID locally  </li>
+<li>Device enforces: "Issued-to" cDID must match derived value  </li>
+</ul>
+<hr />
+<h1 id="10-when-cdid-is-recomputed-vs-reused">10. When cDID is Recomputed vs. Reused<a class="headerlink" href="#10-when-cdid-is-recomputed-vs-reused" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Uses new cDID?</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Same user, same epoch</td>
+<td>❌</td>
+<td>Stable identity anchor</td>
+</tr>
+<tr>
+<td>New epoch (salt rotates)</td>
+<td>✔</td>
+<td>Preserves unlinkability</td>
+</tr>
+<tr>
+<td>Device restored from backup</td>
+<td>❌ (if device_secret preserved)</td>
+<td>Stable identity</td>
+</tr>
+<tr>
+<td>Multi-device use</td>
+<td>✔</td>
+<td>No cross-device linking</td>
+</tr>
+<tr>
+<td>User resets identity</td>
+<td>✔</td>
+<td>New device_secret</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="11-should-cdid-use-its-own-did-method">11. Should cDID Use Its Own DID Method?<a class="headerlink" href="#11-should-cdid-use-its-own-did-method" title="Permanent link">&para;</a></h1>
+<p>cDID can optionally be defined as a private DID method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>did:stf:&lt;encoded_value&gt;
+</code></pre></div>
+<p>But this is only recommended for:</p>
+<ul>
+<li>internal debugging</li>
+<li>optional internal API traces</li>
+<li>representing cDID-like objects in logs</li>
+</ul>
+<p><strong>IMPORTANT:</strong><br />
+This DID method MUST NEVER be transmitted externally.</p>
+<hr />
+<h1 id="12-example-cdid-lifecycle">12. Example cDID Lifecycle<a class="headerlink" href="#12-example-cdid-lifecycle" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1. Bob receives Alice’s DID or VID
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>2. STF performs Normalize(DID)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>3. Epoch salt is applied
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>4. cDID derived
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>5. Trust score and attestations linked to this cDID
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>6. Next month salt rotates
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>7. Old cDID archived as &quot;epoch-1&quot;
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>8. New cDID used going forward
+</code></pre></div>
+<hr />
+<h1 id="13-security-privacy-guarantees">13. Security &amp; Privacy Guarantees<a class="headerlink" href="#13-security-privacy-guarantees" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Unlinkability:</strong> No two parties can correlate Alice’s identities.</li>
+<li><strong>Local-only:</strong> No network exposure.</li>
+<li><strong>Sybil mitigation:</strong> Combined with STF-ATT and STF-REPUTE.</li>
+<li><strong>No ledger dependency.</strong></li>
+<li><strong>Minimal attack surface.</strong></li>
+</ul>
+<hr />
+<h1 id="14-future-extensions">14. Future Extensions<a class="headerlink" href="#14-future-extensions" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Multi-device canonical identity synchronization with privacy guarantees  </li>
+<li>Multi-party blinded attestations  </li>
+<li>cDID versioning for DIDComm 2.0 compatibility  </li>
+<li>Selective correlation via user-consented export  </li>
+</ul>
+<hr />
+<h1 id="15-summary">15. Summary<a class="headerlink" href="#15-summary" title="Permanent link">&para;</a></h1>
+<p>The <strong>canonical DID (cDID)</strong> is the foundational identity abstraction mechanism of STF Layer 1.</p>
+<p>It:</p>
+<ul>
+<li>unifies all external identifiers  </li>
+<li>ensures privacy and unlinkability  </li>
+<li>anchors policy and reputation  </li>
+<li>integrates deeply across STF layers  </li>
+<li>is never exposed  </li>
+<li>is derived using deterministic, rotating, privacy-preserving methods  </li>
+</ul>
+<p>This mechanism ensures STF remains <strong>privacy-first</strong>, <strong>transport-agnostic</strong>, <strong>DID-method-agnostic</strong>, and <strong>future-proof</strong>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1176,10 +1480,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "/assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>

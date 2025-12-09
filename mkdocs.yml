@@ -9,7 +9,8 @@ repo_name: cardosoalexandrecom/sovereigntrustframework
 
 theme:
   name: material
-  favicon: img/STF_logo_nobf.png
+  logo: img/STF_logo_nobg.png
+  favicon: img/STF_logo_nobg.png
   palette:
     # Light mode
     - scheme: default
@@ -48,6 +49,9 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true  
+
+extra_css:
+  - style/custom.css
 
 nav:
   - Home: index.md

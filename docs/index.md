@@ -10,6 +10,13 @@ description: Home Page
 
 ## Introduction to the Sovereign Trust Framework (STF)
 
+<div style="float: right; width: 300px; margin: 0 0 1rem 1rem;">
+  <video width="100%" controls autoplay muted style="border-radius: 4px;">
+    <source src="videos/stf_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
 The **Sovereign Trust Framework (STF)** is an innovative orchestration layer designed to enhance **Self-Sovereign Identity (SSI)** systems by integrating and extending components from the [Trust Over IP (ToIP)](https://trustoverip.org/) Foundation's technology stack. STF focuses on providing modular, trait-driven abstractions for building interoperable, policy-driven trust systems that enable secure, privacy-preserving interactions in decentralized ecosystems.
 
 STF contributes to ToIP by providing:

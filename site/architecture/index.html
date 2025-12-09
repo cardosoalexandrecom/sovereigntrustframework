@@ -1,0 +1,2852 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive architecture of STFX, SOLID principles, modular design, trait-based abstraction layers, ToIP alignment, and protocol integration capabilities.">
+      
+      
+        <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
+      
+      
+        <link rel="canonical" href="https://sovereigntrustframework.org/architecture/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../references/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/STF_logo_nobg.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Sovereign Trust Framework Architecture - Sovereign Trust Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sovereign-trust-framework-stfx-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  <img src="../img/STF_logo_nobg.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sovereign Trust Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sovereign Trust Framework Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../references/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../stfx-crypto/" class="md-tabs__link">
+          
+  
+  
+  Core Modules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../VID-IMPLEMENTATION-ANALYSIS/" class="md-tabs__link">
+          
+  
+  
+  Identity
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../stfx-crypto-api-analysis/" class="md-tabs__link">
+          
+  
+  
+  Design Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecural_principles/" class="md-tabs__link">
+          
+  
+  
+  Architectural Principles
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  <img src="../img/STF_logo_nobg.png" alt="logo">
+
+    </a>
+    Sovereign Trust Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy-solid-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy &amp; SOLID Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Philosophy &amp; SOLID Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-responsibility-principle-srp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single Responsibility Principle (SRP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openclosed-principle-ocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open/Closed Principle (OCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liskov-substitution-principle-lsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liskov Substitution Principle (LSP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-segregation-principle-isp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Segregation Principle (ISP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-inversion-principle-dip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Inversion Principle (DIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-layer-architecture-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Layer Architecture Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two-Layer Architecture Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layer-1-base-traits-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: Base Traits (Abstraction)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-2-helper-wrappers-composition-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: Helper Wrappers &amp; Composition (Convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-two-layer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits of Two-Layer Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stfx-core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STFX Core Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STFX Core Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stfx-crypto-cryptographic-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. stfx-crypto — Cryptographic Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-stfx-vid-verifiable-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. stfx-vid — Verifiable Identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stfx-runtime-async-execution-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. stfx-runtime — Async Execution &amp; Orchestration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-stfx-transport-communication-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. stfx-transport — Communication Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-trust-decision-engines-layer-3-future-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Trust Decision Engines (Layer 3 — Future Component)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-kits-protocol-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Kits &amp; Protocol Adapters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Kits &amp; Protocol Adapters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tspcrypto-integration-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSPCrypto Integration Kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didcommcrypto-integration-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DIDCommCrypto Integration Kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Governance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toip-stack-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Stack Alignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ToIP Stack Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-4-layer-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP 4-Layer Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stfx-to-toip-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STFX-to-ToIP Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectural-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architectural Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-modularity-through-traits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Modularity Through Traits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-composable-cryptography" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Composable Cryptography
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-transport-agnosticism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Transport Agnosticism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-trust-decision-evaluation-future-layer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Trust Decision Evaluation (Future Layer 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-privacy-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Privacy-by-Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-protocol-agnostic-protocol-friendly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Protocol-Agnostic, Protocol-Friendly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-rationale-why-two-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Rationale: Why Two Layers?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Rationale: Why Two Layers?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-implementing-a-verifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Implementing a Verifier
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-crypto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Crypto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Runtime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STFX Transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VID-IMPLEMENTATION-ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VID Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-crypto-api-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto API Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STFX-CRYPTO-DESIGN-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Design Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-crypto-implementation-layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Implementation Layers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STFX-CRYPTO-VISUAL-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Visual Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STFX-CRYPTO-DOCUMENTATION-INDEX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto Documentation Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stfx-runtime_decision_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Decision Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-RESOLUTION-OVER-MODULARIZATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resolution Over Modularization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architectural Principles
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architectural Principles
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecural_principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arch_DIP_SOLID/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DIP & SOLID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy-solid-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy &amp; SOLID Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Philosophy &amp; SOLID Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-responsibility-principle-srp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single Responsibility Principle (SRP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openclosed-principle-ocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open/Closed Principle (OCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liskov-substitution-principle-lsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liskov Substitution Principle (LSP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-segregation-principle-isp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Segregation Principle (ISP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-inversion-principle-dip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Inversion Principle (DIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-layer-architecture-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Layer Architecture Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two-Layer Architecture Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layer-1-base-traits-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: Base Traits (Abstraction)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-2-helper-wrappers-composition-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: Helper Wrappers &amp; Composition (Convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-two-layer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits of Two-Layer Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stfx-core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STFX Core Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STFX Core Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stfx-crypto-cryptographic-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. stfx-crypto — Cryptographic Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-stfx-vid-verifiable-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. stfx-vid — Verifiable Identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stfx-runtime-async-execution-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. stfx-runtime — Async Execution &amp; Orchestration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-stfx-transport-communication-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. stfx-transport — Communication Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-trust-decision-engines-layer-3-future-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Trust Decision Engines (Layer 3 — Future Component)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-kits-protocol-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Kits &amp; Protocol Adapters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Kits &amp; Protocol Adapters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tspcrypto-integration-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSPCrypto Integration Kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didcommcrypto-integration-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DIDCommCrypto Integration Kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Governance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toip-stack-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP Stack Alignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ToIP Stack Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toip-4-layer-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ToIP 4-Layer Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stfx-to-toip-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STFX-to-ToIP Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectural-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architectural Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-modularity-through-traits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Modularity Through Traits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-composable-cryptography" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Composable Cryptography
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-transport-agnosticism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Transport Agnosticism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-trust-decision-evaluation-future-layer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Trust Decision Evaluation (Future Layer 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-privacy-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Privacy-by-Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-protocol-agnostic-protocol-friendly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Protocol-Agnostic, Protocol-Friendly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-rationale-why-two-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Rationale: Why Two Layers?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Rationale: Why Two Layers?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-implementing-a-verifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Implementing a Verifier
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sovereign-trust-framework-stfx-architecture">Sovereign Trust Framework (STFX) — Architecture<a class="headerlink" href="#sovereign-trust-framework-stfx-architecture" title="Permanent link">&para;</a></h1>
+<p>The <strong>Sovereign Trust Framework (STFX)</strong> is a modular, trait-driven architecture for building interoperable, policy-driven trust systems that remain privacy-preserving, transport-agnostic, and governance-neutral. STFX provides an extensible foundation enabling seamless integration with current and future trust protocols and specifications.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#design-philosophy--solid-principles">Design Philosophy &amp; SOLID Principles</a></li>
+<li><a href="#two-layer-architecture-pattern">Two-Layer Architecture Pattern</a></li>
+<li><a href="#stfx-core-modules">STFX Core Modules</a></li>
+<li><a href="#integration-kits--protocol-adapters">Integration Kits &amp; Protocol Adapters</a></li>
+<li><a href="#toip-stack-alignment">ToIP Stack Alignment</a></li>
+<li><a href="#architectural-principles">Architectural Principles</a></li>
+</ol>
+<hr />
+<h2 id="design-philosophy-solid-principles">Design Philosophy &amp; SOLID Principles<a class="headerlink" href="#design-philosophy-solid-principles" title="Permanent link">&para;</a></h2>
+<p>STFX follows <strong>SOLID design principles</strong> to ensure maintainability, extensibility, and reusability:</p>
+<h3 id="single-responsibility-principle-srp">Single Responsibility Principle (SRP)<a class="headerlink" href="#single-responsibility-principle-srp" title="Permanent link">&para;</a></h3>
+<p>Each trait and module has <strong>one reason to change</strong>:
+- <code>Signer</code> handles only message signing, not verification
+- <code>Encryptor</code> and <code>Decryptor</code> are separate (not monolithic AEAD)
+- <code>Hasher</code> is independent of key derivation
+- <code>HPKESealer</code> and <code>HPKEOpener</code> are distinct operations</p>
+<h3 id="openclosed-principle-ocp">Open/Closed Principle (OCP)<a class="headerlink" href="#openclosed-principle-ocp" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Open for extension</strong>: New cryptographic algorithms via trait implementations</li>
+<li><strong>Closed for modification</strong>: Base traits remain stable; add adapters, not changes</li>
+<li>Example: Add <code>ChaCha20Poly1305Encryptor</code> without modifying existing code</li>
+</ul>
+<h3 id="liskov-substitution-principle-lsp">Liskov Substitution Principle (LSP)<a class="headerlink" href="#liskov-substitution-principle-lsp" title="Permanent link">&para;</a></h3>
+<p>Any trait implementation is <strong>interchangeable</strong> within its interface:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Both work identically via the Signer trait</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">let</span><span class="w"> </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Signer</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Box</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">Ed25519Signer</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">keypair</span><span class="p">));</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">let</span><span class="w"> </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Signer</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Box</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">ECDSASigner</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">keypair</span><span class="p">));</span>
+</code></pre></div></p>
+<h3 id="interface-segregation-principle-isp">Interface Segregation Principle (ISP)<a class="headerlink" href="#interface-segregation-principle-isp" title="Permanent link">&para;</a></h3>
+<p>Traits are <strong>minimal and focused</strong>:
+- Don't force clients to depend on methods they don't use
+- <code>Verifier</code> doesn't need signing capability
+- <code>Wallet</code> doesn't need sealing (only decryption/opening)
+- Each role gets <strong>exactly</strong> what it needs</p>
+<h3 id="dependency-inversion-principle-dip">Dependency Inversion Principle (DIP)<a class="headerlink" href="#dependency-inversion-principle-dip" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Depend on abstractions (traits), not concrete implementations</strong></li>
+<li><code>VerifyService</code> accepts <code>dyn SignatureVerifier</code>, not <code>Ed25519Verifier</code></li>
+<li>Enables swappable crypto backends without refactoring business logic</li>
+</ul>
+<hr />
+<h2 id="two-layer-architecture-pattern">Two-Layer Architecture Pattern<a class="headerlink" href="#two-layer-architecture-pattern" title="Permanent link">&para;</a></h2>
+<p>STFX employs a <strong>two-layer pattern</strong> across all modules:</p>
+<h3 id="layer-1-base-traits-abstraction">Layer 1: Base Traits (Abstraction)<a class="headerlink" href="#layer-1-base-traits-abstraction" title="Permanent link">&para;</a></h3>
+<p>Minimal, <strong>ISP-compliant trait interfaces</strong> defining the contract for each cryptographic or functional capability. Traits are:
+- <strong>Single-purpose</strong> (one operation per trait)
+- <strong>Async-aware</strong> (using <code>#[async_trait]</code>)
+- <strong>Error-transparent</strong> (using <code>Result&lt;T&gt;</code>)
+- <strong>Implementation-agnostic</strong> (no knowledge of algorithm details)</p>
+<p>Example from <code>stfx-crypto</code>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Signer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">signature</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Encryptor</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">}</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Decryptor</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="layer-2-helper-wrappers-composition-convenience">Layer 2: Helper Wrappers &amp; Composition (Convenience)<a class="headerlink" href="#layer-2-helper-wrappers-composition-convenience" title="Permanent link">&para;</a></h3>
+<p><strong>Concrete structs</strong> that combine related traits for convenience, enabling:
+- <strong>Simplified delegation</strong> to multiple trait implementations
+- <strong>State sharing</strong> across operations
+- <strong>API ergonomics</strong> for common patterns</p>
+<p>Example helper wrappers:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Symmetric cipher combining Encryptor + Decryptor</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SymmetricCipher</span><span class="o">&lt;</span><span class="n">E</span><span class="p">:</span><span class="w"> </span><span class="nc">Encryptor</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="nc">Decryptor</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">encryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">E</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">decryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">D</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">// Signing kit combining Signer + Verifier</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SigningKit</span><span class="o">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">V</span><span class="p">,</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">// HPKE kit combining Sealer + Opener</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HpkeKit</span><span class="o">&lt;</span><span class="n">Sealer</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKESealer</span><span class="p">,</span><span class="w"> </span><span class="n">Opener</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">sealer</span><span class="p">:</span><span class="w"> </span><span class="nc">Sealer</span><span class="p">,</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="n">opener</span><span class="p">:</span><span class="w"> </span><span class="nc">Opener</span><span class="p">,</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="benefits-of-two-layer-pattern">Benefits of Two-Layer Pattern<a class="headerlink" href="#benefits-of-two-layer-pattern" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Layer 1 (Traits)</th>
+<th>Layer 2 (Wrappers)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modularity</strong></td>
+<td>Maximum; single concern</td>
+<td>Composable combinations</td>
+</tr>
+<tr>
+<td><strong>Reusability</strong></td>
+<td>Core abstraction reused everywhere</td>
+<td>Convenient for common scenarios</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Easy mocking via trait bounds</td>
+<td>Integration testing of combinations</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>Flexible algorithm selection</td>
+<td>Pre-composed for typical use cases</td>
+</tr>
+<tr>
+<td><strong>SOLID Compliance</strong></td>
+<td>SRP + ISP enforced</td>
+<td>OCP + DIP facilitated</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="stfx-core-modules">STFX Core Modules<a class="headerlink" href="#stfx-core-modules" title="Permanent link">&para;</a></h2>
+<p>STFX is organized into functional modules, each following the two-layer pattern. Each module has:
+1. <strong>Trait definitions</strong> (<code>stfx-xxx/</code>) — Base Layer 1 abstractions
+2. <strong>Helper wrappers</strong> (<code>stfx-xxx/</code>) — Layer 2 convenience structs
+3. <strong>Concrete implementations</strong> (<code>stfx-xxx-yyy/</code>) — Algorithm-specific crates
+4. <strong>Integration kits</strong> (protocol repos or <code>integration-kits/</code>) — Protocol-specific adapters</p>
+<h3 id="1-stfx-crypto-cryptographic-operations">1. stfx-crypto — Cryptographic Operations<a class="headerlink" href="#1-stfx-crypto-cryptographic-operations" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Core cryptographic trait abstractions for signing, verification, encryption, decryption, hashing, key derivation, and hybrid encryption.</p>
+<p><strong>Repository</strong>: <a href="../stfx-crypto/">docs/stfx-crypto.md</a></p>
+<p><strong>Layer 1 Traits</strong>:
+- <code>Signer</code> — Sign messages
+- <code>SignatureVerifier</code> — Verify signatures
+- <code>Encryptor</code> — Encrypt plaintext
+- <code>Decryptor</code> — Decrypt ciphertext
+- <code>HPKESealer</code> — Hybrid Public Key Encryption (seal)
+- <code>HPKEOpener</code> — Hybrid Public Key Encryption (open)
+- <code>Hasher</code> — Cryptographic hashing
+- <code>KeyDerivation</code> — Key derivation functions (KDF)</p>
+<p><strong>Layer 2 Wrappers</strong>:
+- <code>SymmetricCipher&lt;E, D&gt;</code> — Combined encryption/decryption
+- <code>SigningKit&lt;S, V&gt;</code> — Combined signing/verification
+- <code>HpkeKit&lt;Sealer, Opener&gt;</code> — Combined HPKE sealing/opening</p>
+<p><strong>Concrete Implementation Crates</strong>:
+- <code>stfx-crypto-signer-ed25519</code> — Ed25519 signing
+- <code>stfx-crypto-verifier-ed25519</code> — Ed25519 verification
+- <code>stfx-crypto-cipher-chacha20</code> — ChaCha20Poly1305 encryption/decryption
+- <code>stfx-crypto-hpke-x25519</code> — X25519 HPKE
+- <code>stfx-crypto-hasher-sha256</code> — SHA-256 hashing
+- <code>stfx-crypto-kdf-blake3</code> — BLAKE3 key derivation</p>
+<p><strong>Example Integration Kit</strong> (in protocol repos):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// tsp/stfx-crypto-tsp/src/lib.rs</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPCryptoBundle</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">Sealer</span><span class="p">,</span><span class="w"> </span><span class="n">Opener</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">KDF</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">V</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">encryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">E</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">decryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">D</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">sealer</span><span class="p">:</span><span class="w"> </span><span class="nc">Sealer</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">opener</span><span class="p">:</span><span class="w"> </span><span class="nc">Opener</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">hasher</span><span class="p">:</span><span class="w"> </span><span class="nc">H</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">kdf</span><span class="p">:</span><span class="w"> </span><span class="nc">KDF</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="2-stfx-vid-verifiable-identity">2. stfx-vid — Verifiable Identity<a class="headerlink" href="#2-stfx-vid-verifiable-identity" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Identity abstraction traits for creating, resolving, discovering, and verifying identity representations across DIDs, VIDs, and other identity formats.</p>
+<p><strong>Layer 1 Traits</strong> (Proposed):
+- <code>VIDCreator</code> — Create verifiable identities
+- <code>VIDResolver</code> — Resolve identity metadata
+- <code>VIDDiscoverer</code> — Discover identity credentials/attestations
+- <code>VIDVerifier</code> — Verify identity claims and attestations</p>
+<p><strong>Layer 2 Wrappers</strong>:
+- <code>FullVIDKit&lt;Creator, Resolver, Discoverer, Verifier&gt;</code> — Complete identity operations
+- <code>ResolverKit&lt;Resolver, Discoverer&gt;</code> — Read-only identity discovery</p>
+<p><strong>Concrete Implementation Crates</strong>:
+- <code>stfx-vid-didcore</code> — W3C DID Core compliance
+- <code>stfx-vid-tsp</code> — TSP VID implementation
+- <code>stfx-vid-resolver-http</code> — HTTP-based resolution
+- <code>stfx-vid-discoverer-dht</code> — DHT-based discovery</p>
+<hr />
+<h3 id="3-stfx-runtime-async-execution-orchestration">3. stfx-runtime — Async Execution &amp; Orchestration<a class="headerlink" href="#3-stfx-runtime-async-execution-orchestration" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Runtime-agnostic abstraction for task spawning, coordination, and timing across different async executors (Tokio, async-std, Embassy) and deployment environments.</p>
+<p><strong>Layer 1 Traits</strong>:
+- <code>Runtime</code> — Core async task management (spawn, join, cancel, sleep, timeout)</p>
+<p><strong>Layer 2 Wrappers</strong> (Proposed):
+- Interval managers
+- Task pools
+- Timing utilities</p>
+<p><strong>Concrete Implementation Crates</strong>:
+- <code>stfx-runtime-tokio</code> — Tokio-based runtime
+- <code>stfx-runtime-embassy</code> — Embassy for embedded systems
+- <code>stfx-runtime-async-std</code> — async-std runtime</p>
+<hr />
+<h3 id="4-stfx-transport-communication-layer">4. stfx-transport — Communication Layer<a class="headerlink" href="#4-stfx-transport-communication-layer" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Transport-agnostic message delivery abstractions enabling protocol bridging.</p>
+<p><strong>Layer 1 Traits</strong> (Likely already implemented):
+- <code>TransportClient</code> — Send messages
+- <code>TransportServer</code> — Receive messages
+- <code>MessageSerializer</code> — Encode/decode messages
+- <code>ChannelEstablisher</code> — Set up communication channels</p>
+<p><strong>Concrete Bridges</strong>:
+- <code>stfx-transport-tsp</code> — TSP message protocol
+- <code>stfx-transport-didcomm</code> — DIDComm protocol
+- <code>stfx-transport-http</code> — HTTP/HTTPS
+- <code>stfx-transport-p2p-ble</code> — Bluetooth Low Energy</p>
+<hr />
+<h3 id="5-trust-decision-engines-layer-3-future-component">5. Trust Decision Engines (Layer 3 — Future Component)<a class="headerlink" href="#5-trust-decision-engines-layer-3-future-component" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Provide declarative, language-agnostic evaluation frameworks for trust decisions. This layer uses <code>stfx-runtime</code> for async execution and <code>stfx-crypto</code> + <code>stfx-vid</code> for cryptographic validation.</p>
+<p><strong>Future Concrete Implementations</strong> (TBD):
+- Rego-based evaluation engine (OPA-compatible)
+- Core evaluation graph processing
+- Custom decision engines as needed</p>
+<p><strong>Note</strong>: This is a planned Layer 3 component with better naming TBD.</p>
+<hr />
+<h2 id="integration-kits-protocol-adapters">Integration Kits &amp; Protocol Adapters<a class="headerlink" href="#integration-kits-protocol-adapters" title="Permanent link">&para;</a></h2>
+<p><strong>Integration kits</strong> are <strong>protocol-specific bundles</strong> combining STFX traits and implementations for seamless integration with external trust protocols. They eliminate impedance mismatch between STFX abstractions and protocol requirements.</p>
+<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>┌─────────────────────────────────────────────────┐
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>│          Protocol Repositories                  │
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│  (tsp/, didcomm/, openid/, ...)                │
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│  ┌─────────────────────────────────────┐       │
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│  │ integration-kits/stfx-crypto-tsp/   │       │
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│  │ integration-kits/stfx-vid-tsp/      │       │
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│  │ integration-kits/stfx-runtime-tsp/  │       │
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│  └─────────────────────────────────────┘       │
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>└─────────────────────────────────────────────────┘
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                      ↑
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        ┌─────────────┴────────────────┐
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        │                              │
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>┌───────────────────┐      ┌──────────────────────┐
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>│ STFX Repository   │      │ STFX Repository      │
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>│ (Core Traits)     │      │ (Reference Impls)    │
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>├───────────────────┤      ├──────────────────────┤
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>│ stfx-crypto/      │      │ integration-kits/    │
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>│ stfx-vid/         │      │ ├─tsp/               │
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>│ stfx-runtime/     │      │ ├─didcomm/           │
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>│ stfx-transport/   │      │ └─openid/            │
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>└───────────────────┘      └──────────────────────┘
+</code></pre></div>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
+<h4 id="tspcrypto-integration-kit">TSPCrypto Integration Kit<a class="headerlink" href="#tspcrypto-integration-kit" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// integration-kits/stfx-crypto-tsp/src/lib.rs</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto</span><span class="p">::{</span><span class="n">Signer</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="p">,</span><span class="w"> </span><span class="n">Encryptor</span><span class="p">,</span><span class="w"> </span><span class="n">Decryptor</span><span class="p">};</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer_ed25519</span><span class="p">::</span><span class="n">Ed25519Signer</span><span class="p">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_cipher_chacha20</span><span class="p">::</span><span class="n">ChaCha20Poly1305</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPCrypto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">Ed25519Signer</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">Ed25519Verifier</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">encryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="n">decryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="k">impl</span><span class="w"> </span><span class="n">TSPCrypto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sign_tsp_message</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">TSPMessage</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">signer</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">serialize</span><span class="p">()).</span><span class="k">await</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify_tsp_message</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">TSPMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sig</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">verifier</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">serialize</span><span class="p">(),</span><span class="w"> </span><span class="n">sig</span><span class="p">)</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="didcommcrypto-integration-kit">DIDCommCrypto Integration Kit<a class="headerlink" href="#didcommcrypto-integration-kit" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// integration-kits/stfx-crypto-didcomm/src/lib.rs</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">DIDCommCrypto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">Ed25519Signer</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">encryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">decryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">hpke</span><span class="p">:</span><span class="w"> </span><span class="nc">HpkeKit</span><span class="o">&lt;</span><span class="n">X25519Sealer</span><span class="p">,</span><span class="w"> </span><span class="n">X25519Opener</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">impl</span><span class="w"> </span><span class="n">DIDCommCrypto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">pack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">recipient_key</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="c1">// DIDComm message packing with HPKE + ChaCha20</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">hpke</span><span class="p">.</span><span class="n">sealer</span><span class="p">.</span><span class="n">seal</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">recipient_key</span><span class="p">)</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">unpack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="c1">// DIDComm message unpacking</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">hpke</span><span class="p">.</span><span class="n">opener</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="governance">Governance<a class="headerlink" href="#governance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Location</th>
+<th>Responsibility</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Protocol repos</strong></td>
+<td>Full integration; native protocol support</td>
+<td>Always (primary)</td>
+</tr>
+<tr>
+<td><strong>STFX <code>integration-kits/</code></strong></td>
+<td>Reference implementations; templates</td>
+<td>When protocol is stable and widely used</td>
+</tr>
+<tr>
+<td><strong>Downstream projects</strong></td>
+<td>Fork/customize for specific needs</td>
+<td>For domain-specific variants</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="toip-stack-alignment">ToIP Stack Alignment<a class="headerlink" href="#toip-stack-alignment" title="Permanent link">&para;</a></h2>
+<p>STFX is designed as a <strong>complete implementation of the Trust Over IP (ToIP) technology stack</strong>. The ToIP Foundation defines a four-layer model for decentralized digital trust:</p>
+<h3 id="toip-4-layer-model">ToIP 4-Layer Model<a class="headerlink" href="#toip-4-layer-model" title="Permanent link">&para;</a></h3>
+<p><strong>Source</strong>: <a href="https://trustoverip.org/our-work/technical-architecture/">ToIP Technology Architecture Specification V1.0</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>┌────────────────────────────────────────────────┐
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>│  Layer 4: Trust Applications                   │
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>│  (User-facing apps: wallets, KYC, verifiers)  │
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>└────────────────────────────────────────────────┘
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>                       ↑
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>┌────────────────────────────────────────────────┐
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│  Layer 3: Trust Tasks                          │
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>│  (Credential exchange, proof, verification)    │
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>└────────────────────────────────────────────────┘
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>                       ↑
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>┌────────────────────────────────────────────────┐
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>│  Layer 2: Trust Spanning (Messaging)           │
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>│  (Universal interoperable messaging protocols) │
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>└────────────────────────────────────────────────┘
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>                       ↑
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>┌────────────────────────────────────────────────┐
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>│  Layer 1: Trust Support                        │
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>│  (Cryptography, keys, identity binding)        │
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>└────────────────────────────────────────────────┘
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>                       ↑
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>┌────────────────────────────────────────────────┐
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>│  Layer 0: Foundation                           │
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>│  (Async runtime + transport mechanisms)        │
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>└────────────────────────────────────────────────┘
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>ToIP Layer</th>
+<th>Description</th>
+<th>STFX Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer 0: Foundation</strong></td>
+<td>Runtime-agnostic async execution + transport mechanisms</td>
+<td><code>stfx-runtime</code>, <code>stfx-transport</code></td>
+</tr>
+<tr>
+<td><strong>Layer 1: Trust Support</strong></td>
+<td>Cryptographic primitives, key management, identity infrastructure</td>
+<td><code>stfx-crypto</code>, <code>stfx-vid</code></td>
+</tr>
+<tr>
+<td><strong>Layer 2: Trust Spanning</strong></td>
+<td>Universal interoperable messaging protocols (TSP, DIDComm)</td>
+<td>Integration kits combining <code>stfx-crypto</code> + <code>stfx-vid</code></td>
+</tr>
+<tr>
+<td><strong>Layer 3: Trust Tasks</strong></td>
+<td>Credential exchange, proof presentation, claim verification, trust decisions</td>
+<td>Trust Decision Engines (TBD naming)</td>
+</tr>
+<tr>
+<td><strong>Layer 4: Trust Applications</strong></td>
+<td>User-facing applications leveraging trust infrastructure</td>
+<td>Built on top of STFX layers 1-3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stfx-to-toip-mapping">STFX-to-ToIP Mapping<a class="headerlink" href="#stfx-to-toip-mapping" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>STFX Architecture          ToIP Architecture
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>─────────────────────────  ──────────────────────────
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>stfx-runtime              →    ToIP Layer 0: Async Execution
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>stfx-transport            →    ToIP Layer 0: Transport Foundation
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>stfx-crypto               →    ToIP Layer 1: Cryptography
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>stfx-vid                  →    ToIP Layer 1: Identity
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>integration-kits/ (TSP)   →    ToIP Layer 2: Messaging (Trust Spanning)
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>Trust Decision Engines    →    ToIP Layer 3: Tasks
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>(applications)            →    ToIP Layer 4: Apps
+</code></pre></div>
+<hr />
+<h2 id="architectural-principles">Architectural Principles<a class="headerlink" href="#architectural-principles" title="Permanent link">&para;</a></h2>
+<h3 id="1-modularity-through-traits">1. Modularity Through Traits<a class="headerlink" href="#1-modularity-through-traits" title="Permanent link">&para;</a></h3>
+<p>Every significant behavior is abstracted as a trait. Implementations are separate crates:
+- <strong>Trait definition</strong> in <code>stfx-xxx/</code> (Layer 1)
+- <strong>Algorithm implementations</strong> in <code>stfx-xxx-yyy/</code> (concrete)
+- <strong>Helpers and wrappers</strong> in <code>stfx-xxx/</code> (Layer 2)</p>
+<p>This ensures:
+- Swappable algorithm backends
+- No monolithic dependencies
+- Clear separation of concerns</p>
+<h3 id="2-composable-cryptography">2. Composable Cryptography<a class="headerlink" href="#2-composable-cryptography" title="Permanent link">&para;</a></h3>
+<p>Rather than large, opinionated crypto suites, STFX combines <strong>minimal, composable traits</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// Instead of: MonolithicCrypto { sign, verify, encrypt, decrypt }</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">// Use: Compose traits as needed</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">CryptoKit</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">V</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">encryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">E</span><span class="p">,</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="n">decryptor</span><span class="p">:</span><span class="w"> </span><span class="nc">D</span><span class="p">,</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="3-transport-agnosticism">3. Transport Agnosticism<a class="headerlink" href="#3-transport-agnosticism" title="Permanent link">&para;</a></h3>
+<p><code>stfx-transport</code> abstracts all message delivery:
+- <strong>Primary protocol</strong>: TSP (Trust Spanning Protocol)
+- <strong>Alternative protocols</strong>: DIDComm, HTTP/WS, BLE/NFC
+- <strong>Bridge layer</strong>: Integration kits adapt between protocols</p>
+<p>No layer above Layer 2 depends on a specific transport.</p>
+<h3 id="4-trust-decision-evaluation-future-layer-3">4. Trust Decision Evaluation (Future Layer 3)<a class="headerlink" href="#4-trust-decision-evaluation-future-layer-3" title="Permanent link">&para;</a></h3>
+<p>A separate <strong>trust decision evaluation layer</strong> (to be designed, built on top of <code>stfx-runtime</code> for execution) will provide:
+- Language-agnostic decision frameworks (e.g., Rego for OPA)
+- Type-safe claim graphs
+- Multi-source evidence processing
+- Deterministic, verifiable results</p>
+<p>Applications will make trust decisions based on evaluation execution, not hard-coded logic.</p>
+<h3 id="5-privacy-by-design">5. Privacy-by-Design<a class="headerlink" href="#5-privacy-by-design" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>cDID model</strong> (canonical DID) with ephemeral identifiers</li>
+<li><strong>Anti-correlation</strong> through salted derivation</li>
+<li><strong>Metadata stripping</strong> at message boundaries</li>
+<li><strong>Minimal disclosure</strong> through selective disclosure protocols</li>
+</ul>
+<h3 id="6-protocol-agnostic-protocol-friendly">6. Protocol-Agnostic, Protocol-Friendly<a class="headerlink" href="#6-protocol-agnostic-protocol-friendly" title="Permanent link">&para;</a></h3>
+<p>STFX is:
+- <strong>Not opinionated</strong> about which protocols you use
+- <strong>Helper-friendly</strong> through integration kits
+- <strong>Composable</strong> — pick TSP + DIDComm + HTTP as needed
+- <strong>Future-proof</strong> — add new protocols via new integration kits</p>
+<hr />
+<h2 id="module-dependency-graph">Module Dependency Graph<a class="headerlink" href="#module-dependency-graph" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>┌─────────────────────────────────┐
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>│   Applications / Use Cases      │  (Layer 4)
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>└────────────┬────────────────────┘
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>             │
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>┌────────────▼────────────────────┐
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>│   Trust Decision Engines        │  (Layer 3)
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>├─────────────────────────────────┤
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>│ Depends: stfx-vid, stfx-crypto  │
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>│          stfx-runtime           │
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>└────────────┬────────────────────┘
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>             │
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>┌────────────▼────────────────────┐
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>│      stfx-transport / Bridges   │  (Layer 2)
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>├─────────────────────────────────┤
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>│ Depends: stfx-crypto, stfx-vid  │
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>│          stfx-transport         │
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>└────────────┬────────────────────┘
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>             │
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>┌────────────▼────────────────────┐
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>│  stfx-crypto / stfx-vid         │  (Layer 1)
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>├─────────────────────────────────┤
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>│ Depends: stfx-runtime           │
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>│          stfx-transport         │
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>└────────────┬────────────────────┘
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>             │
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>┌────────────▼────────────────────┐
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>│  stfx-runtime / stfx-transport  │  (Layer 0)
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>├─────────────────────────────────┤
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>│ No STFX dependencies (only ext) │
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>└─────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h2 id="design-rationale-why-two-layers">Design Rationale: Why Two Layers?<a class="headerlink" href="#design-rationale-why-two-layers" title="Permanent link">&para;</a></h2>
+<h3 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Too few traits</strong>: Monolithic trait designs (e.g., single <code>Crypto</code> trait) violate ISP. Wallet implementations don't need signing; signers don't need verification.</li>
+<li><strong>Too many traits</strong>: Without composition helpers, each application must wire dozens of trait bounds together.</li>
+</ul>
+<h3 id="the-solution">The Solution<a class="headerlink" href="#the-solution" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Layer 1 (Base Traits)</strong>: Minimal, ISP-compliant abstractions. Each trait does exactly one thing.</li>
+<li><strong>Layer 2 (Helpers)</strong>: Pre-composed wrappers for common patterns, reducing boilerplate and improving ergonomics.</li>
+</ul>
+<h3 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Layer 1 Solution</th>
+<th>Layer 2 Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISP violations</td>
+<td>Separate traits per operation</td>
+<td>N/A (Layer 1 enforces ISP)</td>
+</tr>
+<tr>
+<td>Boilerplate</td>
+<td>Precise, minimal interfaces</td>
+<td>Pre-composed combinations</td>
+</tr>
+<tr>
+<td>Reusability</td>
+<td>Universal across protocols</td>
+<td>Reusable within protocol families</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Easy mocking via trait bounds</td>
+<td>Integration testing of combinations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="example-implementing-a-verifier">Example: Implementing a Verifier<a class="headerlink" href="#example-implementing-a-verifier" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// Layer 1: Use only the traits you need</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto</span><span class="p">::{</span><span class="n">SignatureVerifier</span><span class="p">,</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="p">};</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_vid</span><span class="p">::</span><span class="n">VIDVerifier</span><span class="p">;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Verifier</span><span class="o">&lt;</span><span class="n">V</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="p">,</span><span class="w"> </span><span class="n">VV</span><span class="p">:</span><span class="w"> </span><span class="nc">VIDVerifier</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="n">sig_verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">V</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="n">opener</span><span class="p">:</span><span class="w"> </span><span class="nc">O</span><span class="p">,</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">vid_verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">VV</span><span class="p">,</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">VV</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Verifier</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">VV</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify_credential</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">cred</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Credential</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="c1">// Use only the traits we need; no Signer, no Encryptor dependency</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">sig_verifier</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cred</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cred</span><span class="p">.</span><span class="n">signature</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vid_verifier</span><span class="p">.</span><span class="n">verify_identity</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cred</span><span class="p">.</span><span class="n">issuer</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="p">}</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="c1">// Layer 2: Use convenient helper wrappers for common scenarios</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto</span><span class="p">::</span><span class="n">VerificationKit</span><span class="p">;</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="kd">let</span><span class="w"> </span><span class="n">verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VerificationKit</span><span class="p">::</span><span class="n">default</span><span class="p">()</span><span class="w"> </span><span class="c1">// Ed25519 + X25519 HPKE</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="p">.</span><span class="n">with_vid_verifier</span><span class="p">(</span><span class="n">MyVIDVerifier</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Finalize Layer 1 traits</strong> for <code>stfx-vid</code> and <code>stfx-runtime</code></li>
+<li><strong>Implement Layer 2 helper wrappers</strong> across all modules</li>
+<li><strong>Create integration kit templates</strong> for TSP, DIDComm, OpenID</li>
+<li><strong>Document ISP corrections</strong> (Encryptor/Decryptor split)</li>
+<li><strong>Establish governance model</strong> for protocol-specific kits</li>
+</ol>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://trustoverip.org/">Trust Over IP Foundation</a></li>
+<li><a href="https://trustoverip.org/our-work/technical-architecture/">ToIP Technology Architecture Specification V1.0</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SOLID">SOLID Principles</a></li>
+<li><a href="../stfx-crypto/">stfx-crypto Module</a></li>
+<li><a href="../stfx-crypto-api-analysis/">STFX Cryptographic API Analysis</a></li>
+<li><a href="../stfx-crypto-implementation-layers/">STFX Implementation Layers</a>  </li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cardosoalexandrecom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/alexandrecardoso" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
