@@ -1,0 +1,1903 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A framework for decentralized trust and self-sovereign identity">
+      
+      
+        <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
+      
+      
+        <link rel="canonical" href="https://sovereigntrustframework.org/stfx-crypto/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/STF_logo_nobf.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>🔐 STFX Crypto Layer - Sovereign Trust Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stfx-crypto-layer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sovereign Trust Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔐 STFX Crypto Layer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sovereign Trust Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Design Philosophy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Design Philosophy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-were-solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem We're Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-trait-only-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Trait-Only Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-guide-trait-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Usage Guide (Trait-Only)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-1-stfx-crypto-signer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Module 1: stfx-crypto-signer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Module 1: stfx-crypto-signer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-traits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Traits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-two-traits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Two Traits?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-example-ed25519" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Example: Ed25519
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsp-integration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSP Integration Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solid-compliance-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLID Compliance Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-2-stfx-crypto-cipher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Module 2: stfx-crypto-cipher
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Module 2: stfx-crypto-cipher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-traits_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Traits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-separate-aead-and-hpke" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Separate AEAD and HPKE?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-example-hpke-with-x25519-chacha20poly1305" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Example: HPKE with X25519 + ChaCha20Poly1305
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsp-integration-example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSP Integration Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solid-compliance-analysis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLID Compliance Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-3-stfx-crypto-hasher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Module 3: stfx-crypto-hasher
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Module 3: stfx-crypto-hasher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-trait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Trait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-single-trait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Single Trait?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-example-blake2b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Example: BLAKE2b
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsp-integration-example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSP Integration Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solid-compliance-analysis_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLID Compliance Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-4-stfx-crypto-kdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Module 4: stfx-crypto-kdf
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Module 4: stfx-crypto-kdf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-trait_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Trait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-example-hkdf-sha256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Example: HKDF-SHA256
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsp-integration-example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSP Integration Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solid-compliance-analysis_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLID Compliance Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Implementation Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol-support-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Protocol Support Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Protocol Support Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tsp-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TSP Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didcomm-v2-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DIDComm v2 Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keri-aids-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KERI (AIDs) Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-stack-integration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Full Stack Integration Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phased-rollout-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phased Rollout Plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phased Rollout Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-tsp-core-requirements-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: TSP Core Requirements (Now)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-didcommw3c-vc-support-q1-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: DIDComm/W3C VC Support (Q1 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-keriaid-support-q2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: KERI/AID Support (Q2 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-why-this-design-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Summary: Why This Design Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Summary: Why This Design Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respects-stfx-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respects STFX Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enables-real-world-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enables Real-World Deployments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aligns-with-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aligns with Ecosystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Related Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="stfx-crypto-layer">🔐 STFX Crypto Layer<a class="headerlink" href="#stfx-crypto-layer" title="Permanent link">&para;</a></h1>
+<h2 id="overview">📖 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><strong>stfx-crypto</strong> provides cryptographic abstractions for signatures, encryption, hashing, and key derivation in decentralized trust systems. Following STFX principles (Reusability, Modularity, SOLID), the crypto layer is intentionally <strong>trait-only</strong>: consumers compose the traits they need and supply concrete implementations.</p>
+<p>This design recognizes that cryptographic operations serve <strong>distinct purposes</strong>:
+- <strong>Signing</strong> (authentication, non-repudiation)
+- <strong>Encryption</strong> (confidentiality, key agreement)
+- <strong>Hashing</strong> (integrity, content addressing)
+- <strong>Key Derivation</strong> (key management, entropy expansion)</p>
+<p>Real-world implementations (TSP SDK, Spruce/ssi, Hyperledger Aries) show trait-based abstraction is a solid foundation; profiles and enums can be layered on top by downstream projects when needed, but STFX keeps the core surface minimal and focused on traits.</p>
+<hr />
+<h2 id="design-philosophy">🎯 Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permanent link">&para;</a></h2>
+<h3 id="the-problem-were-solving">The Problem We're Solving<a class="headerlink" href="#the-problem-were-solving" title="Permanent link">&para;</a></h3>
+<p><strong>❌ ANTI-PATTERN 1: Monolithic Crypto Trait (violates ISP)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Crypto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">sig</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+<strong>Problems:</strong>
+- Forces Ed25519 signer to implement unused <code>encrypt()</code>, <code>decrypt()</code>
+- Impossible for TPM (signing-only device) to implement fully
+- ISP violated: clients depend on unused methods</p>
+<p><strong>❌ ANTI-PATTERN 2: Over-Generics (burdens implementers)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPApp</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">SV</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">KD</span><span class="o">&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">where</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">SV</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">C</span><span class="p">:</span><span class="w"> </span><span class="nc">Cipher</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">H</span><span class="p">:</span><span class="w"> </span><span class="nc">Hasher</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">KD</span><span class="p">:</span><span class="w"> </span><span class="nc">KeyDerivation</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">{</span><span class="w"> </span><span class="cm">/* 5+ type parameters! */</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<strong>Problems:</strong>
+- TSP has fixed algorithms (Ed25519, HPKE, SHA256) - doesn't need flexibility
+- Generic bloat makes code hard to read
+- Every instantiation requires specifying all 5 types
+- Testing requires 5 mock implementations</p>
+<h3 id="the-trait-only-approach">The Trait-Only Approach<a class="headerlink" href="#the-trait-only-approach" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>stfx-crypto-signer/             # Traits: Signer, SignatureVerifier
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    └── stfx-crypto-signer-ed25519/    # Concrete: Ed25519Signer, Ed25519Verifier
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>stfx-crypto-cipher/             # Traits: AEAD, HPKESealer, HPKEOpener
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    └── stfx-crypto-cipher-hpke/       # Concrete: HpkeSealer, HpkeOpener
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>stfx-crypto-hasher/             # Trait: Hasher
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    └── stfx-crypto-hasher-sha256/     # Concrete: Sha256Hasher, Blake2bHasher
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>stfx-crypto-kdf/                # Trait: KeyDerivation
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    └── stfx-crypto-kdf-hkdf/          # Concrete: HkdfKeyDerivation
+</code></pre></div>
+<p><strong>Key idea:</strong> STFX publishes only small, ISP-compliant traits. Integrators (including TSP) compose or wrap them as they see fit—either direct wiring or project-specific profiles—without STFX prescribing higher-level layers.</p>
+<hr />
+<h2 id="usage-guide-trait-only">📚 Usage Guide (Trait-Only)<a class="headerlink" href="#usage-guide-trait-only" title="Permanent link">&para;</a></h2>
+<p>The only STFX surface is the set of focused traits. Downstream projects (including TSP) choose how to assemble them:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer</span><span class="p">::</span><span class="n">Signer</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer_ed25519</span><span class="p">::</span><span class="n">Ed25519Signer</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPRuntime</span><span class="o">&lt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">// ... other fields</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="kd">let</span><span class="w"> </span><span class="n">signer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ed25519Signer</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">keypair</span><span class="p">);</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kd">let</span><span class="w"> </span><span class="n">runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TSPRuntime</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">signer</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">// Later, swap to TPM without changing call sites</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="kd">let</span><span class="w"> </span><span class="n">tpm_signer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TpmSigner</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="kd">let</span><span class="w"> </span><span class="n">runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TSPRuntime</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">tpm_signer</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div>
+<p>Profiles, enums, or convenience bundles can be built on top by integrators, but they are intentionally <strong>not</strong> part of the core STFX API.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Are you implementing a custom protocol?
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├─ Yes → Use Layer 1: Traits (maximum flexibility, ISP compliance)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│        pub struct MyProtocol&lt;S: Signer, C: Cipher&gt; { ... }
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>└─ No ─→ Do you need multiple algorithms at runtime?
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>         ├─ Yes → Use Layer 2: Algorithm Enum (DIDComm, W3C VC)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>         │        pub struct MyApp { algorithms: HashMap&lt;String, Algorithm&gt; }
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>         │
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>         └─ No ─→ Use Layer 3: Convenience Type (TSP)
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                  pub struct MyApp { crypto: StandardTSPCrypto }
+</code></pre></div>
+<hr />
+<h2 id="module-1-stfx-crypto-signer">🔌 Module 1: stfx-crypto-signer<a class="headerlink" href="#module-1-stfx-crypto-signer" title="Permanent link">&para;</a></h2>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
+<p>Digital signature creation and verification for authentication and non-repudiation.</p>
+<h3 id="core-traits">Core Traits<a class="headerlink" href="#core-traits" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">use</span><span class="w"> </span><span class="n">async_trait</span><span class="p">::</span><span class="n">async_trait</span><span class="p">;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">error</span><span class="p">::</span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">/// Trait for creating digital signatures</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Signer</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="sd">/// Signs a message with the private key</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="sd">/// Returns the public key material for verification</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="sd">/// Returns the algorithm identifier (e.g., &quot;Ed25519&quot;, &quot;ES256K&quot;)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="p">}</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="sd">/// Trait for verifying digital signatures</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="sd">/// Verifies a signature against a message and public key</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">signature</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">public_key</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">    </span><span class="sd">/// Returns the algorithm identifier this verifier supports</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="why-two-traits">Why Two Traits?<a class="headerlink" href="#why-two-traits" title="Permanent link">&para;</a></h3>
+<p><strong>Signer</strong> and <strong>SignatureVerifier</strong> are separated because:
+1. <strong>Security isolation</strong>: Signing requires private keys (HSM, secure enclave), verification is public operation
+2. <strong>Deployment patterns</strong>: Many systems only verify signatures (relying parties), few create signatures (issuers)
+3. <strong>Performance</strong>: Verification can be optimized differently (batch verification, caching)
+4. <strong>ISP compliance</strong>: TSP message receivers only need <code>SignatureVerifier</code>, not <code>Signer</code></p>
+<h3 id="implementation-example-ed25519">Implementation Example: Ed25519<a class="headerlink" href="#implementation-example-ed25519" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// In stfx-crypto-signer-ed25519 crate</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">use</span><span class="w"> </span><span class="n">ed25519_dalek</span><span class="p">::{</span><span class="n">Keypair</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">,</span><span class="w"> </span><span class="n">PublicKey</span><span class="p">};</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer</span><span class="p">::{</span><span class="n">Signer</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="p">};</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Ed25519Signer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">keypair</span><span class="p">:</span><span class="w"> </span><span class="nc">Keypair</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="k">impl</span><span class="w"> </span><span class="n">Signer</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Ed25519Signer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ed25519Error</span><span class="p">;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span><span class="k">use</span><span class="w"> </span><span class="n">ed25519_dalek</span><span class="p">::</span><span class="n">Signer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">DalekSigner</span><span class="p">;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">signature</span><span class="p">:</span><span class="w"> </span><span class="nc">Signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">keypair</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">signature</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">().</span><span class="n">to_vec</span><span class="p">())</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">keypair</span><span class="p">.</span><span class="n">public</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">().</span><span class="n">to_vec</span><span class="p">())</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">        </span><span class="s">&quot;Ed25519&quot;</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="p">}</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Ed25519Verifier</span><span class="p">;</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="k">impl</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Ed25519Verifier</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ed25519Error</span><span class="p">;</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">signature</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">public_key</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">        </span><span class="k">use</span><span class="w"> </span><span class="n">ed25519_dalek</span><span class="p">::</span><span class="n">Verifier</span><span class="p">;</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">public_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PublicKey</span><span class="p">::</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Signature</span><span class="p">::</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">public_key</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">signature</span><span class="p">).</span><span class="n">is_ok</span><span class="p">())</span>
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a><span class="w">        </span><span class="s">&quot;Ed25519&quot;</span>
+<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="tsp-integration-example">TSP Integration Example<a class="headerlink" href="#tsp-integration-example" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer</span><span class="p">::{</span><span class="n">Signer</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="p">};</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPMessageHandler</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">where</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="n">V</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">V</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">}</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TSPMessageHandler</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="k">where</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="n">V</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">{</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">envelope</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">TSPMessage</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">        </span><span class="c1">// Concatenate envelope + payload</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">envelope</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">].</span><span class="n">concat</span><span class="p">();</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">        </span><span class="c1">// Sign using injected signer</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">signer</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">TSPMessage</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">            </span><span class="n">envelope</span><span class="p">:</span><span class="w"> </span><span class="nc">envelope</span><span class="p">.</span><span class="n">to_vec</span><span class="p">(),</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">            </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="nc">payload</span><span class="p">.</span><span class="n">to_vec</span><span class="p">(),</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">            </span><span class="n">signature</span><span class="p">,</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">        </span><span class="p">})</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify_message</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">TSPMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sender_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">envelope</span><span class="p">[</span><span class="o">..</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">payload</span><span class="p">[</span><span class="o">..</span><span class="p">]].</span><span class="n">concat</span><span class="p">();</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">        </span><span class="c1">// Verify using injected verifier</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">verifier</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg_bytes</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">signature</span><span class="p">,</span><span class="w"> </span><span class="n">sender_pubkey</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">)</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="solid-compliance-analysis">SOLID Compliance Analysis<a class="headerlink" href="#solid-compliance-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>Single Responsibility (SRP)</strong> ✅
+- <code>Signer</code>: Only signature creation
+- <code>SignatureVerifier</code>: Only signature verification
+- Each trait has one reason to change (algorithm requirements)</p>
+<p><strong>Open/Closed (OCP)</strong> ✅
+- New signature algorithms (ES256K, BLS) extend via new implementations
+- Core traits never change
+- Example: <code>stfx-crypto-signer-secp256k1</code>, <code>stfx-crypto-signer-bls</code></p>
+<p><strong>Liskov Substitution (LSP)</strong> ✅
+- Any <code>impl Signer</code> can be swapped (Ed25519 → secp256k1)
+- TSP SDK accepts <code>&amp;dyn Signer</code> regardless of algorithm
+- Behavioral contract: <code>sign(msg)</code> always produces verifiable signature</p>
+<p><strong>Interface Segregation (ISP)</strong> ⭐ ✅
+- <strong>Signature creators</strong> (wallets) only implement <code>Signer</code>
+- <strong>Signature verifiers</strong> (relying parties) only implement <code>SignatureVerifier</code>
+- <strong>Hardware signers</strong> (TPM) can implement <code>Signer</code> without <code>SignatureVerifier</code>
+- No client forced to implement methods they don't need</p>
+<p><strong>Dependency Inversion (DIP)</strong> ✅
+- TSP SDK depends on <code>trait Signer</code>, not <code>Ed25519Signer</code>
+- Implementations injected at startup
+- High-level policy (TSP) never imports low-level details (ed25519-dalek)</p>
+<hr />
+<h2 id="module-2-stfx-crypto-cipher">🔌 Module 2: stfx-crypto-cipher<a class="headerlink" href="#module-2-stfx-crypto-cipher" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_1">Purpose<a class="headerlink" href="#purpose_1" title="Permanent link">&para;</a></h3>
+<p>Symmetric and asymmetric encryption for confidentiality and authenticated encryption.</p>
+<h3 id="core-traits_1">Core Traits<a class="headerlink" href="#core-traits_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">use</span><span class="w"> </span><span class="n">async_trait</span><span class="p">::</span><span class="n">async_trait</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">error</span><span class="p">::</span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="sd">/// Trait for authenticated encryption with associated data (AEAD)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">AEAD</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="sd">/// Encrypts plaintext with authenticated additional data</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">aad</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="sd">/// Decrypts ciphertext and verifies additional data</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">aad</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">    </span><span class="sd">/// Returns the algorithm identifier (e.g., &quot;ChaCha20Poly1305&quot;, &quot;AES-256-GCM&quot;)</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="p">}</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="sd">/// Trait for Hybrid Public Key Encryption (HPKE)</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">HPKESealer</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">    </span><span class="sd">/// Seals (encrypts) plaintext to recipient&#39;s public key</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">seal</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">recipient_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">    </span><span class="sd">/// Returns the ephemeral public key for this operation</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">ephemeral_public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="p">}</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="sd">/// Trait for HPKE decryption</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="w">    </span><span class="sd">/// Opens (decrypts) ciphertext using private key</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">ephemeral_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="why-separate-aead-and-hpke">Why Separate AEAD and HPKE?<a class="headerlink" href="#why-separate-aead-and-hpke" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Different use cases</strong>: </li>
+<li>AEAD: Symmetric encryption after key exchange (session keys)</li>
+<li>
+<p>HPKE: Asymmetric encryption for initial message encryption</p>
+</li>
+<li>
+<p><strong>Key material</strong>:</p>
+</li>
+<li>AEAD: Pre-shared or derived symmetric key</li>
+<li>
+<p>HPKE: Public/private keypairs</p>
+</li>
+<li>
+<p><strong>Protocol alignment</strong>:</p>
+</li>
+<li>TSP uses HPKE for message confidentiality</li>
+<li>DIDComm uses HPKE for encrypted envelopes</li>
+<li>Both may use AEAD internally</li>
+</ol>
+<h3 id="implementation-example-hpke-with-x25519-chacha20poly1305">Implementation Example: HPKE with X25519 + ChaCha20Poly1305<a class="headerlink" href="#implementation-example-hpke-with-x25519-chacha20poly1305" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// In stfx-crypto-cipher-hpke crate</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">use</span><span class="w"> </span><span class="n">hpke</span><span class="p">::{</span><span class="n">Hpke</span><span class="p">,</span><span class="w"> </span><span class="n">HpkeMode</span><span class="p">,</span><span class="w"> </span><span class="n">HpkeSuite</span><span class="p">};</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_cipher</span><span class="p">::{</span><span class="n">HPKESealer</span><span class="p">,</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="p">};</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HpkeAuthSealer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">sender_keypair</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">),</span><span class="w"> </span><span class="c1">// (private, public)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="k">impl</span><span class="w"> </span><span class="n">HPKESealer</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HpkeAuthSealer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HpkeError</span><span class="p">;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">seal</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">recipient_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="c1">// HPKE-Auth mode: includes sender authentication</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">suite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HpkeSuite</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">            </span><span class="n">KemAlgorithm</span><span class="p">::</span><span class="n">DhKemX25519HkdfSha256</span><span class="p">,</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">            </span><span class="n">KdfAlgorithm</span><span class="p">::</span><span class="n">HkdfSha256</span><span class="p">,</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="n">AeadAlgorithm</span><span class="p">::</span><span class="n">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">encap</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hpke</span><span class="p">::</span><span class="n">single_shot_seal_auth</span><span class="p">(</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">            </span><span class="o">&amp;</span><span class="n">suite</span><span class="p">,</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">            </span><span class="n">recipient_pubkey</span><span class="p">,</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">            </span><span class="n">info</span><span class="p">,</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">            </span><span class="n">plaintext</span><span class="p">,</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">            </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">sender_keypair</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// Sender private key</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">        </span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">        </span><span class="c1">// Prepend encapsulated key to ciphertext</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">([</span><span class="n">encap</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">].</span><span class="n">concat</span><span class="p">())</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">ephemeral_public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sender_keypair</span><span class="p">.</span><span class="mf">1.</span><span class="n">clone</span><span class="p">())</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="p">}</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HpkeAuthOpener</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="w">    </span><span class="n">recipient_keypair</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">),</span><span class="w"> </span><span class="c1">// (private, public)</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="p">}</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a><span class="k">impl</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HpkeAuthOpener</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HpkeError</span><span class="p">;</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>
+<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">ephemeral_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">suite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HpkeSuite</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a><span class="w">            </span><span class="n">KemAlgorithm</span><span class="p">::</span><span class="n">DhKemX25519HkdfSha256</span><span class="p">,</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a><span class="w">            </span><span class="n">KdfAlgorithm</span><span class="p">::</span><span class="n">HkdfSha256</span><span class="p">,</span>
+<a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a><span class="w">            </span><span class="n">AeadAlgorithm</span><span class="p">::</span><span class="n">ChaCha20Poly1305</span><span class="p">,</span>
+<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>
+<a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a><span class="w">        </span><span class="c1">// Extract encapsulated key (first 32 bytes) and ciphertext</span>
+<a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">encap</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="n">split_at</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>
+<a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">plaintext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hpke</span><span class="p">::</span><span class="n">single_shot_open_auth</span><span class="p">(</span>
+<a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a><span class="w">            </span><span class="o">&amp;</span><span class="n">suite</span><span class="p">,</span>
+<a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a><span class="w">            </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">recipient_keypair</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// Recipient private key</span>
+<a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a><span class="w">            </span><span class="n">encap</span><span class="p">,</span>
+<a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a><span class="w">            </span><span class="n">info</span><span class="p">,</span>
+<a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a><span class="w">            </span><span class="n">ct</span><span class="p">,</span>
+<a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a><span class="w">            </span><span class="n">ephemeral_pubkey</span><span class="p">,</span><span class="w"> </span><span class="c1">// Sender public key for authentication</span>
+<a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a><span class="w">        </span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>
+<a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+<a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="tsp-integration-example_1">TSP Integration Example<a class="headerlink" href="#tsp-integration-example_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_cipher</span><span class="p">::{</span><span class="n">HPKESealer</span><span class="p">,</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="p">};</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPEncryptedMessage</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="o">&gt;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">where</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKESealer</span><span class="p">,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="n">O</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="p">,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">{</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="n">sealer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="n">opener</span><span class="p">:</span><span class="w"> </span><span class="nc">O</span><span class="p">,</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">}</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TSPEncryptedMessage</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="o">&gt;</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="k">where</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKESealer</span><span class="p">,</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="n">O</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="p">,</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="p">{</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">encrypt_payload</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">recipient_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">b&quot;TSP-v1-HPKE-Auth&quot;</span><span class="p">;</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sealer</span><span class="p">.</span><span class="n">seal</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">recipient_pubkey</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">)</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">decrypt_payload</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">sender_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">b&quot;TSP-v1-HPKE-Auth&quot;</span><span class="p">;</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">opener</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="n">sender_pubkey</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">)</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="solid-compliance-analysis_1">SOLID Compliance Analysis<a class="headerlink" href="#solid-compliance-analysis_1" title="Permanent link">&para;</a></h3>
+<p><strong>SRP</strong> ✅ - Each trait handles one encryption mode
+<strong>OCP</strong> ✅ - New cipher suites extend via new implementations
+<strong>LSP</strong> ✅ - Any HPKE implementation is interchangeable
+<strong>ISP</strong> ✅ - Sealers and openers are separate (asymmetric operation)
+<strong>DIP</strong> ✅ - TSP depends on traits, not concrete implementations</p>
+<hr />
+<h2 id="module-3-stfx-crypto-hasher">🔌 Module 3: stfx-crypto-hasher<a class="headerlink" href="#module-3-stfx-crypto-hasher" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_2">Purpose<a class="headerlink" href="#purpose_2" title="Permanent link">&para;</a></h3>
+<p>Cryptographic hashing for integrity verification and content addressing.</p>
+<h3 id="core-trait">Core Trait<a class="headerlink" href="#core-trait" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">error</span><span class="p">::</span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="sd">/// Trait for cryptographic hash functions</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Hasher</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="sd">/// Computes the hash of input data</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="sd">/// Returns the algorithm identifier (e.g., &quot;SHA256&quot;, &quot;BLAKE2b-256&quot;)</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="sd">/// Returns the output size in bytes</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">output_size</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">usize</span><span class="p">;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="why-single-trait">Why Single Trait?<a class="headerlink" href="#why-single-trait" title="Permanent link">&para;</a></h3>
+<p>Unlike signing/verification or sealing/opening, hashing is <strong>symmetric and stateless</strong>:
+- No public/private key distinction
+- Same operation for all participants
+- Pure function: <code>hash(data) → digest</code></p>
+<h3 id="implementation-example-blake2b">Implementation Example: BLAKE2b<a class="headerlink" href="#implementation-example-blake2b" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// In stfx-crypto-hasher-blake2b crate</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">use</span><span class="w"> </span><span class="n">blake2</span><span class="p">::{</span><span class="n">Blake2b512</span><span class="p">,</span><span class="w"> </span><span class="n">Digest</span><span class="p">};</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_hasher</span><span class="p">::</span><span class="n">Hasher</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Blake2bHasher256</span><span class="p">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="k">impl</span><span class="w"> </span><span class="n">Hasher</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Blake2bHasher256</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">convert</span><span class="p">::</span><span class="n">Infallible</span><span class="p">;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hasher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Blake2b512</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="n">hasher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hasher</span><span class="p">.</span><span class="n">finalize</span><span class="p">();</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="c1">// Truncate to 256 bits (32 bytes)</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="o">..</span><span class="mi">32</span><span class="p">].</span><span class="n">to_vec</span><span class="p">())</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">        </span><span class="s">&quot;BLAKE2b-256&quot;</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">output_size</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">usize</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">        </span><span class="mi">32</span><span class="w"> </span><span class="c1">// 256 bits</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="tsp-integration-example_2">TSP Integration Example<a class="headerlink" href="#tsp-integration-example_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_hasher</span><span class="p">::</span><span class="n">Hasher</span><span class="p">;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPContentAddressing</span><span class="o">&lt;</span><span class="n">H</span><span class="p">:</span><span class="w"> </span><span class="nc">Hasher</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="n">hasher</span><span class="p">:</span><span class="w"> </span><span class="nc">H</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">H</span><span class="p">:</span><span class="w"> </span><span class="nc">Hasher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TSPContentAddressing</span><span class="o">&lt;</span><span class="n">H</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">compute_message_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">envelope</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">envelope</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">].</span><span class="n">concat</span><span class="p">();</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">hasher</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">        </span><span class="c1">// Convert to base64url for TSP message ID</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">base64</span><span class="p">::</span><span class="n">encode_config</span><span class="p">(</span><span class="n">digest</span><span class="p">,</span><span class="w"> </span><span class="n">base64</span><span class="p">::</span><span class="n">URL_SAFE_NO_PAD</span><span class="p">))</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="solid-compliance-analysis_2">SOLID Compliance Analysis<a class="headerlink" href="#solid-compliance-analysis_2" title="Permanent link">&para;</a></h3>
+<p><strong>SRP</strong> ✅ - Only hashing responsibility
+<strong>OCP</strong> ✅ - New hash algorithms extend via new implementations
+<strong>LSP</strong> ✅ - Any hasher is interchangeable
+<strong>ISP</strong> ✅ - Single focused interface (no unused methods)
+<strong>DIP</strong> ✅ - TSP depends on trait, not concrete hasher</p>
+<hr />
+<h2 id="module-4-stfx-crypto-kdf">🔌 Module 4: stfx-crypto-kdf<a class="headerlink" href="#module-4-stfx-crypto-kdf" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_3">Purpose<a class="headerlink" href="#purpose_3" title="Permanent link">&para;</a></h3>
+<p>Key derivation for entropy expansion, key stretching, and hierarchical key generation.</p>
+<h3 id="core-trait_1">Core Trait<a class="headerlink" href="#core-trait_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">use</span><span class="w"> </span><span class="n">async_trait</span><span class="p">::</span><span class="n">async_trait</span><span class="p">;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">error</span><span class="p">::</span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="sd">/// Trait for key derivation functions</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">KeyDerivation</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="sd">/// Derives a key from input key material</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">derive</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ikm</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">salt</span><span class="p">:</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">output_len</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="sd">/// Returns the algorithm identifier (e.g., &quot;HKDF-SHA256&quot;)</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">;</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="implementation-example-hkdf-sha256">Implementation Example: HKDF-SHA256<a class="headerlink" href="#implementation-example-hkdf-sha256" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// In stfx-crypto-kdf-hkdf crate</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">use</span><span class="w"> </span><span class="n">hkdf</span><span class="p">::</span><span class="n">Hkdf</span><span class="p">;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">use</span><span class="w"> </span><span class="n">sha2</span><span class="p">::</span><span class="n">Sha256</span><span class="p">;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_kdf</span><span class="p">::</span><span class="n">KeyDerivation</span><span class="p">;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HkdfSha256</span><span class="p">;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="cp">#[async_trait]</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="k">impl</span><span class="w"> </span><span class="n">KeyDerivation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HkdfSha256</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hkdf</span><span class="p">::</span><span class="n">InvalidLength</span><span class="p">;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">derive</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ikm</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">salt</span><span class="p">:</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">output_len</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">hkdf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Hkdf</span><span class="p">::</span><span class="o">&lt;</span><span class="n">Sha256</span><span class="o">&gt;</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">salt</span><span class="p">,</span><span class="w"> </span><span class="n">ikm</span><span class="p">);</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">okm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">output_len</span><span class="p">];</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">        </span><span class="n">hkdf</span><span class="p">.</span><span class="n">expand</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">okm</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">okm</span><span class="p">)</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="w">        </span><span class="s">&quot;HKDF-SHA256&quot;</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="tsp-integration-example_3">TSP Integration Example<a class="headerlink" href="#tsp-integration-example_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_kdf</span><span class="p">::</span><span class="n">KeyDerivation</span><span class="p">;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPSessionKeys</span><span class="o">&lt;</span><span class="n">K</span><span class="p">:</span><span class="w"> </span><span class="nc">KeyDerivation</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">kdf</span><span class="p">:</span><span class="w"> </span><span class="nc">K</span><span class="p">,</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">K</span><span class="p">:</span><span class="w"> </span><span class="nc">KeyDerivation</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TSPSessionKeys</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">derive_session_key</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">shared_secret</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">        </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">        </span><span class="c1">// Derive 32-byte session key from ECDH shared secret</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">kdf</span><span class="p">.</span><span class="n">derive</span><span class="p">(</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">            </span><span class="n">shared_secret</span><span class="p">,</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">            </span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="c1">// No salt</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">            </span><span class="n">context</span><span class="p">,</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">            </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="c1">// AES-256 key size</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">        </span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="solid-compliance-analysis_3">SOLID Compliance Analysis<a class="headerlink" href="#solid-compliance-analysis_3" title="Permanent link">&para;</a></h3>
+<p><strong>SRP</strong> ✅ - Only key derivation responsibility
+<strong>OCP</strong> ✅ - New KDFs (PBKDF2, Argon2) extend via new implementations
+<strong>LSP</strong> ✅ - Any KDF is interchangeable
+<strong>ISP</strong> ✅ - Single focused interface
+<strong>DIP</strong> ✅ - TSP depends on trait, not concrete KDF</p>
+<hr />
+<h2 id="implementation-structure">📦 Implementation Structure<a class="headerlink" href="#implementation-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>stfx-crypto-signer/           # Core signing traits
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    ├── src/lib.rs            # Signer, SignatureVerifier traits
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    └── Cargo.toml
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>stfx-crypto-signer-ed25519/   # Ed25519 implementation
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>stfx-crypto-signer-secp256k1/ # secp256k1 (ES256K) implementation
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>stfx-crypto-signer-bls/       # BLS signatures (future)
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>stfx-crypto-cipher/           # Core encryption traits
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    ├── src/lib.rs            # AEAD, HPKESealer, HPKEOpener traits
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    └── Cargo.toml
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>stfx-crypto-cipher-hpke/      # HPKE implementation
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>stfx-crypto-cipher-chacha/    # ChaCha20Poly1305 AEAD
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>stfx-crypto-cipher-aes/       # AES-GCM AEAD
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>stfx-crypto-hasher/           # Core hashing trait
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>    ├── src/lib.rs            # Hasher trait
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>    └── Cargo.toml
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>stfx-crypto-hasher-sha256/    # SHA2-256 implementation
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>stfx-crypto-hasher-blake2b/   # BLAKE2b implementation
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>stfx-crypto-kdf/              # Core KDF trait
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>    ├── src/lib.rs            # KeyDerivation trait
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>    └── Cargo.toml
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>stfx-crypto-kdf-hkdf/         # HKDF implementation
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>stfx-crypto-kdf-pbkdf2/       # PBKDF2 (future)
+</code></pre></div>
+<hr />
+<h2 id="protocol-support-matrix">🎯 Protocol Support Matrix<a class="headerlink" href="#protocol-support-matrix" title="Permanent link">&para;</a></h2>
+<h3 id="tsp-requirements">TSP Requirements<a class="headerlink" href="#tsp-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Module</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sign messages</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519</td>
+<td>✅ Mandatory</td>
+</tr>
+<tr>
+<td>Verify signatures</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519</td>
+<td>✅ Mandatory</td>
+</tr>
+<tr>
+<td>Encrypt payloads</td>
+<td><code>stfx-crypto-cipher</code></td>
+<td>HPKE-Auth (X25519+ChaCha20Poly1305)</td>
+<td>✅ Mandatory</td>
+</tr>
+<tr>
+<td>Decrypt payloads</td>
+<td><code>stfx-crypto-cipher</code></td>
+<td>HPKE-Auth</td>
+<td>✅ Mandatory</td>
+</tr>
+<tr>
+<td>Hash messages</td>
+<td><code>stfx-crypto-hasher</code></td>
+<td>SHA256, BLAKE2b</td>
+<td>✅ Mandatory</td>
+</tr>
+<tr>
+<td>Derive session keys</td>
+<td><code>stfx-crypto-kdf</code></td>
+<td>HKDF-SHA256</td>
+<td>⚠️ Optional</td>
+</tr>
+</tbody>
+</table>
+<h3 id="didcomm-v2-requirements">DIDComm v2 Requirements<a class="headerlink" href="#didcomm-v2-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Module</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sign JWS</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519, ES256K</td>
+<td>✅ Required</td>
+</tr>
+<tr>
+<td>Verify JWS</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519, ES256K</td>
+<td>✅ Required</td>
+</tr>
+<tr>
+<td>Encrypt JWE</td>
+<td><code>stfx-crypto-cipher</code></td>
+<td>HPKE, ECDH-ES+A256KW</td>
+<td>✅ Required</td>
+</tr>
+<tr>
+<td>Content encryption</td>
+<td><code>stfx-crypto-cipher</code></td>
+<td>AES-256-GCM, XChaCha20Poly1305</td>
+<td>✅ Required</td>
+</tr>
+</tbody>
+</table>
+<h3 id="keri-aids-requirements">KERI (AIDs) Requirements<a class="headerlink" href="#keri-aids-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Module</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sign events</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519, secp256k1, BLS</td>
+<td>⚠️ Ed25519 only (Phase 1)</td>
+</tr>
+<tr>
+<td>Verify events</td>
+<td><code>stfx-crypto-signer</code></td>
+<td>Ed25519, secp256k1, BLS</td>
+<td>⚠️ Ed25519 only (Phase 1)</td>
+</tr>
+<tr>
+<td>Hash events</td>
+<td><code>stfx-crypto-hasher</code></td>
+<td>BLAKE3, SHA256</td>
+<td>⚠️ SHA256 only (Phase 1)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="full-stack-integration-example">🔗 Full Stack Integration Example<a class="headerlink" href="#full-stack-integration-example" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_transport</span><span class="p">::</span><span class="n">Transport</span><span class="p">;</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_runtime</span><span class="p">::</span><span class="n">Runtime</span><span class="p">;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_signer</span><span class="p">::{</span><span class="n">Signer</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureVerifier</span><span class="p">};</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_cipher</span><span class="p">::{</span><span class="n">HPKESealer</span><span class="p">,</span><span class="w"> </span><span class="n">HPKEOpener</span><span class="p">};</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="k">use</span><span class="w"> </span><span class="n">stfx_crypto_hasher</span><span class="p">::</span><span class="n">Hasher</span><span class="p">;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TSPSecureChannel</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">SV</span><span class="p">,</span><span class="w"> </span><span class="n">HS</span><span class="p">,</span><span class="w"> </span><span class="n">HO</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="o">&gt;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="k">where</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nc">Transport</span><span class="p">,</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="nc">Runtime</span><span class="p">,</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">    </span><span class="n">SV</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">    </span><span class="n">HS</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKESealer</span><span class="p">,</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">    </span><span class="n">HO</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="p">,</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">    </span><span class="n">H</span><span class="p">:</span><span class="w"> </span><span class="nc">Hasher</span><span class="p">,</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="p">{</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">    </span><span class="n">transport</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="w">    </span><span class="n">runtime</span><span class="p">:</span><span class="w"> </span><span class="nc">R</span><span class="p">,</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="w">    </span><span class="n">signer</span><span class="p">:</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="w">    </span><span class="n">verifier</span><span class="p">:</span><span class="w"> </span><span class="nc">SV</span><span class="p">,</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="w">    </span><span class="n">sealer</span><span class="p">:</span><span class="w"> </span><span class="nc">HS</span><span class="p">,</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="w">    </span><span class="n">opener</span><span class="p">:</span><span class="w"> </span><span class="nc">HO</span><span class="p">,</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="w">    </span><span class="n">hasher</span><span class="p">:</span><span class="w"> </span><span class="nc">H</span><span class="p">,</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="p">}</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">SV</span><span class="p">,</span><span class="w"> </span><span class="n">HS</span><span class="p">,</span><span class="w"> </span><span class="n">HO</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TSPSecureChannel</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">SV</span><span class="p">,</span><span class="w"> </span><span class="n">HS</span><span class="p">,</span><span class="w"> </span><span class="n">HO</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="o">&gt;</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="k">where</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="w">    </span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nc">Transport</span><span class="p">,</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="w">    </span><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="nc">Runtime</span><span class="p">,</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="w">    </span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="nc">Signer</span><span class="p">,</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="w">    </span><span class="n">SV</span><span class="p">:</span><span class="w"> </span><span class="nc">SignatureVerifier</span><span class="p">,</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="w">    </span><span class="n">HS</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKESealer</span><span class="p">,</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="w">    </span><span class="n">HO</span><span class="p">:</span><span class="w"> </span><span class="nc">HPKEOpener</span><span class="p">,</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="w">    </span><span class="n">H</span><span class="p">:</span><span class="w"> </span><span class="nc">Hasher</span><span class="p">,</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="p">{</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">send_secure_message</span><span class="p">(</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="w">        </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="w">        </span><span class="n">recipient_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="w">        </span><span class="c1">// 1. Hash payload for integrity</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">payload_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">hasher</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a><span class="w">        </span><span class="c1">// 2. Encrypt payload with HPKE</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sealer</span><span class="p">.</span><span class="n">seal</span><span class="p">(</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a><span class="w">            </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a><span class="w">            </span><span class="n">recipient_pubkey</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a><span class="w">            </span><span class="s">b&quot;TSP-v1&quot;</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a><span class="w">        </span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>
+<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a><span class="w">        </span><span class="c1">// 3. Sign encrypted payload</span>
+<a id="__codelineno-18-52" name="__codelineno-18-52" href="#__codelineno-18-52"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">signer</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ciphertext</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-53" name="__codelineno-18-53" href="#__codelineno-18-53"></a>
+<a id="__codelineno-18-54" name="__codelineno-18-54" href="#__codelineno-18-54"></a><span class="w">        </span><span class="c1">// 4. Construct TSP message</span>
+<a id="__codelineno-18-55" name="__codelineno-18-55" href="#__codelineno-18-55"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TSPMessage</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-56" name="__codelineno-18-56" href="#__codelineno-18-56"></a><span class="w">            </span><span class="n">ciphertext</span><span class="p">,</span>
+<a id="__codelineno-18-57" name="__codelineno-18-57" href="#__codelineno-18-57"></a><span class="w">            </span><span class="n">signature</span><span class="p">,</span>
+<a id="__codelineno-18-58" name="__codelineno-18-58" href="#__codelineno-18-58"></a><span class="w">            </span><span class="n">payload_hash</span><span class="p">,</span>
+<a id="__codelineno-18-59" name="__codelineno-18-59" href="#__codelineno-18-59"></a><span class="w">        </span><span class="p">};</span>
+<a id="__codelineno-18-60" name="__codelineno-18-60" href="#__codelineno-18-60"></a>
+<a id="__codelineno-18-61" name="__codelineno-18-61" href="#__codelineno-18-61"></a><span class="w">        </span><span class="c1">// 5. Send over transport</span>
+<a id="__codelineno-18-62" name="__codelineno-18-62" href="#__codelineno-18-62"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bincode</span><span class="p">::</span><span class="n">serialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-63" name="__codelineno-18-63" href="#__codelineno-18-63"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg_bytes</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-64" name="__codelineno-18-64" href="#__codelineno-18-64"></a>
+<a id="__codelineno-18-65" name="__codelineno-18-65" href="#__codelineno-18-65"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span>
+<a id="__codelineno-18-66" name="__codelineno-18-66" href="#__codelineno-18-66"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-67" name="__codelineno-18-67" href="#__codelineno-18-67"></a>
+<a id="__codelineno-18-68" name="__codelineno-18-68" href="#__codelineno-18-68"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">receive_secure_message</span><span class="p">(</span>
+<a id="__codelineno-18-69" name="__codelineno-18-69" href="#__codelineno-18-69"></a><span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span>
+<a id="__codelineno-18-70" name="__codelineno-18-70" href="#__codelineno-18-70"></a><span class="w">        </span><span class="n">sender_pubkey</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]</span>
+<a id="__codelineno-18-71" name="__codelineno-18-71" href="#__codelineno-18-71"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-72" name="__codelineno-18-72" href="#__codelineno-18-72"></a><span class="w">        </span><span class="c1">// 1. Receive from transport</span>
+<a id="__codelineno-18-73" name="__codelineno-18-73" href="#__codelineno-18-73"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">4096</span><span class="p">];</span>
+<a id="__codelineno-18-74" name="__codelineno-18-74" href="#__codelineno-18-74"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">transport</span><span class="p">.</span><span class="n">receive</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">buf</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-75" name="__codelineno-18-75" href="#__codelineno-18-75"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="nc">TSPMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bincode</span><span class="p">::</span><span class="n">deserialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">[</span><span class="o">..</span><span class="n">n</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-76" name="__codelineno-18-76" href="#__codelineno-18-76"></a>
+<a id="__codelineno-18-77" name="__codelineno-18-77" href="#__codelineno-18-77"></a><span class="w">        </span><span class="c1">// 2. Verify signature</span>
+<a id="__codelineno-18-78" name="__codelineno-18-78" href="#__codelineno-18-78"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">verifier</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span>
+<a id="__codelineno-18-79" name="__codelineno-18-79" href="#__codelineno-18-79"></a><span class="w">            </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-80" name="__codelineno-18-80" href="#__codelineno-18-80"></a><span class="w">            </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">signature</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-81" name="__codelineno-18-81" href="#__codelineno-18-81"></a><span class="w">            </span><span class="n">sender_pubkey</span>
+<a id="__codelineno-18-82" name="__codelineno-18-82" href="#__codelineno-18-82"></a><span class="w">        </span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-83" name="__codelineno-18-83" href="#__codelineno-18-83"></a>
+<a id="__codelineno-18-84" name="__codelineno-18-84" href="#__codelineno-18-84"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">valid</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-85" name="__codelineno-18-85" href="#__codelineno-18-85"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Invalid signature&quot;</span><span class="p">.</span><span class="n">into</span><span class="p">());</span>
+<a id="__codelineno-18-86" name="__codelineno-18-86" href="#__codelineno-18-86"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-18-87" name="__codelineno-18-87" href="#__codelineno-18-87"></a>
+<a id="__codelineno-18-88" name="__codelineno-18-88" href="#__codelineno-18-88"></a><span class="w">        </span><span class="c1">// 3. Decrypt payload</span>
+<a id="__codelineno-18-89" name="__codelineno-18-89" href="#__codelineno-18-89"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">plaintext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">opener</span><span class="p">.</span><span class="n">open</span><span class="p">(</span>
+<a id="__codelineno-18-90" name="__codelineno-18-90" href="#__codelineno-18-90"></a><span class="w">            </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">.</span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-91" name="__codelineno-18-91" href="#__codelineno-18-91"></a><span class="w">            </span><span class="n">sender_pubkey</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-92" name="__codelineno-18-92" href="#__codelineno-18-92"></a><span class="w">            </span><span class="s">b&quot;TSP-v1&quot;</span>
+<a id="__codelineno-18-93" name="__codelineno-18-93" href="#__codelineno-18-93"></a><span class="w">        </span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-94" name="__codelineno-18-94" href="#__codelineno-18-94"></a>
+<a id="__codelineno-18-95" name="__codelineno-18-95" href="#__codelineno-18-95"></a><span class="w">        </span><span class="c1">// 4. Verify integrity hash</span>
+<a id="__codelineno-18-96" name="__codelineno-18-96" href="#__codelineno-18-96"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">computed_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">hasher</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="o">&amp;</span><span class="n">plaintext</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-97" name="__codelineno-18-97" href="#__codelineno-18-97"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">computed_hash</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">payload_hash</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-98" name="__codelineno-18-98" href="#__codelineno-18-98"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Integrity check failed&quot;</span><span class="p">.</span><span class="n">into</span><span class="p">());</span>
+<a id="__codelineno-18-99" name="__codelineno-18-99" href="#__codelineno-18-99"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-18-100" name="__codelineno-18-100" href="#__codelineno-18-100"></a>
+<a id="__codelineno-18-101" name="__codelineno-18-101" href="#__codelineno-18-101"></a><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+<a id="__codelineno-18-102" name="__codelineno-18-102" href="#__codelineno-18-102"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-103" name="__codelineno-18-103" href="#__codelineno-18-103"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="phased-rollout-plan">🚀 Phased Rollout Plan<a class="headerlink" href="#phased-rollout-plan" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-tsp-core-requirements-now">Phase 1: TSP Core Requirements (Now)<a class="headerlink" href="#phase-1-tsp-core-requirements-now" title="Permanent link">&para;</a></h3>
+<p><strong>Modules:</strong>
+- ✅ <code>stfx-crypto-signer</code> (trait definitions)
+- ✅ <code>stfx-crypto-signer-ed25519</code> (TSP mandatory)
+- ✅ <code>stfx-crypto-cipher</code> (trait definitions)
+- ✅ <code>stfx-crypto-cipher-hpke</code> (X25519+ChaCha20Poly1305)
+- ✅ <code>stfx-crypto-hasher</code> (trait definitions)
+- ✅ <code>stfx-crypto-hasher-sha256</code> (TSP mandatory)
+- ✅ <code>stfx-crypto-hasher-blake2b</code> (TSP optional)</p>
+<p><strong>Goal:</strong> Enable TSP SDK to be fully algorithm-agnostic</p>
+<h3 id="phase-2-didcommw3c-vc-support-q1-2026">Phase 2: DIDComm/W3C VC Support (Q1 2026)<a class="headerlink" href="#phase-2-didcommw3c-vc-support-q1-2026" title="Permanent link">&para;</a></h3>
+<p><strong>Modules:</strong>
+- ⚠️ <code>stfx-crypto-signer-secp256k1</code> (ES256K for Bitcoin/Ethereum DIDs)
+- ⚠️ <code>stfx-crypto-cipher-aes</code> (AES-256-GCM for JWE)
+- ⚠️ <code>stfx-crypto-kdf</code> (trait definitions)
+- ⚠️ <code>stfx-crypto-kdf-hkdf</code> (session key derivation)</p>
+<p><strong>Goal:</strong> Enable DIDComm v2 and W3C VC issuance/verification</p>
+<h3 id="phase-3-keriaid-support-q2-2026">Phase 3: KERI/AID Support (Q2 2026)<a class="headerlink" href="#phase-3-keriaid-support-q2-2026" title="Permanent link">&para;</a></h3>
+<p><strong>Modules:</strong>
+- ⚠️ <code>stfx-crypto-signer-bls</code> (BLS signatures for KERI multi-sig)
+- ⚠️ <code>stfx-crypto-hasher-blake3</code> (KERI event hashing)
+- ⚠️ <code>stfx-crypto-kdf-pbkdf2</code> (password-based key derivation)</p>
+<p><strong>Goal:</strong> Enable KERI AIDs and event log verification</p>
+<hr />
+<h2 id="summary-why-this-design-works">✅ Summary: Why This Design Works<a class="headerlink" href="#summary-why-this-design-works" title="Permanent link">&para;</a></h2>
+<h3 id="respects-stfx-principles">Respects STFX Principles<a class="headerlink" href="#respects-stfx-principles" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Reusability</strong> ✅</li>
+<li>Each crypto module usable independently</li>
+<li>Ed25519 signer works without HPKE cipher</li>
+<li>
+<p>TSP, DIDComm, KERI can share implementations</p>
+</li>
+<li>
+<p><strong>Modularity</strong> ✅</p>
+</li>
+<li>Loose coupling via traits</li>
+<li>Pluggable implementations (software, hardware, mock)</li>
+<li>
+<p>No monolithic crypto library dependency</p>
+</li>
+<li>
+<p><strong>SOLID Compliance</strong> ✅</p>
+</li>
+<li><strong>SRP</strong>: Each trait has single cryptographic responsibility</li>
+<li><strong>OCP</strong>: New algorithms extend without modifying traits</li>
+<li><strong>LSP</strong>: Any implementation substitutable</li>
+<li><strong>ISP</strong>: Clients only implement methods they need</li>
+<li><strong>DIP</strong>: High-level code depends on abstractions</li>
+</ol>
+<h3 id="enables-real-world-deployments">Enables Real-World Deployments<a class="headerlink" href="#enables-real-world-deployments" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cloud/Server</strong>: Software implementations (RustCrypto, ring, sodiumoxide)</li>
+<li><strong>Embedded/IoT</strong>: Hardware crypto accelerators (TPM, secure element)</li>
+<li><strong>Testing</strong>: Mock implementations for deterministic tests</li>
+<li><strong>WASM</strong>: Pure Rust implementations without platform dependencies</li>
+</ul>
+<h3 id="aligns-with-ecosystem">Aligns with Ecosystem<a class="headerlink" href="#aligns-with-ecosystem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>TSP SDK</strong>: All mandatory algorithms supported</li>
+<li><strong>DIDComm v2</strong>: JWS/JWE compatibility via trait implementations</li>
+<li><strong>KERI</strong>: Event signing/verification via pluggable signers</li>
+<li><strong>W3C VCs</strong>: LD-Proofs and JWT-VCs via common signer trait</li>
+</ul>
+<hr />
+<h2 id="related-documentation">🔗 Related Documentation<a class="headerlink" href="#related-documentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../architecural_principles/">STFX Architectural Principles</a></li>
+<li><a href="../arch_DIP_SOLID/">Dependency Inversion Principle (DIP)</a></li>
+<li><a href="../stfx-transport/">STFX Transport Layer</a></li>
+<li><a href="../stfx-runtime/">STFX Runtime Layer</a></li>
+<li><a href="../VID-IMPLEMENTATION-ANALYSIS/">VID Implementation Analysis</a> (ISP rationale)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cardosoalexandrecom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/alexandrecardoso" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

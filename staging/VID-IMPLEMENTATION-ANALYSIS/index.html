@@ -1,0 +1,2089 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A framework for decentralized trust and self-sovereign identity">
+      
+      
+        <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
+      
+      
+        <link rel="canonical" href="https://sovereigntrustframework.org/VID-IMPLEMENTATION-ANALYSIS/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/STF_logo_nobf.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Verified Identifier (VID) Implementation Analysis - Sovereign Trust Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#verified-identifier-vid-implementation-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sovereign Trust Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Verified Identifier (VID) Implementation Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sovereign Trust Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executive Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-1-main-vid-types-differences-aid-did-vid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 1: Main VID Types - Differences (AID, DID, VID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 1: Main VID Types - Differences (AID, DID, VID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vid-verified-identifier-the-umbrella-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VID (Verified Identifier) - The Umbrella Category
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-decentralized-identifier-w3c-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DID (Decentralized Identifier) - W3C Standard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aid-autonomic-identifier-keri-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AID (Autonomic Identifier) - KERI-Based
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparative-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparative Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-2-implementation-in-major-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 2: Implementation in Major Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 2: Implementation in Major Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-spanning-protocol-tsp-openwallet-foundation-labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust Spanning Protocol (TSP) - OpenWallet Foundation Labs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didkit-spruce-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DIDKit (Spruce Systems)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hyperledger-indy-sovrin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hyperledger Indy / Sovrin
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-3-supported-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 3: Supported Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 3: Supported Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#universal-vid-operations-tsp-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Universal VID Operations (TSP Requirements)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Universal VID Operations (TSP Requirements)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mandatory-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mandatory Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-specific-operations-w3c-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DID-Specific Operations (W3C Standard)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aid-specific-operations-keri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AID-Specific Operations (KERI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-mapping-by-vid-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operation Mapping by VID Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-4-protocol-relationships-trqp-acdc-keriaid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 4: Protocol Relationships (TRQP, ACDC, KERI/AID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 4: Protocol Relationships (TRQP, ACDC, KERI/AID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-registry-query-protocol-trqp-v20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust Registry Query Protocol (TRQP) v2.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentic-chained-data-container-acdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentic Chained Data Container (ACDC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keri-autonomic-identifier-aid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KERI / Autonomic Identifier (AID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Integration Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-5-architectural-patterns-in-existing-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 5: Architectural Patterns in Existing Implementations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 5: Architectural Patterns in Existing Implementations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-1-relationship-table-architecture-tsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 1: Relationship Table Architecture (TSP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-2-support-system-abstraction-tspdid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 2: Support System Abstraction (TSP/DID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-3-nested-vid-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 3: Nested VID Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-4-event-log-based-trust-keri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 4: Event-Log-Based Trust (KERI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-5-multi-level-relationship-formation-tsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 5: Multi-Level Relationship Formation (TSP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-6-gaps-in-current-vid-abstractions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question 6: Gaps in Current VID Abstractions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question 6: Gaps in Current VID Abstractions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gap-1-key-rotation-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 1: Key Rotation Specification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-2-governance-assessment-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 2: Governance Assessment Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-3-vid-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 3: VID Lifecycle Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-4-cross-method-vid-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 4: Cross-Method VID Relationships
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-5-nested-relationship-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 5: Nested Relationship Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-6-support-system-interoperability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 6: Support System Interoperability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-7-metadata-privacy-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap 7: Metadata Privacy Guidance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthesis-architectural-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthesis: Architectural Design Decisions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Synthesis: Architectural Design Decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decision-1-vid-type-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision 1: VID Type Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-2-tsp-relationship-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision 2: TSP Relationship Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-3-key-rotation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision 3: Key Rotation Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-4-metadata-privacy-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision 4: Metadata Privacy Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-5-support-system-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision 5: Support System Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stfx-architecture-decision-vid-module-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STFX Architecture Decision: VID Module Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STFX Architecture Decision: VID Module Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-solid-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The SOLID Challenge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implication-for-stfx-crypto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implication for stfx-crypto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="verified-identifier-vid-implementation-analysis">Verified Identifier (VID) Implementation Analysis<a class="headerlink" href="#verified-identifier-vid-implementation-analysis" title="Permanent link">&para;</a></h1>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
+<p>This document synthesizes current state research on Verified Identifier (VID) implementations and standards in the Self-Sovereign Identity (SSI) ecosystem. The analysis addresses six key architectural questions and provides evidence-based guidance for system designers implementing identity infrastructure aligned with Trust Over IP (ToIP) Layer 2 standards.</p>
+<p><strong>Key Finding:</strong> VID is an abstract category encompassing multiple identifier types (DIDs, AIDs) bound to cryptographic trust roots. TSP (Trust Spanning Protocol) serves as the universal Layer 2 interoperability mechanism, enabling diverse VID types to communicate securely while preserving trust properties.</p>
+<hr />
+<h2 id="question-1-main-vid-types-differences-aid-did-vid">Question 1: Main VID Types - Differences (AID, DID, VID)<a class="headerlink" href="#question-1-main-vid-types-differences-aid-did-vid" title="Permanent link">&para;</a></h2>
+<h3 id="vid-verified-identifier-the-umbrella-category">VID (Verified Identifier) - The Umbrella Category<a class="headerlink" href="#vid-verified-identifier-the-umbrella-category" title="Permanent link">&para;</a></h3>
+<p><strong>Definition (TSP Spec):</strong> A Verified Identifier is a category of digital identifier that meets cryptographic verification and governance assessment requirements. It is <strong>not itself a digital identifier scheme</strong> but rather a category encompassing identifiers that:</p>
+<ol>
+<li>Support public-key cryptography with verifiable trust roots</li>
+<li>Can be verified cryptographically (through signature verification)</li>
+<li>Can be assessed for governance (through associated support systems)</li>
+<li>May be centralized, federated, or decentralized</li>
+</ol>
+<p><strong>Key Characteristics:</strong>
+- Format requirement: Must be compliant with DID format or URN format (RFC8141)
+- Cryptographic non-correlation: Multiple VIDs controlled by same endpoint must not reveal correlation
+- Support mandatory operations: address resolution, mapping to keys, verification
+- Can be used in public, well-known, or nested scenarios</p>
+<h3 id="did-decentralized-identifier-w3c-standard">DID (Decentralized Identifier) - W3C Standard<a class="headerlink" href="#did-decentralized-identifier-w3c-standard" title="Permanent link">&para;</a></h3>
+<p><strong>Definition (W3C v1.0):</strong> A globally unique persistent identifier that does not require a centralized registration authority.</p>
+<p><strong>Syntax Format:</strong> <code>did:method:method-specific-id[/path][?query][#fragment]</code></p>
+<p><strong>Core Properties:</strong>
+- <strong>Verification Methods:</strong> Public key material (Ed25519, RSA, secp256k1, etc.) with:
+  - Format support: JSON Web Key (JWK) and Multibase encodings
+  - Controller: Who controls the key
+  - Type: Cryptographic algorithm identifier
+  - Purposes: Authentication, assertion, key agreement, capability operations</p>
+<ul>
+<li><strong>Verification Relationships:</strong> Define purposes for verification methods:</li>
+<li><code>authentication</code>: For authenticating the controller/subject</li>
+<li><code>assertionMethod</code>: For asserting claims about the subject</li>
+<li><code>keyAgreement</code>: For encrypted communications</li>
+<li><code>capabilityInvocation</code>: For invoking capabilities</li>
+<li>
+<p><code>capabilityDelegation</code>: For delegating capabilities</p>
+</li>
+<li>
+<p><strong>Services:</strong> Enable discovery and interaction patterns</p>
+</li>
+<li>Service endpoints with types (e.g., messaging, credential repository)</li>
+<li>
+<p>Transport addresses and protocols</p>
+</li>
+<li>
+<p><strong>Metadata:</strong> </p>
+</li>
+<li><code>created</code>, <code>updated</code>, <code>deactivated</code> timestamps</li>
+<li><code>equivalentId</code>, <code>canonicalId</code> for identity relationships</li>
+<li><code>versionId</code>, <code>nextUpdate</code> for state management</li>
+</ul>
+<p><strong>Core Operations (Method-dependent):</strong>
+1. <strong>Create:</strong> Method-specific process to generate new DID
+2. <strong>Resolve:</strong> <code>resolve(did, options) → (metadata, DID document, document metadata)</code>
+3. <strong>Update:</strong> Modify DID document properties (method-specific)
+4. <strong>Deactivate:</strong> Mark DID as no longer active</p>
+<p><strong>Supported DID Methods in Production:</strong>
+- <code>did:peer</code> - Peer DIDs (public-key based, no registration required)
+- <code>did:web</code> - Web-hosted DIDs (HTTP-based resolution)
+- <code>did:webvh</code> - Web with verifiable history
+- <code>did:key</code> - Cryptographic material embedded in identifier
+- DID methods in registry at did-method-registry.github.io</p>
+<p><strong>Resolution Process:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Input: DID + resolution options
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>     ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>1. Parse DID identifier
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>2. Route to appropriate DID method resolver
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>3. Retrieve DID document (from blockchain, web server, etc.)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>4. Validate signature/cryptographic proof
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     ↓
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Output: (resolution metadata, DID document, document metadata)
+</code></pre></div></p>
+<h3 id="aid-autonomic-identifier-keri-based">AID (Autonomic Identifier) - KERI-Based<a class="headerlink" href="#aid-autonomic-identifier-keri-based" title="Permanent link">&para;</a></h3>
+<p><strong>Emerging Standard:</strong> Key Event Receipt Infrastructure (KERI) defines AIDs with autonomic key management.</p>
+<p><strong>Core Philosophy:</strong>
+- Autonomic: Self-managed, no external registry required
+- Event-based: Keys managed through verifiable event logs (key event receipt logs)
+- Non-correlatable: Distinct keys for different contexts</p>
+<p><strong>Key Characteristics:</strong>
+- Identifier format: Derived from inception event
+- Key rotation: Native support through event log
+- Verification: Through key event history, not just current keys
+- Trust root: Event log itself (KEL - Key Event Log)
+- Use cases: High-security applications requiring key event history</p>
+<p><strong>Status:</strong> Active development, IETF standardization in progress (Web of Trust community)</p>
+<h3 id="comparative-analysis">Comparative Analysis<a class="headerlink" href="#comparative-analysis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>DID</th>
+<th>AID</th>
+<th>VID (Category)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standardization</strong></td>
+<td>W3C v1.0 complete</td>
+<td>IETF draft (KERI)</td>
+<td>ToIP framework (abstract)</td>
+</tr>
+<tr>
+<td><strong>Trust Root</strong></td>
+<td>Method-dependent</td>
+<td>Event log (KEL)</td>
+<td>Any cryptographic foundation</td>
+</tr>
+<tr>
+<td><strong>Key Management</strong></td>
+<td>Method-dependent</td>
+<td>Autonomic (event-based)</td>
+<td>Method-dependent</td>
+</tr>
+<tr>
+<td><strong>Registration Required</strong></td>
+<td>Method-dependent</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Identifier Syntax</strong></td>
+<td>Strict DID format</td>
+<td>URN-compatible</td>
+<td>DID or URN format</td>
+</tr>
+<tr>
+<td><strong>Verification Method</strong></td>
+<td>Cryptographic keys</td>
+<td>Key event history</td>
+<td>Keys + support system assessment</td>
+</tr>
+<tr>
+<td><strong>Primary Use Cases</strong></td>
+<td>Broad SSI</td>
+<td>High-security, key-rotatable</td>
+<td>Universal Layer 2 interoperability</td>
+</tr>
+<tr>
+<td><strong>Governance Assessment</strong></td>
+<td>Out of scope</td>
+<td>Through event log</td>
+<td>Required (via support system)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="question-2-implementation-in-major-projects">Question 2: Implementation in Major Projects<a class="headerlink" href="#question-2-implementation-in-major-projects" title="Permanent link">&para;</a></h2>
+<h3 id="trust-spanning-protocol-tsp-openwallet-foundation-labs">Trust Spanning Protocol (TSP) - OpenWallet Foundation Labs<a class="headerlink" href="#trust-spanning-protocol-tsp-openwallet-foundation-labs" title="Permanent link">&para;</a></h3>
+<p><strong>Project:</strong> Rust-based TSP SDK (openwallet-foundation-labs/tsp)</p>
+<p><strong>Status:</strong> Early prototype/experimental (v0.0.1), interfaces subject to change</p>
+<p><strong>Supported VID Types:</strong>
+- <code>did:peer</code> - Self-contained peer DIDs (no resolution required)
+- <code>did:web</code> - Web-hosted DIDs
+- <code>did:webvh</code> - Web with verifiable history</p>
+<p><strong>Implementation Architecture:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TSP SDK Workspace (Cargo)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── tsp_sdk/              # Core TSP implementation (5 crates)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   ├── cesr/             # Composable Event Streaming Representation
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   ├── crypto/           # Cryptographic primitives
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   ├── definitions/      # Common data structures, traits
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│   ├── transport/        # tokio-based transport layer
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│   └── vid/              # Verified identifier handling
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>├── examples/
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>├── python/               # Python language bindings
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>├── javascript/           # JavaScript/Node.js bindings
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>└── fuzzing/              # Fuzz testing
+</code></pre></div>
+<p><strong>Core Cryptographic Primitives:</strong></p>
+<ol>
+<li><strong>Signatures (Authentication):</strong></li>
+<li>Algorithm: Ed25519 (mandatory)</li>
+<li>Format: 64-byte signature using Curve25519 + SHA2-512</li>
+<li>
+<p>Security: SUF-CMA (Strong UnForgeability under Chosen Message Attack)</p>
+</li>
+<li>
+<p><strong>Encryption (Confidentiality):</strong></p>
+</li>
+<li><strong>HPKE-Auth (Mandatory):</strong><ul>
+<li>KEM: DHKEM(X25519, HKDF-SHA256)</li>
+<li>KDF: HKDF-SHA256</li>
+<li>AEAD: ChaCha20Poly1305</li>
+<li>Includes sender authentication via ephemeral keys</li>
+</ul>
+</li>
+<li><strong>HPKE-Base (Mandatory):</strong><ul>
+<li>Same algorithms, non-authenticating variant</li>
+<li>Used when sender must be in encrypted payload</li>
+</ul>
+</li>
+<li>
+<p><strong>Libsodium Sealed Box (Optional):</strong></p>
+<ul>
+<li>X25519 DH + XSalsa20-Poly1305</li>
+<li>Legacy support, deprecated in favor of HPKE</li>
+</ul>
+</li>
+<li>
+<p><strong>Hashing:</strong></p>
+</li>
+<li>SHA2-256</li>
+<li>BLAKE2b (256-bit)</li>
+</ol>
+<p><strong>Message Structure:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>TSP_Message = {
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    TSP_Envelope {
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        TSP_Tag,           # Message start marker
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        TSP_Version,       # Protocol version
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        VID_sender,        # Sender&#39;s VID
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        VID_receiver       # Receiver&#39;s VID (or NULL for nested)
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    },
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    TSP_Payload {
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        Type,              # Message type (RFI, RFA, RFD, etc.)
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        ControlFields,     # TSP operation fields
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        Data,              # Application payload (optional)
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    },
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    TSP_Signature          # Ed25519 signature over envelope + payload
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>}
+</code></pre></div></p>
+<p><strong>Encoding:</strong> CESR (Composable Event Streaming Representation) for all message parts</p>
+<p><strong>CLI Example (TSP):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Create identity</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>tsp<span class="w"> </span>create<span class="w"> </span>--type<span class="w"> </span>web<span class="w"> </span>--alias<span class="w"> </span>bob<span class="w"> </span>bob
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Verify VID</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>tsp<span class="w"> </span>verify<span class="w"> </span>--alias<span class="w"> </span>alice<span class="w"> </span>&lt;did-url&gt;
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Direct message</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>tsp<span class="w"> </span>message<span class="w"> </span>--from<span class="w"> </span>alice<span class="w"> </span>--to<span class="w"> </span>bob<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Routed message</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>tsp<span class="w"> </span>message<span class="w"> </span>--from<span class="w"> </span>alice<span class="w"> </span>--to<span class="w"> </span>bob<span class="w"> </span>--via<span class="w"> </span>&lt;intermediary&gt;<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+</code></pre></div></p>
+<p><strong>Key VID Operations Supported:</strong></p>
+<ol>
+<li><strong>Create:</strong> CLI command <code>tsp create --type [peer|web|webvh]</code></li>
+<li><strong>Resolve:</strong> Automatic during relationship forming (VID_rcvr resolution)</li>
+<li><strong>Verify:</strong> TSP_VERIFY operation in relationship forming protocol</li>
+<li><strong>Rotate:</strong> Out-of-band only (not yet fully specified in TSP)</li>
+<li><strong>Discover:</strong> Via OOBI (Out-Of-Band Introduction) mechanism</li>
+</ol>
+<p><strong>VID Mapping Operations (Required by TSP):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>VID.PK_e      # Public key for encryption (HPKE)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>VID.SK_e      # Private key for encryption
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>VID.SK_s      # Private key(s) for signing
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>VID.PK_s      # Public key for signature verification
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>VID.VERIFY    # Verify endpoint has access to SK_s
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>VID.RESOLVEADDRESS  # Map to transport address
+</code></pre></div></p>
+<h3 id="didkit-spruce-systems">DIDKit (Spruce Systems)<a class="headerlink" href="#didkit-spruce-systems" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Production-ready reference implementation</p>
+<p><strong>Supported Features:</strong>
+- DID method implementations (did:key, did:web, did:peer, etc.)
+- Credential issuance and verification
+- Presentation generation and verification</p>
+<p><strong>Architecture:</strong> Rust core with language bindings (JavaScript, Python, WASM)</p>
+<p><strong>VID Operations Support:</strong>
+- Create/resolve DIDs
+- Verify signatures
+- Manage verification methods
+- Full W3C DID Core compliance</p>
+<h3 id="hyperledger-indy-sovrin">Hyperledger Indy / Sovrin<a class="headerlink" href="#hyperledger-indy-sovrin" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Production SSI infrastructure</p>
+<p><strong>Identifier Type:</strong> DIDs (did:indy, did:sov)</p>
+<p><strong>Key Features:</strong>
+- Distributed ledger-based identity
+- Credential ecosystem
+- Trust registry for governance</p>
+<p><strong>VID Operations:</strong>
+- On-ledger DID registration
+- Credential-based authentication
+- Governance framework integration</p>
+<hr />
+<h2 id="question-3-supported-operations">Question 3: Supported Operations<a class="headerlink" href="#question-3-supported-operations" title="Permanent link">&para;</a></h2>
+<h3 id="universal-vid-operations-tsp-requirements">Universal VID Operations (TSP Requirements)<a class="headerlink" href="#universal-vid-operations-tsp-requirements" title="Permanent link">&para;</a></h3>
+<p>TSP defines abstract operations that all VID types must support:</p>
+<h4 id="mandatory-operations">Mandatory Operations<a class="headerlink" href="#mandatory-operations" title="Permanent link">&para;</a></h4>
+<p><strong>1. VID.RESOLVEADDRESS(VID) → Transport Address</strong>
+- <strong>Purpose:</strong> Map VID to network address for message delivery
+- <strong>Usage:</strong> Required for public VIDs; optional for nested VIDs
+- <strong>Implementation:</strong> VID type-specific
+- <strong>Example (did:web):</strong> Resolve to HTTPS endpoint
+- <strong>Example (did:peer):</strong> Bypass (embedded in relationship)</p>
+<p><strong>2. VID.MAPPING_TO_KEYS(VID) → {PK_e, SK_e, SK_s, PK_s}</strong>
+- <strong>By controller (sender side):</strong>
+  - <code>VID.PK_e</code> - Public key for HPKE encryption
+  - <code>VID.SK_e</code> - Private key for HPKE
+  - <code>VID.SK_s</code> / <code>VID.SK_s_i</code> - Private keys for signature (can be multiple)</p>
+<ul>
+<li><strong>By assessing endpoint (receiver side):</strong></li>
+<li><code>VID.PK_s</code> - Public key for signature verification</li>
+<li>
+<p><code>VID.PK_e</code> - Public key for HPKE</p>
+</li>
+<li>
+<p><strong>Implementation:</strong> VID type-specific resolution process</p>
+</li>
+</ul>
+<p><strong>3. VID.VERIFY(VID, signature) → BOOL</strong>
+- <strong>Purpose:</strong> Verify that endpoint controls the VID (has access to secret key)
+- <strong>Method:</strong> PKC signature verification
+- <strong>Additional info:</strong> May use additional assessment information from support system
+- <strong>Simplified for nested:</strong> Can be simpler for VIDs in already-verified relationships</p>
+<h4 id="did-specific-operations-w3c-standard">DID-Specific Operations (W3C Standard)<a class="headerlink" href="#did-specific-operations-w3c-standard" title="Permanent link">&para;</a></h4>
+<p><strong>1. DID Resolution</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>resolve(did, resolutionOptions) → {
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    resolutionMetadata: {
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        contentType,
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        retrieved,
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        duration,
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        error
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    },
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    didDocument: {
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        @context,
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        id,
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        controller,
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        verificationMethod,
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        authentication,
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        assertionMethod,
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        keyAgreement,
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        capabilityInvocation,
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        capabilityDelegation,
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        service,
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        created,
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        updated,
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        deactivated,
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>        versionId,
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        nextUpdate
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    },
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    didDocumentMetadata: {
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        created,
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>        updated,
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        deactivated,
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        nextUpdate,
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        equivalentId,
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>        canonicalId
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    }
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>}
+</code></pre></div></p>
+<p><strong>2. DID Create</strong> (Method-specific)
+- Generate DID identifier
+- Create initial DID document
+- Establish verification methods
+- Register with support system (blockchain, web server, etc.)</p>
+<p><strong>3. DID Update</strong> (Method-specific)
+- Modify verification methods
+- Add/remove services
+- Update controller
+- Rotate keys</p>
+<p><strong>4. DID Deactivate</strong> (Method-specific)
+- Mark DID as inactive
+- Preserve DID document history
+- Prevent further updates</p>
+<h4 id="aid-specific-operations-keri">AID-Specific Operations (KERI)<a class="headerlink" href="#aid-specific-operations-keri" title="Permanent link">&para;</a></h4>
+<p><strong>1. AID Creation</strong>
+- Generate from inception event
+- Create initial key event
+- Establish event log (KEL - Key Event Log)</p>
+<p><strong>2. AID Key Rotation</strong>
+- Add rotation event to KEL
+- Update valid signing keys
+- Maintain event history</p>
+<p><strong>3. AID Verification</strong>
+- Verify against event log
+- Check key validity at event time
+- Validate event signatures</p>
+<p><strong>4. AID Recovery</strong>
+- Recover from compromised keys via rotation
+- Update valid key set atomically
+- Maintain cryptographic proof of recovery</p>
+<h3 id="operation-mapping-by-vid-type">Operation Mapping by VID Type<a class="headerlink" href="#operation-mapping-by-vid-type" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>DID</th>
+<th>AID</th>
+<th>TSP Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Create</strong></td>
+<td>Method-specific</td>
+<td>KERI inception</td>
+<td>Via support system</td>
+</tr>
+<tr>
+<td><strong>Resolve</strong></td>
+<td>Method-specific</td>
+<td>Event log lookup</td>
+<td>Mandatory for public VIDs</td>
+</tr>
+<tr>
+<td><strong>Verify</strong></td>
+<td>Signature on VID</td>
+<td>Event log + signature</td>
+<td>Mandatory</td>
+</tr>
+<tr>
+<td><strong>Rotate Keys</strong></td>
+<td>Method-specific</td>
+<td>KERI rotation event</td>
+<td>Out-of-band (TBD)</td>
+</tr>
+<tr>
+<td><strong>Discover</strong></td>
+<td>Out-of-band</td>
+<td>Out-of-band</td>
+<td>OOBI mechanism</td>
+</tr>
+<tr>
+<td><strong>Revoke/Deactivate</strong></td>
+<td>Method-specific</td>
+<td>Not applicable</td>
+<td>Out-of-band</td>
+</tr>
+<tr>
+<td><strong>Update Metadata</strong></td>
+<td>Method-specific</td>
+<td>Inception event (static)</td>
+<td>Via support system</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="question-4-protocol-relationships-trqp-acdc-keriaid">Question 4: Protocol Relationships (TRQP, ACDC, KERI/AID)<a class="headerlink" href="#question-4-protocol-relationships-trqp-acdc-keriaid" title="Permanent link">&para;</a></h2>
+<h3 id="trust-registry-query-protocol-trqp-v20">Trust Registry Query Protocol (TRQP) v2.0<a class="headerlink" href="#trust-registry-query-protocol-trqp-v20" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Implementers Draft (ToIP)</p>
+<p><strong>Purpose:</strong> Enable VID holders to query trust registries for governance information</p>
+<p><strong>Relationship to VIDs:</strong>
+- <strong>Operates at ToIP Layer 2/3 boundary</strong>
+- Queries registry for governance metadata associated with VIDs
+- Returns trust framework policies, compliance status, revocation status
+- Used after VID verification to assess governance alignment</p>
+<p><strong>Typical Flow:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>1. TSP endpoint A verifies VID_b (via TSP)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   ↓
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>2. A queries TRQP registry about VID_b governance
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>   ↓
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>3. Registry returns: governance framework, policies, accreditation status
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>   ↓
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>4. A assesses trust based on returned information + cryptographic trust from TSP
+</code></pre></div></p>
+<h3 id="authentic-chained-data-container-acdc">Authentic Chained Data Container (ACDC)<a class="headerlink" href="#authentic-chained-data-container-acdc" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Public Review Phase (ToIP)</p>
+<p><strong>Purpose:</strong> Cryptographically-bound, portable credential/attestation format</p>
+<p><strong>Relationship to VIDs:</strong>
+- <strong>Issued by VID controller</strong>
+- <strong>About VID subject</strong> (or other subjects)
+- <strong>Cryptographically linked to issuer's VID</strong> through signature
+- <strong>Contains chain of custody</strong> (issuer → holder → others)</p>
+<p><strong>Structure (Abstract):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ACDC {
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    issuer: VID,           # Verified identifier of issuer
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    subject: VID,          # Subject identifier (may be another VID)
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    claims: {},            # Credential claims
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    rules: {},             # Usage rules
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    signatures: [],        # Issuer signatures
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    previousHash: SAID     # Link to previous event
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>}
+</code></pre></div></p>
+<p><strong>VID Relationship Patterns:</strong></p>
+<ol>
+<li><strong>Self-Issued Credential:</strong></li>
+<li>Issuer VID == Subject VID</li>
+<li>
+<p>Self-attestation use cases</p>
+</li>
+<li>
+<p><strong>Third-Party Credential:</strong></p>
+</li>
+<li>Issuer VID != Subject VID</li>
+<li>
+<p>Verifier can establish chain: Issuer VID → ACDC → Subject VID</p>
+</li>
+<li>
+<p><strong>Delegated Credential:</strong></p>
+</li>
+<li>Issuer delegates to delegatee</li>
+<li>Chain: Original issuer VID → delegation ACDC → delegatee VID → final ACDC</li>
+</ol>
+<p><strong>Integration with TSP:</strong>
+- ACDC can be carried in TSP message payloads
+- TSP provides authenticity/confidentiality channel for ACDC transmission
+- ACDC provides long-term, revocation-resistant attestations</p>
+<h3 id="keri-autonomic-identifier-aid">KERI / Autonomic Identifier (AID)<a class="headerlink" href="#keri-autonomic-identifier-aid" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> IETF Standardization (Web of Trust)</p>
+<p><strong>Purpose:</strong> Self-sovereign identifier with autonomic key management</p>
+<p><strong>Relationship to VIDs in TSP:</strong>
+- <strong>AID as VID type:</strong> Can be used as VID in TSP relationships
+- <strong>Event-based trust root:</strong> TSP verifies against KEL, not static keys
+- <strong>Inherent key rotation:</strong> Via event log, enables key agility
+- <strong>Non-correlatable:</strong> Multiple AIDs per controller without key reuse</p>
+<p><strong>Key Architectural Differences from DID:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>DID</th>
+<th>AID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Trust Root</strong></td>
+<td>Registry (blockchain, web server, etc.)</td>
+<td>Event log (KEL)</td>
+</tr>
+<tr>
+<td><strong>Key Storage</strong></td>
+<td>In DID document</td>
+<td>In KEL events</td>
+</tr>
+<tr>
+<td><strong>Key Rotation</strong></td>
+<td>Registry update</td>
+<td>Event log rotation entry</td>
+</tr>
+<tr>
+<td><strong>Non-correlation</strong></td>
+<td>Different DIDs with different keys</td>
+<td>Different AIDs, inherent non-correlation</td>
+</tr>
+<tr>
+<td><strong>Verifier Role</strong></td>
+<td>Resolves DID document</td>
+<td>Verifies against KEL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KERI Event Structure:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>KeyEvent {
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    version: &quot;KERI1&quot;,
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    kind: &quot;icp|rot|dip|drt|ixn|rct|...&quot;,  # Event type
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    serialNumber: &lt;n&gt;,
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    aidPrefix: &lt;aid&gt;,           # AID identifier
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    sequenceNumber: &lt;sn&gt;,
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    flags: &lt;digest algorithm&gt;,
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    witnesses: [&lt;wits&gt;],        # Witness KEL endorsements
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    keyConfig: {
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        keys: [&lt;keys&gt;],         # Current signing keys
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        threshold: &lt;t&gt;
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    },
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    nextKeys: [&lt;keys&gt;],         # Keys for next rotation
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    timestamp: &lt;ts&gt;,
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    signatures: [&lt;sigs&gt;]        # Endorsing signatures
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>}
+</code></pre></div></p>
+<p><strong>Witness Architecture:</strong>
+- External systems that endorse (sign) key events
+- Enable distributed verification without requiring all parties to maintain full KEL
+- Can be validators in blockchain or dedicated witness servers</p>
+<h3 id="protocol-integration-architecture">Protocol Integration Architecture<a class="headerlink" href="#protocol-integration-architecture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>TSP Layer 2 (Trust Spanning)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>│
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>├─ Direct VID Verification
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>│  └─ DID resolution + signature verification
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>│  └─ AID verification against KEL
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>│
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>├─ Governance Assessment (Layer 3)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>│  └─ TRQP queries for trust registry
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>│  └─ Policy evaluation
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>│
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>└─ Credential Exchange
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>   └─ ACDC transmission in TSP payloads
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>   └─ Chain of custody verification
+</code></pre></div>
+<p><strong>Typical Conversation Flow:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Endpoint A ──TSP Message──&gt; Endpoint B (TSP Layer 2: authenticity)
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>           │
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>           ├─ VID verification (DID resolve or AID KEL check)
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>           │
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>           ├─ Governance check (TRQP query)
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>           │
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>           └─ If ACDC in payload: verify issuer signature against issuer VID
+</code></pre></div></p>
+<hr />
+<h2 id="question-5-architectural-patterns-in-existing-implementations">Question 5: Architectural Patterns in Existing Implementations<a class="headerlink" href="#question-5-architectural-patterns-in-existing-implementations" title="Permanent link">&para;</a></h2>
+<h3 id="pattern-1-relationship-table-architecture-tsp">Pattern 1: Relationship Table Architecture (TSP)<a class="headerlink" href="#pattern-1-relationship-table-architecture-tsp" title="Permanent link">&para;</a></h3>
+<p><strong>Core Concept:</strong> Endpoints maintain directional relationship tables</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Endpoint A&#39;s Relationship Table:
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>┌──────────────────────────────┐
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>│ &lt;VID_a0, VID_b0&gt; : metadata  │  Uni-directional relationship
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>│ (VID_a1, VID_b1) : metadata  │  Bi-directional relationship
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>│ (VID_a0, VID_c0) : metadata  │  To different endpoint
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>└──────────────────────────────┘
+</code></pre></div>
+<p><strong>Characteristics:</strong>
+- <strong>Directional by default:</strong> <VID_local, VID_remote>
+- <strong>Bi-directional when mutual:</strong> (VID_local, VID_remote) notation
+- <strong>Per-relationship state:</strong> Each relationship is independent
+- <strong>Non-correlation:</strong> Different VID pairs even from same endpoint
+- <strong>Nested relationships:</strong> Can create new relationships inside existing ones</p>
+<p><strong>Implementation Benefit:</strong> Enables metadata privacy by using different VIDs for different contexts while maintaining cryptographic non-correlation.</p>
+<h3 id="pattern-2-support-system-abstraction-tspdid">Pattern 2: Support System Abstraction (TSP/DID)<a class="headerlink" href="#pattern-2-support-system-abstraction-tspdid" title="Permanent link">&para;</a></h3>
+<p><strong>Core Concept:</strong> Abstract interface between identifier and its support infrastructure</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Endpoint ──Interface──&gt; Support System
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>         │
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>         ├─ VID.RESOLVEADDRESS()     → Transport address
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>         ├─ VID.MAPPING_TO_KEYS()    → Cryptographic keys
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>         └─ VID.VERIFY()             → Verification info
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>         │
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>         └─ Implementation
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>            ├─ Blockchain-based (did:indy)
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>            ├─ Web-based (did:web)
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>            ├─ Self-contained (did:peer)
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>            ├─ Event log-based (AID/KERI)
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>            └─ Custom (organizational)
+</code></pre></div>
+<p><strong>Benefits:</strong>
+- VID type agnostic at TSP layer
+- Support system selection per VID
+- Decoupled identifier from infrastructure
+- Enables governance assessment hooks</p>
+<h3 id="pattern-3-nested-vid-architecture">Pattern 3: Nested VID Architecture<a class="headerlink" href="#pattern-3-nested-vid-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Core Concept:</strong> Hide inner VID identifiers within encrypted outer TSP message</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Outer Layer (Public):
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>[VID_a1, VID_p1, [ENCRYPTED]]  ← Visible intermediaries
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Inner Layer (Hidden):
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>           [VID_a2, VID_b2, payload] ← Only visible to intended endpoints
+</code></pre></div>
+<p><strong>Use Cases:</strong>
+- Hide endpoint-to-endpoint relationships from intermediaries
+- Multiple relationship contexts with same physical endpoint
+- Progressive trust establishment (public → private VIDs)</p>
+<p><strong>Architectural Benefit:</strong> Enables metadata privacy (correlation resistance) without requiring new VID types.</p>
+<h3 id="pattern-4-event-log-based-trust-keri">Pattern 4: Event-Log-Based Trust (KERI)<a class="headerlink" href="#pattern-4-event-log-based-trust-keri" title="Permanent link">&para;</a></h3>
+<p><strong>Core Concept:</strong> Replace registry with cryptographically-linked event history</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Inception Event
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    ↓ (signed)
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Rotation Event 1 (new keys, references previous)
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    ↓ (signed with old keys, attests new keys)
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Rotation Event 2
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    ↓
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>... Event Log (KEL) ...
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>Verification: Replay events from inception, verify chains
+</code></pre></div>
+<p><strong>Characteristics:</strong>
+- <strong>Immutable history:</strong> Cannot revise past events
+- <strong>Key agility:</strong> Frequent key rotation without registration
+- <strong>Non-repudiation:</strong> Event signatures prove historical state
+- <strong>Distributed:</strong> Can be endorsed by witnesses
+- <strong>Portable:</strong> Full KEL can be transmitted (or just recent events)</p>
+<p><strong>Contrast with DID:</strong>
+- DID: Current state in registry (point-in-time)
+- AID: Full history in event log (continuous)</p>
+<h3 id="pattern-5-multi-level-relationship-formation-tsp">Pattern 5: Multi-Level Relationship Formation (TSP)<a class="headerlink" href="#pattern-5-multi-level-relationship-formation-tsp" title="Permanent link">&para;</a></h3>
+<p><strong>Stages of Relationship Establishment:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Stage 1: Out-of-Band Introduction (OOBI)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>         └─ Discover at least one VID of other endpoint
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>         └─ No security guarantees at this stage
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>Stage 2: Relationship Forming Invite (TSP_RFI)
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>         └─ Send cryptographic challenge
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>         └─ Contains: VID_sender, digest, nonce
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>Stage 3: Relationship Forming Accept (TSP_RFA)
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>         └─ Prove possession of private key
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>         └─ Create uni-directional relationship
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>Stage 4: Bi-directional Confirmation
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>         └─ Both endpoints verify each other
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>         └─ Relationship becomes bi-directional
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>         └─ Can establish nested or routed variants
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>Stage 5: Subsequent Messages
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>         └─ Use established relationship table
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>         └─ No re-verification overhead
+</code></pre></div>
+<p><strong>Pattern Benefit:</strong> Separates initial trust establishment (expensive verification) from subsequent operations (cached relationship).</p>
+<hr />
+<h2 id="question-6-gaps-in-current-vid-abstractions">Question 6: Gaps in Current VID Abstractions<a class="headerlink" href="#question-6-gaps-in-current-vid-abstractions" title="Permanent link">&para;</a></h2>
+<h3 id="gap-1-key-rotation-specification">Gap 1: Key Rotation Specification<a class="headerlink" href="#gap-1-key-rotation-specification" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- DID: Method-dependent (no standard approach)
+- AID/KERI: Well-specified via event log
+- TSP: Key update marked "TBD" (Issue #7)</p>
+<p><strong>Impact:</strong>
+- Implementations diverge on rotation semantics
+- No standard way to negotiate key updates in TSP relationships
+- Unclear how rotated keys affect existing relationships</p>
+<p><strong>Architectural Implication:</strong>
+- TSP needs explicit key update control message
+- Should support both "hard" rotation (revoke old keys) and "soft" rotation (phase out)
+- Need mechanism to signal key compromise vs. scheduled rotation</p>
+<p><strong>Recommendation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Proposed TSP Control Message:
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>TSP_KEY_UPDATE {
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    VID: &lt;VID&gt;,
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    newKeys: &lt;public keys&gt;,
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    rotationType: [&quot;scheduled&quot; | &quot;compromise&quot;],
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    effectiveTime: &lt;timestamp&gt;,
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    retirementTime: &lt;timestamp or NULL&gt;
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>}
+</code></pre></div></p>
+<h3 id="gap-2-governance-assessment-integration">Gap 2: Governance Assessment Integration<a class="headerlink" href="#gap-2-governance-assessment-integration" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- TSP: Defines VID verification (cryptography), governance assessment separate
+- TRQP: Specifies governance query protocol (draft)
+- No standard integration between TSP verification and governance assessment</p>
+<p><strong>Impact:</strong>
+- Endpoints must implement custom logic to integrate TRQP queries
+- No standard response to "VID cryptographically valid but governance unknown"
+- Unclear responsibility split (TSP layer vs. application layer)</p>
+<p><strong>Architectural Implication:</strong>
+- Need standard policy attachment to VID verification results
+- TRQP should be tightly integrated with TSP Layer 2/3 boundary
+- Policy enforcement should be explicit in relationship table metadata</p>
+<p><strong>Recommendation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Enhanced Relationship Table Entry:
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>RelationshipEntry {
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    relationship: &lt;VID_local, VID_remote&gt;,
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    cryptoVerificationStatus: &quot;verified&quot; | &quot;failed&quot; | &quot;expired&quot;,
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    governanceStatus: &quot;compliant&quot; | &quot;unknown&quot; | &quot;non-compliant&quot;,
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    policyId: &lt;policy URI&gt;,
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    trustScore: &lt;0-100&gt;,
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    metadata: {
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>        verifiedAt: &lt;timestamp&gt;,
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>        governanceCheckedAt: &lt;timestamp&gt;,
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>        expiresAt: &lt;timestamp&gt;
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>    }
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>}
+</code></pre></div></p>
+<h3 id="gap-3-vid-lifecycle-management">Gap 3: VID Lifecycle Management<a class="headerlink" href="#gap-3-vid-lifecycle-management" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- DID: Deactivate defined, revocation mechanism unclear
+- AID: No explicit deactivation (event log is immutable)
+- TSP: No standard revocation or expiration mechanism</p>
+<p><strong>Impact:</strong>
+- Endpoints may continue using compromised VIDs
+- No standard for VID retirement
+- Unclear interaction between VID deactivation and established relationships</p>
+<p><strong>Architectural Implication:</strong>
+- Need standardized revocation checking (similar to certificate revocation lists)
+- Revocation authority unclear (issuer, trusted third party, distributed)
+- Relationship invalidation semantics undefined</p>
+<p><strong>Recommendation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>VID Lifecycle States:
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>- ACTIVE: Can be used for new relationships
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>- ROTATING: Keys rotating, relationships still valid
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>- SUSPENDED: Compromised, existing relationships must check revocation
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>- RETIRED: No longer used, can be removed from relationship table
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>- DEACTIVATED: Explicitly marked inactive, may be reactivated later
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>Revocation Checking:
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>- Inline with VID resolution
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>- Cached with TTL
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>- Network failure handling policy
+</code></pre></div></p>
+<h3 id="gap-4-cross-method-vid-relationships">Gap 4: Cross-Method VID Relationships<a class="headerlink" href="#gap-4-cross-method-vid-relationships" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- TSP supports <code>did:peer</code>, <code>did:web</code>, <code>did:webvh</code> concurrently
+- No specification for mixed DID/AID relationships
+- No standardized method for negotiating supported VID types</p>
+<p><strong>Impact:</strong>
+- Interoperability uncertain between different VID type ecosystems
+- Cannot determine if endpoints can communicate until relationship established
+- No mechanism to signal VID type preferences</p>
+<p><strong>Architectural Implication:</strong>
+- Need capability negotiation protocol before relationship forming
+- Support system compatibility must be verified
+- Fallback strategies for incompatible VID types undefined</p>
+<p><strong>Recommendation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Enhanced OOBI (Out-of-Band Introduction):
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>OOBI {
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    primaryVID: &lt;VID&gt;,
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    supportedMethods: [&quot;did:peer&quot;, &quot;did:web&quot;, &quot;AID&quot;],
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    requiredCapabilities: {
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        &quot;encryption&quot;: &quot;HPKE-Auth&quot;,
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>        &quot;signing&quot;: &quot;Ed25519&quot;,
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>        &quot;metadata_privacy&quot;: boolean
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    },
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    fallbackVIDs: [&lt;VID2&gt;, &lt;VID3&gt;]
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>}
+</code></pre></div></p>
+<h3 id="gap-5-nested-relationship-limits">Gap 5: Nested Relationship Limits<a class="headerlink" href="#gap-5-nested-relationship-limits" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- TSP supports arbitrary nesting depth
+- No practical guidance on nesting levels
+- Performance implications undefined</p>
+<p><strong>Impact:</strong>
+- Implementers uncertain about reasonable nesting depths
+- No standards for when nesting is appropriate
+- Potential for performance degradation with deep nesting</p>
+<p><strong>Architectural Implication:</strong>
+- Need guidance on nesting semantics (e.g., max 3-4 levels)
+- Caching strategies for nested relationship tables
+- Key agility through deep nesting not well-studied</p>
+<h3 id="gap-6-support-system-interoperability">Gap 6: Support System Interoperability<a class="headerlink" href="#gap-6-support-system-interoperability" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- TSP defines abstract interface to support system
+- No standardized support system API
+- Different VID methods use different backends</p>
+<p><strong>Impact:</strong>
+- Each VID type requires custom support system integration
+- Cannot implement generic "VID resolver"
+- Difficult to add new VID types to existing implementations</p>
+<p><strong>Architectural Implication:</strong>
+- Need common support system interface (HTTP REST? GraphQL? Custom?)
+- Standard error handling and caching semantics
+- Discovery mechanism for support systems</p>
+<p><strong>Recommendation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Standard Support System Interface (Proposed):
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>GET /did-resolver/{method}/{id}
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>  → {didDocument, metadata, timestamp}
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>GET /vid-verify/{method}/{id}/{signature}
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>  → {valid: boolean, timestamp: &lt;ts&gt;, proof: &lt;verification data&gt;}
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>GET /governance/{method}/{id}
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>  → {policies: [...], compliance: {...}, revocationStatus: ...}
+</code></pre></div></p>
+<h3 id="gap-7-metadata-privacy-guidance">Gap 7: Metadata Privacy Guidance<a class="headerlink" href="#gap-7-metadata-privacy-guidance" title="Permanent link">&para;</a></h3>
+<p><strong>Current State:</strong>
+- TSP defines nested and routed message mechanisms
+- No clear guidance on when to use each
+- No performance/security tradeoff analysis</p>
+<p><strong>Impact:</strong>
+- Implementers uncertain about metadata privacy strategy
+- Potential unnecessary performance overhead
+- Threat model not fully articulated</p>
+<p><strong>Architectural Implication:</strong>
+- Need metadata privacy policy language
+- Clear threat model per nesting strategy
+- Performance impact benchmarks</p>
+<hr />
+<h2 id="synthesis-architectural-design-decisions">Synthesis: Architectural Design Decisions<a class="headerlink" href="#synthesis-architectural-design-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="decision-1-vid-type-selection">Decision 1: VID Type Selection<a class="headerlink" href="#decision-1-vid-type-selection" title="Permanent link">&para;</a></h3>
+<p><strong>When to use each type:</strong></p>
+<p><strong>DIDs (W3C Standard)</strong> - Recommended for:
+- ✅ Public/discoverable identities
+- ✅ Interoperability with W3C ecosystem
+- ✅ Governance framework integration (TRQP-compatible)
+- ✅ Credential issuance (ACDC integration)
+- ✅ When support system (blockchain, web) is already available</p>
+<p><strong>AIDs (KERI-based)</strong> - Recommended for:
+- ✅ High-security applications requiring key event history
+- ✅ Self-sovereign scenarios (no external registry needed)
+- ✅ Frequent key rotation required
+- ✅ When non-correlation is critical
+- ✅ Research/advanced deployments</p>
+<p><strong>Decision Rule:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>IF system requires external governance framework
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  USE DID (did:web, did:indy, etc.)
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>ELSE IF key event history required
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>  USE AID (KERI)
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>ELSE IF peer-to-peer, self-contained
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>  USE DID (did:peer)
+</code></pre></div></p>
+<h3 id="decision-2-tsp-relationship-architecture">Decision 2: TSP Relationship Architecture<a class="headerlink" href="#decision-2-tsp-relationship-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended implementation:</strong></p>
+<ol>
+<li><strong>Use directional relationships as default</strong></li>
+<li>Implement relationship table: <code>&lt;VID_local, VID_remote&gt; → metadata</code></li>
+<li>Track verification status per relationship</li>
+<li>
+<p>Separate governance assessment from cryptographic verification</p>
+</li>
+<li>
+<p><strong>Implement nested relationships for sensitive contexts</strong></p>
+</li>
+<li>Use outer relationship for intermediary routes</li>
+<li>Use inner relationship for endpoint-to-endpoint (hidden from intermediaries)</li>
+<li>
+<p>Cache inner relationships per outer relationship</p>
+</li>
+<li>
+<p><strong>Implement three trust levels:</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>CRYPTOGRAPHIC_VERIFIED  (TSP verification passed)
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>GOVERNANCE_COMPLIANT    (TRQP assessment passed)
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>APPLICATION_TRUSTED     (Application policy satisfied)
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="decision-3-key-rotation-strategy">Decision 3: Key Rotation Strategy<a class="headerlink" href="#decision-3-key-rotation-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended approach:</strong></p>
+<ol>
+<li><strong>Implement soft rotation pattern:</strong></li>
+<li>Announce new keys in advance (grace period)</li>
+<li>Accept signatures from both old and new keys during transition</li>
+<li>
+<p>Explicitly retire old keys after grace period</p>
+</li>
+<li>
+<p><strong>Separate key rotation from relationship establishment:</strong></p>
+</li>
+<li>Key rotation does NOT invalidate existing relationships</li>
+<li>Implement TSP_KEY_UPDATE control message (proposed above)</li>
+<li>
+<p>Allow policy-based key rotation (scheduled vs. emergency)</p>
+</li>
+<li>
+<p><strong>Cache key information with TTL:</strong></p>
+</li>
+<li>Cache support system responses (DID resolution, AID KEL)</li>
+<li>Set TTL based on key rotation frequency</li>
+<li>Implement cache invalidation on key rotation notification</li>
+</ol>
+<h3 id="decision-4-metadata-privacy-strategy">Decision 4: Metadata Privacy Strategy<a class="headerlink" href="#decision-4-metadata-privacy-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended policies:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Pattern</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Public Communication</strong></td>
+<td>Direct mode, public VIDs</td>
+<td>No privacy needed, minimal overhead</td>
+</tr>
+<tr>
+<td><strong>Organization-internal</strong></td>
+<td>Nested mode, private VIDs</td>
+<td>Hide from external observers</td>
+</tr>
+<tr>
+<td><strong>Cross-organization</strong></td>
+<td>Routed mode, public→private</td>
+<td>Hide from intermediaries</td>
+</tr>
+<tr>
+<td><strong>High-privacy</strong></td>
+<td>Nested + routed, multi-level</td>
+<td>Maximum privacy (performance cost)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implementation:</strong>
+- Make nested/routed mode decision explicit in policy
+- Default to direct mode (minimum overhead)
+- Document privacy threat model for each level</p>
+<h3 id="decision-5-support-system-integration">Decision 5: Support System Integration<a class="headerlink" href="#decision-5-support-system-integration" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended architecture:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Application Layer
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>       ↓
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>VID Manager (local implementation)
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>  ├─ Relationship table
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>  ├─ Local VID management
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>  ├─ TSP message handling
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>       ↓
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>Support System Adapter Layer (pluggable)
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>  ├─ DID Resolver (for did:*)
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>  ├─ KERI Verifier (for AID)
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>  ├─ TRQP Client (for governance)
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>  ├─ Cache layer (TTL-based)
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>       ↓
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>External Support Systems
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>  ├─ Blockchains (Indy, web3)
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>  ├─ Web servers (did:web)
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>  ├─ KERI witness network
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>  └─ Trust registries (TRQP)
+</code></pre></div>
+<p><strong>Interface design:</strong>
+- Standardize on HTTP/REST with JSON payloads
+- Implement circuit breaker for support system unavailability
+- Local fallback for cached VIDs
+- Graceful degradation when support system down</p>
+<hr />
+<h2 id="stfx-architecture-decision-vid-module-design">STFX Architecture Decision: VID Module Design<a class="headerlink" href="#stfx-architecture-decision-vid-module-design" title="Permanent link">&para;</a></h2>
+<h3 id="the-solid-challenge">The SOLID Challenge<a class="headerlink" href="#the-solid-challenge" title="Permanent link">&para;</a></h3>
+<p>When designing <code>stfx-vid</code> following STFX principles (Reusability, Modularity, SOLID compliance), a critical design question emerged:</p>
+<p><strong>Should stfx-vid expose ONE trait (like <code>stfx-transport</code> and <code>stfx-runtime</code>) or MULTIPLE traits?</strong></p>
+<h3 id="analysis">Analysis<a class="headerlink" href="#analysis" title="Permanent link">&para;</a></h3>
+<p>VID operations naturally cluster into three distinct concerns:</p>
+<ol>
+<li><strong>Resolution/Verification</strong> (read path): <code>resolve()</code>, <code>verify()</code></li>
+<li>Used by: TSP message handlers, credential verifiers, signature validators</li>
+<li>Examples: did:web resolver, did:key resolver</li>
+<li>
+<p>Characteristic: Read-only, stateless, universal support</p>
+</li>
+<li>
+<p><strong>Creation</strong> (write path): <code>create()</code></p>
+</li>
+<li>Used by: Onboarding systems, wallet initialization, agent setup</li>
+<li>Examples: AID creator (KERI), did:peer generator</li>
+<li>
+<p>Characteristic: Write-only, stateful, method-specific</p>
+</li>
+<li>
+<p><strong>Discovery</strong> (search path): <code>discover()</code></p>
+</li>
+<li>Used by: Directory services, TRQP queries, relationship discovery</li>
+<li>Examples: TRQP trust registry, well-known endpoint discovery</li>
+<li>Characteristic: Query-based, optional, governance-integrated</li>
+</ol>
+<p><strong>Critical observation:</strong> Unlike <code>Transport</code> (where ALL implementations need open/send/receive/close) and <code>Runtime</code> (where ALL implementations need spawn/join/cancel/sleep/timeout), VID operations are <strong>not universally required together</strong>:</p>
+<ul>
+<li><code>did:key</code> resolver: only needs <code>resolve()</code> + <code>verify()</code> (keys embedded, no creation)</li>
+<li><code>did:web</code> resolver: only needs <code>resolve()</code> + <code>verify()</code> (read-only HTTP)</li>
+<li>AID creator: needs <code>create()</code> (KERI inception event generation)</li>
+<li>TRQP client: needs <code>discover()</code> (governance queries)</li>
+</ul>
+<h3 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h3>
+<p><strong>❌ REJECTED: Single <code>VIDProvider</code> trait</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">VIDProvider</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">resolve</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">VIDDocument</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">sig</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="nc">VIDConfig</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">CreatedVID</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">discover</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Query</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="p">}</span>
+</code></pre></div>
+<strong>Problem:</strong> Violates Interface Segregation Principle (ISP)
+- Forces did:key to implement <code>create()</code> → returns <code>Err(Unsupported)</code>
+- Forces did:web to implement <code>discover()</code> → returns <code>Err(Unsupported)</code>
+- Clients depend on methods they don't use</p>
+<p><strong>✅ ADOPTED: Three separate trait modules</strong></p>
+<p>Following SOLID principles over pattern consistency:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>stfx-vid-resolver/     # Trait: VIDResolver (resolve, verify)
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>stfx-vid-creator/      # Trait: VIDCreator (create)
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>stfx-vid-discovery/    # Trait: VIDDiscovery (discover)
+</code></pre></div>
+<p>Each trait is its own STFX module with focused responsibilities:
+- <code>stfx-vid-resolver</code>: Core read path, universally needed
+- <code>stfx-vid-creator</code>: Optional write path, onboarding systems
+- <code>stfx-vid-discovery</code>: Optional search path, directory services</p>
+<p><strong>Rationale:</strong>
+1. <strong>ISP compliance</strong>: Clients depend only on interfaces they use
+2. <strong>SRP compliance</strong>: Each trait has single, focused responsibility
+3. <strong>DIP compliance</strong>: TSP depends on <code>trait VIDResolver</code>, not concrete implementations
+4. <strong>Modularity</strong>: Can implement resolver without creator
+5. <strong>Real-world alignment</strong>: Matches actual deployment patterns (many systems only resolve, few create)</p>
+<h3 id="implication-for-stfx-crypto">Implication for stfx-crypto<a class="headerlink" href="#implication-for-stfx-crypto" title="Permanent link">&para;</a></h3>
+<p>This analysis reveals that <strong>stfx-crypto will face identical challenges</strong>:</p>
+<p>Crypto operations cluster into distinct concerns:
+- <strong>Signing</strong> (authentication): <code>sign()</code>, <code>verify_signature()</code>
+- <strong>Encryption</strong> (confidentiality): <code>encrypt()</code>, <code>decrypt()</code>
+- <strong>Hashing</strong> (integrity): <code>hash()</code>, <code>verify_hash()</code>
+- <strong>Key derivation</strong> (key management): <code>derive_key()</code>, <code>rotate_key()</code></p>
+<p><strong>Question for stfx-crypto design:</strong> Should these be separate trait modules (<code>stfx-crypto-signer</code>, <code>stfx-crypto-cipher</code>, <code>stfx-crypto-hasher</code>, <code>stfx-crypto-kdf</code>) or combined into one trait?</p>
+<p><strong>Answer (following VID precedent):</strong> Separate traits following ISP, as not all implementations need all operations:
+- Ed25519 signer: only signing/verification
+- ChaCha20Poly1305 cipher: only encryption/decryption
+- BLAKE2b hasher: only hashing
+- HKDF deriver: only key derivation</p>
+<hr />
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Verified Identifiers are a unifying abstraction enabling diverse trust models (DID, AID, future types) to operate together through TSP. Key architectural insights:</p>
+<ol>
+<li><strong>VID is category, not type:</strong> Encompasses DIDs, AIDs, and potential future identifier schemes</li>
+<li><strong>TSP is universal Layer 2:</strong> Enables trustworthy communication across VID types</li>
+<li><strong>Relationships, not registries:</strong> TSP relationship table pattern replaces global registry</li>
+<li><strong>Trust is multi-faceted:</strong> Cryptographic + governance + application policies</li>
+<li><strong>Gaps remain:</strong> Key rotation, governance integration, lifecycle management need standardization</li>
+<li><strong>STFX design principle:</strong> When operations are not universally co-required, separate into focused trait modules (ISP over pattern consistency)</li>
+</ol>
+<p><strong>For system architects:</strong> Start with DIDs for initial deployment, prepare for AID integration, implement extensible support system adapters, keep governance assessment separate from cryptographic verification.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>W3C DID Core v1.0:</strong> https://www.w3.org/TR/did-1.0/</li>
+<li><strong>Trust Spanning Protocol Specification:</strong> https://trustoverip.github.io/tswg-tsp-specification/</li>
+<li><strong>TSP SDK (Rust):</strong> https://github.com/openwallet-foundation-labs/tsp</li>
+<li><strong>KERI Specification:</strong> https://trustoverip.github.io/keri/</li>
+<li><strong>ToIP Technology Architecture:</strong> https://github.com/trustoverip/TechArch/blob/main/spec.md</li>
+<li><strong>TRQP (Trust Registry Query Protocol):</strong> https://github.com/trustoverip/tswg-trqp-specification</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cardosoalexandrecom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/alexandrecardoso" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

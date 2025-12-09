@@ -1,0 +1,1776 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A framework for decentralized trust and self-sovereign identity">
+      
+      
+        <meta name="author" content="Alexandre Cardoso (wwww.cardosoalexandre.com)">
+      
+      
+        <link rel="canonical" href="https://sovereigntrustframework.org/stfx-runtime_decision_analysis/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/STF_logo_nobf.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>📋 STFX Runtime — Architecture Decision Analysis - Sovereign Trust Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stfx-runtime-architecture-decision-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Sovereign Trust Framework" class="md-header__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sovereign Trust Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📋 STFX Runtime — Architecture Decision Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sovereign Trust Framework" class="md-nav__button md-logo" aria-label="Sovereign Trust Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sovereign Trust Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cardosoalexandrecom/sovereigntrustframework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cardosoalexandrecom/sovereigntrustframework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#design-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Design Goal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-1-abstraction-vs-no-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 1: Abstraction vs. No Abstraction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 1: Abstraction vs. No Abstraction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-no-abstraction-use-tokio-directly-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: No abstraction — use Tokio directly (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-define-runtime-trait-abstraction-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Define Runtime trait abstraction (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-2-trait-scope-narrow-vs-vast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 2: Trait Scope — Narrow vs. Vast
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 2: Trait Scope — Narrow vs. Vast">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-narrow-minimal-2-methods-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: NARROW (minimal) — 2 methods (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-medium-focused-5-methods-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: MEDIUM (focused) — 5 methods (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-vast-comprehensive-8-methods-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: VAST (comprehensive) — 8+ methods (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-3-task-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 3: Task Representation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 3: Task Representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-fire-and-forget-only-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Fire-and-forget only (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-task-handles-join-cancel-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Task handles + join + cancel (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-return-joinhandle-like-trait-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: Return JoinHandle-like trait (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-4-error-handling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 4: Error Handling Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 4: Error Handling Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-panic-on-error-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Panic on error (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-result-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Result (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-5-supporting-multiple-runtimes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 5: Supporting Multiple Runtimes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 5: Supporting Multiple Runtimes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-only-tokio-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Only Tokio (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-tokio-embassy-async-std-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Tokio + Embassy + async-std (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-6-embassy-compatibility-fire-and-forget-with-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 6: Embassy Compatibility (Fire-and-Forget with Channels)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 6: Embassy Compatibility (Fire-and-Forget with Channels)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-exempt-embassy-from-full-trait-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Exempt Embassy from full trait (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-simulate-with-channels-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Simulate with channels (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-7-naming-executor-vs-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 7: Naming — "Executor" vs. "Runtime"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 7: Naming — &#34;Executor&#34; vs. &#34;Runtime&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considered_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-executor-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Executor (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-runtime-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Runtime (CHOSEN ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-asyncruntime-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: AsyncRuntime (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-d-taskruntime-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option D: TaskRuntime (CONSIDERED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-8-feature-scope-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Decision 8: Feature Scope Boundaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Decision 8: Feature Scope Boundaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-question_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features Explicitly Out of Scope
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features Explicitly Out of Scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-block_on-syncasync-bridge-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. block_on() — Sync/Async Bridge (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-intervalsperiodic-timers-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Intervals/Periodic Timers (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-task-introspection-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Task Introspection (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-current-time-access-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Current Time Access (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-channelsync-abstractions-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Channel/Sync Abstractions (REJECTED)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Design Principles Applied
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Design Principles Applied">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-dependency-inversion-dip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dependency Inversion (DIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-single-responsibility-srp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Single Responsibility (SRP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-openclosed-ocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Open/Closed (OCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-interface-segregation-isp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interface Segregation (ISP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-liskov-substitution-lsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Liskov Substitution (LSP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-evolution-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 Future Evolution Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔮 Future Evolution Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 (Now)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-if-demand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 (If Demand)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 (Future)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intentionally-not-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intentionally NOT Planned
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-rationale-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 References &amp; Rationale Sources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 References &amp; Rationale Sources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solid-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLID Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stf-architectural-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STF Architectural Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-World Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="stfx-runtime-architecture-decision-analysis">📋 STFX Runtime — Architecture Decision Analysis<a class="headerlink" href="#stfx-runtime-architecture-decision-analysis" title="Permanent link">&para;</a></h1>
+<p>This document captures the design decisions behind <code>stfx-runtime</code>, the reasoning that led to them, and alternatives that were considered but rejected.</p>
+<hr />
+<h2 id="design-goal">🎯 Design Goal<a class="headerlink" href="#design-goal" title="Permanent link">&para;</a></h2>
+<p>Create a <strong>minimal, stable abstraction</strong> for async task execution that:
+- Works across <strong>servers</strong> (Tokio), <strong>embedded</strong> (Embassy), and <strong>alternatives</strong> (async-std)
+- Enables <strong>TSP SDK</strong> and future STF components to be runtime-agnostic
+- Complies with <strong>SOLID principles</strong> and <strong>STF architectural philosophy</strong>
+- Supports <strong>DIDComm</strong>, <strong>agents</strong>, and <strong>routers</strong> without forcing unnecessary complexity</p>
+<hr />
+<h2 id="decision-1-abstraction-vs-no-abstraction">📊 Decision 1: Abstraction vs. No Abstraction<a class="headerlink" href="#decision-1-abstraction-vs-no-abstraction" title="Permanent link">&para;</a></h2>
+<h3 id="the-question">The Question<a class="headerlink" href="#the-question" title="Permanent link">&para;</a></h3>
+<p>Should STFX define a <code>Runtime</code> trait, or just recommend using native async/await with Tokio as default?</p>
+<h3 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-no-abstraction-use-tokio-directly-rejected"><strong>Option A: No abstraction — use Tokio directly (REJECTED)</strong><a class="headerlink" href="#option-a-no-abstraction-use-tokio-directly-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// TSP SDK hard-coupled to Tokio</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#[tokio::main]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokio</span><span class="p">::</span><span class="n">spawn</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">});</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">tokio</span><span class="p">::</span><span class="n">time</span><span class="p">::</span><span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span><span class="p">::</span><span class="n">from_secs</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Simplest implementation
+- ✅ No abstraction overhead
+- ✅ All Tokio features available</p>
+<p><strong>Cons:</strong>
+- ❌ Cannot use Embassy (embedded IoT)
+- ❌ Cannot use async-std (alternative for compatibility)
+- ❌ Violates <strong>DIP</strong> (high-level code depends on concrete Tokio)
+- ❌ Blocks STFX from IoT/edge deployments
+- ❌ TSP must be rewritten for different runtimes</p>
+<p><strong>Why rejected:</strong> Contradicts STF's core mission of modularity and extensibility. Enterprise/institutional deployments may require specific runtimes (e.g., real-time systems, edge computing).</p>
+<hr />
+<h4 id="option-b-define-runtime-trait-abstraction-chosen"><strong>Option B: Define <code>Runtime</code> trait abstraction (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-define-runtime-trait-abstraction-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="p">:</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Task</span><span class="p">:</span><span class="w"> </span><span class="nb">Clone</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">timeout</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">F</span><span class="p">::</span><span class="n">Output</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Works with Tokio, async-std, Embassy, custom runtimes
+- ✅ Enables embedded/IoT deployments
+- ✅ Single TSP codebase, multiple deployment targets
+- ✅ Satisfies <strong>DIP</strong> (depends on abstraction, not concrete impl)
+- ✅ Testable with mock runtimes
+- ✅ Future-proof for new runtimes</p>
+<p><strong>Cons:</strong>
+- ⚠️ Slight abstraction overhead (1-2% performance impact)
+- ⚠️ Adds ~5 methods to implement per runtime
+- ⚠️ Embassy requires channel-based simulation for join/cancel</p>
+<p><strong>Why chosen:</strong> Benefits far outweigh costs. Abstraction overhead is negligible in practice. STFX's mission demands modularity. Community feedback from SSI projects (DIDComm maintainers) indicates need for runtime flexibility.</p>
+<hr />
+<h2 id="decision-2-trait-scope-narrow-vs-vast">📊 Decision 2: Trait Scope — Narrow vs. Vast<a class="headerlink" href="#decision-2-trait-scope-narrow-vs-vast" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_1">The Question<a class="headerlink" href="#the-question_1" title="Permanent link">&para;</a></h3>
+<p>What methods should <code>Runtime</code> expose? Should it be minimal or comprehensive?</p>
+<h3 id="alternatives-considered_1">Alternatives Considered<a class="headerlink" href="#alternatives-considered_1" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-narrow-minimal-2-methods-rejected"><strong>Option A: NARROW (minimal) — 2 methods (REJECTED)</strong><a class="headerlink" href="#option-a-narrow-minimal-2-methods-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Use cases covered:</strong>
+- ✅ Basic message spawning
+- ✅ Retry backoff delays</p>
+<p><strong>Use cases NOT covered:</strong>
+- ❌ Message timeouts (critical for TSP)
+- ❌ Graceful shutdown (need to join tasks)
+- ❌ Cancellation (abort stalled operations)</p>
+<p><strong>Why rejected:</strong> TSP needs timeout enforcement on message receive operations. Without it, a single stuck connection can block entire network. Graceful shutdown is essential for production deployments.</p>
+<hr />
+<h4 id="option-b-medium-focused-5-methods-chosen"><strong>Option B: MEDIUM (focused) — 5 methods (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-medium-focused-5-methods-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">timeout</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">F</span><span class="p">::</span><span class="n">Output</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Use cases covered:</strong>
+- ✅ Task spawning (concurrent message handling)
+- ✅ Task joining (graceful shutdown)
+- ✅ Task cancellation (abort stalled operations)
+- ✅ Delays (retry backoff)
+- ✅ Timeouts (enforce message deadlines)</p>
+<p><strong>Coverage:</strong>
+- ✅ TSP SDK needs
+- ✅ DIDComm agent needs (optional use)
+- ✅ Router/relay needs
+- ✅ Embedded device needs (Embassy)</p>
+<p><strong>Why chosen:</strong> Perfect balance. Covers all identified STF use cases without over-engineering. Every method is used by at least one known component.</p>
+<hr />
+<h4 id="option-c-vast-comprehensive-8-methods-rejected"><strong>Option C: VAST (comprehensive) — 8+ methods (REJECTED)</strong><a class="headerlink" href="#option-c-vast-comprehensive-8-methods-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// ... 5 core methods ...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Timer</span><span class="p">:</span><span class="w"> </span><span class="o">???</span><span class="p">;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Interval</span><span class="p">:</span><span class="w"> </span><span class="o">???</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">interval</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Interval</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">block_on</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">F</span><span class="p">::</span><span class="n">Output</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="p">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">current_task_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">TaskId</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">try_current_time</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">Instant</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Handles future edge cases
+- ✅ Some components might want intervals</p>
+<p><strong>Cons:</strong>
+- ❌ No identified need in STF ecosystem yet
+- ❌ <code>block_on</code> impossible to implement in Embassy
+- ❌ Task introspection not needed for TSP
+- ❌ Cognitive overhead (5 unused methods)
+- ❌ Over-specifies, locks future designs</p>
+<p><strong>Why rejected:</strong> Violates <strong>ISP</strong> (Interface Segregation). Adds functionality before demand. Can always extend later without breaking (add new methods to trait). Current scope is sufficient and proven by use case analysis.</p>
+<hr />
+<h2 id="decision-3-task-representation">📊 Decision 3: Task Representation<a class="headerlink" href="#decision-3-task-representation" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_2">The Question<a class="headerlink" href="#the-question_2" title="Permanent link">&para;</a></h3>
+<p>How should spawned tasks be represented? Return handle or fire-and-forget?</p>
+<h3 id="alternatives-considered_2">Alternatives Considered<a class="headerlink" href="#alternatives-considered_2" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-fire-and-forget-only-rejected"><strong>Option A: Fire-and-forget only (REJECTED)</strong><a class="headerlink" href="#option-a-fire-and-forget-only-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Simplest API
+- ✅ Works with all runtimes</p>
+<p><strong>Cons:</strong>
+- ❌ Cannot wait for task completion (breaks graceful shutdown)
+- ❌ Cannot cancel tasks (breaks timeout/abort scenarios)
+- ❌ Applications can't track in-flight operations
+- ❌ Memory leaks if spawned tasks accumulate</p>
+<p><strong>Why rejected:</strong> Graceful shutdown is essential for production systems. Without task handles, you cannot guarantee all message handlers complete before shutdown.</p>
+<hr />
+<h4 id="option-b-task-handles-join-cancel-chosen"><strong>Option B: Task handles + join + cancel (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-task-handles-join-cancel-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Task</span><span class="p">:</span><span class="w"> </span><span class="nb">Clone</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Enables graceful shutdown (wait for all tasks)
+- ✅ Enables cancellation (abort stalled operations)
+- ✅ Enables task tracking (store handles, monitor completion)
+- ✅ Enables batching (spawn N tasks, wait for all)</p>
+<p><strong>Cons:</strong>
+- ⚠️ Requires <code>type Task</code> associated type (more complex)
+- ⚠️ Embassy implementation needs simulation (channels)</p>
+<p><strong>Why chosen:</strong> Production requirements. Real systems must handle graceful shutdown and task cancellation. The added complexity is minimal and well-understood pattern.</p>
+<hr />
+<h4 id="option-c-return-joinhandle-like-trait-rejected"><strong>Option C: Return JoinHandle-like trait (REJECTED)</strong><a class="headerlink" href="#option-c-return-joinhandle-like-trait-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">TaskHandle</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="o">&lt;</span><span class="n">Output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">abort</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">TaskHandle</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Unified interface (join is just awaiting handle)</p>
+<p><strong>Cons:</strong>
+- ❌ Requires boxing (heap allocation per task)
+- ❌ Dynamic dispatch overhead
+- ❌ Cannot store handles in collections easily
+- ❌ Tokio's <code>JoinHandle</code> is generic (<code>JoinHandle&lt;T&gt;</code>), hard to trait-ify</p>
+<p><strong>Why rejected:</strong> Option B (associated type) is cleaner and more efficient. Avoids boxing/dynamic dispatch.</p>
+<hr />
+<h2 id="decision-4-error-handling-strategy">📊 Decision 4: Error Handling Strategy<a class="headerlink" href="#decision-4-error-handling-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_3">The Question<a class="headerlink" href="#the-question_3" title="Permanent link">&para;</a></h3>
+<p>Should <code>Runtime</code> methods return <code>Result</code> or panic/unwrap?</p>
+<h3 id="alternatives-considered_3">Alternatives Considered<a class="headerlink" href="#alternatives-considered_3" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-panic-on-error-rejected"><strong>Option A: Panic on error (REJECTED)</strong><a class="headerlink" href="#option-a-panic-on-error-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">// Panics if runtime is exhausted or task queue full</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Simpler API (no Result wrapping)</p>
+<p><strong>Cons:</strong>
+- ❌ Unrecoverable failures (application crashes)
+- ❌ Cannot handle runtime exhaustion gracefully
+- ❌ Violates error handling best practices
+- ❌ Embedded systems cannot tolerate panics</p>
+<p><strong>Why rejected:</strong> Production systems need to handle runtime exhaustion (task queue full), spawn failures, or timeout errors gracefully.</p>
+<hr />
+<h4 id="option-b-result-chosen"><strong>Option B: Result<T, Self::Error> (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-result-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Error</span><span class="p">:</span><span class="w"> </span><span class="nc">Error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">timeout</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="nc">Duration</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">F</span><span class="p">::</span><span class="n">Output</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Recoverable errors (applications can handle failures)
+- ✅ Explicit error handling (compiler enforces)
+- ✅ Matches Rust ecosystem conventions
+- ✅ Enables graceful degradation</p>
+<p><strong>Cons:</strong>
+- ⚠️ Slightly more verbose (<code>.map_err()</code>, <code>?</code> operator usage)</p>
+<p><strong>Why chosen:</strong> Rust best practice. Real systems must handle errors. In practice, error handling is minimal (usually just propagate with <code>?</code>).</p>
+<hr />
+<h2 id="decision-5-supporting-multiple-runtimes">📊 Decision 5: Supporting Multiple Runtimes<a class="headerlink" href="#decision-5-supporting-multiple-runtimes" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_4">The Question<a class="headerlink" href="#the-question_4" title="Permanent link">&para;</a></h3>
+<p>Should STFX provide implementations for Tokio, async-std, and Embassy from day one, or just Tokio as default?</p>
+<h3 id="alternatives-considered_4">Alternatives Considered<a class="headerlink" href="#alternatives-considered_4" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-only-tokio-rejected"><strong>Option A: Only Tokio (REJECTED)</strong><a class="headerlink" href="#option-a-only-tokio-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>stfx-runtime/        ← Core trait
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>stfx-runtime-tokio/  ← Only implementation
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Simpler maintenance (1 implementation)
+- ✅ Tokio is dominant in ecosystem</p>
+<p><strong>Cons:</strong>
+- ❌ Embedded IoT impossible (no Embassy impl)
+- ❌ async-std users must reimplement
+- ❌ Reduces value of abstraction (only 1 implementation)
+- ❌ Community might fork/duplicate effort</p>
+<p><strong>Why rejected:</strong> Abstraction is only valuable with multiple implementations. Embedded use case is critical for STF (IoT identity management). Proves ecosystem adoption.</p>
+<hr />
+<h4 id="option-b-tokio-embassy-async-std-chosen"><strong>Option B: Tokio + Embassy + async-std (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-tokio-embassy-async-std-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>stfx-runtime/                  ← Core trait
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>stfx-runtime-tokio/            ← Tokio (servers, cloud)
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>stfx-runtime-embassy/          ← Embassy (embedded)
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>stfx-runtime-async-std/        ← async-std (alternatives)
+</code></pre></div>
+<p><strong>Coverage:</strong>
+- ✅ Tokio: 80%+ of Rust async market
+- ✅ Embassy: Growing embedded/IoT ecosystem
+- ✅ async-std: Compatibility, academic projects
+- ✅ Future: glommio, smol, custom runtimes</p>
+<p><strong>Why chosen:</strong> Three implementations prove abstraction is solid. Cover major use cases: cloud (Tokio), IoT (Embassy), alternatives (async-std). Establishes pattern for future community implementations.</p>
+<hr />
+<h2 id="decision-6-embassy-compatibility-fire-and-forget-with-channels">📊 Decision 6: Embassy Compatibility (Fire-and-Forget with Channels)<a class="headerlink" href="#decision-6-embassy-compatibility-fire-and-forget-with-channels" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_5">The Question<a class="headerlink" href="#the-question_5" title="Permanent link">&para;</a></h3>
+<p>How do we implement <code>join()</code> and <code>cancel()</code> in Embassy, which has no native task handles?</p>
+<h3 id="alternatives-considered_5">Alternatives Considered<a class="headerlink" href="#alternatives-considered_5" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-exempt-embassy-from-full-trait-rejected"><strong>Option A: Exempt Embassy from full trait (REJECTED)</strong><a class="headerlink" href="#option-a-exempt-embassy-from-full-trait-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">EmbassyCompatibleRuntime</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">spawn</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&#39;</span><span class="nb">static</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="c1">// No join, no cancel — fire-and-forget only</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Simpler Embassy implementation</p>
+<p><strong>Cons:</strong>
+- ❌ Breaks TSP graceful shutdown on Embassy
+- ❌ Different code paths for different runtimes
+- ❌ Reduces Embassy appeal for serious deployments
+- ❌ Violates <strong>Liskov Substitution</strong> (different behavior)</p>
+<p><strong>Why rejected:</strong> STF demands identical behavior across runtimes. Embedded deployments need graceful shutdown too (e.g., wireless sensor networks).</p>
+<hr />
+<h4 id="option-b-simulate-with-channels-chosen"><strong>Option B: Simulate with channels (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-simulate-with-channels-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// In stfx-runtime-embassy</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="cp">#[derive(Clone)]</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">EmbassyTask</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="n">done_rx</span><span class="p">:</span><span class="w"> </span><span class="nc">Receiver</span><span class="o">&lt;&#39;</span><span class="nb">static</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Notification channel</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="nc">EmbassyTask</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="n">task</span><span class="p">.</span><span class="n">done_rx</span><span class="p">.</span><span class="n">recv</span><span class="p">().</span><span class="k">await</span><span class="p">;</span><span class="w">  </span><span class="c1">// Wait for completion signal</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="p">}</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_task</span><span class="p">:</span><span class="w"> </span><span class="nc">EmbassyTask</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="c1">// Best-effort: dropping the signal receiver prevents clean join</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="c1">// Task continues but join will timeout</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Full trait compatibility
+- ✅ Identical API across all runtimes
+- ✅ Graceful shutdown works on embedded
+- ✅ Enables resource cleanup</p>
+<p><strong>Cons:</strong>
+- ⚠️ Extra channel overhead (small, acceptable)
+- ⚠️ Cancel is "best-effort" (task continues but join fails)</p>
+<p><strong>Why chosen:</strong> Enables embedded use case without sacrificing API compatibility. Channel overhead is negligible (~1KB per task). Acceptable for IoT identity management workflows.</p>
+<hr />
+<h2 id="decision-7-naming-executor-vs-runtime">📊 Decision 7: Naming — "Executor" vs. "Runtime"<a class="headerlink" href="#decision-7-naming-executor-vs-runtime" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_6">The Question<a class="headerlink" href="#the-question_6" title="Permanent link">&para;</a></h3>
+<p>What should we call this trait? <code>Executor</code>, <code>Runtime</code>, <code>AsyncRuntime</code>, <code>TaskRuntime</code>, or something else?</p>
+<h3 id="alternatives-considered_6">Alternatives Considered<a class="headerlink" href="#alternatives-considered_6" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-executor-rejected"><strong>Option A: <code>Executor</code> (REJECTED)</strong><a class="headerlink" href="#option-a-executor-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Executor</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Technically accurate (it's an executor in Rust terms)</p>
+<p><strong>Cons:</strong>
+- ❌ Conflicts with <code>std::task::Executor</code> (confusing)
+- ❌ Doesn't convey scope (spawn + time management)
+- ❌ "Executor" is jargon (less accessible)
+- ❌ Suggests low-level task dispatching (it's higher-level)</p>
+<p><strong>Why rejected:</strong> Name confusion with standard library. Broader scope than "executor" suggests.</p>
+<hr />
+<h4 id="option-b-runtime-chosen"><strong>Option B: <code>Runtime</code> (CHOSEN ✅)</strong><a class="headerlink" href="#option-b-runtime-chosen" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Industry standard term (Tokio is "a runtime", async-std is "a runtime")
+- ✅ Clear to users
+- ✅ Correctly conveys full async execution environment
+- ✅ Works for Tokio, async-std, Embassy (despite Embassy being technically an executor)</p>
+<p><strong>Cons:</strong>
+- ⚠️ Not 100% technically precise for Embassy (it's an executor, not a runtime)
+- ⚠️ Slight terminology looseness</p>
+<p><strong>Why chosen:</strong> Clarity wins. Documentation clarifies that "runtime" covers runtimes, executors, and frameworks. Industry understanding outweighs technical precision.</p>
+<hr />
+<h4 id="option-c-asyncruntime-rejected"><strong>Option C: <code>AsyncRuntime</code> (REJECTED)</strong><a class="headerlink" href="#option-c-asyncruntime-rejected" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">AsyncRuntime</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ More specific than <code>Runtime</code>
+- ✅ Emphasizes async context</p>
+<p><strong>Cons:</strong>
+- ❌ Verbose (redundant "async" — all are async)
+- ❌ Less familiar to users
+- ❌ Breaks naming consistency with ecosystem</p>
+<p><strong>Why rejected:</strong> "Runtime" is sufficient and matches Tokio/async-std naming conventions.</p>
+<hr />
+<h4 id="option-d-taskruntime-considered"><strong>Option D: <code>TaskRuntime</code> (CONSIDERED)</strong><a class="headerlink" href="#option-d-taskruntime-considered" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">TaskRuntime</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Pros:</strong>
+- ✅ Very specific (task spawning + timing)
+- ✅ Avoids confusion with std::task::Executor</p>
+<p><strong>Cons:</strong>
+- ❌ Unusual term (not industry standard)
+- ❌ Less recognizable</p>
+<p><strong>Why rejected:</strong> <code>Runtime</code> is clearer and more familiar.</p>
+<hr />
+<h2 id="decision-8-feature-scope-boundaries">📊 Decision 8: Feature Scope Boundaries<a class="headerlink" href="#decision-8-feature-scope-boundaries" title="Permanent link">&para;</a></h2>
+<h3 id="the-question_7">The Question<a class="headerlink" href="#the-question_7" title="Permanent link">&para;</a></h3>
+<p>What features should <code>stfx-runtime</code> intentionally NOT include?</p>
+<h3 id="features-explicitly-out-of-scope">Features Explicitly Out of Scope<a class="headerlink" href="#features-explicitly-out-of-scope" title="Permanent link">&para;</a></h3>
+<h4 id="1-block_on-syncasync-bridge-rejected"><strong>1. <code>block_on()</code> — Sync/Async Bridge (REJECTED)</strong><a class="headerlink" href="#1-block_on-syncasync-bridge-rejected" title="Permanent link">&para;</a></h4>
+<p><strong>Why excluded:</strong>
+- ❌ Cannot be implemented in Embassy (no sync context in interrupt-driven systems)
+- ❌ Not needed for STF workflows (always async)
+- ❌ Violates async-first philosophy
+- ❌ Encourages anti-patterns (blocking in async code)</p>
+<p><strong>Alternative:</strong> Use <code>tokio::task::block_in_place()</code> if you specifically need sync code in Tokio.</p>
+<hr />
+<h4 id="2-intervalsperiodic-timers-rejected"><strong>2. Intervals/Periodic Timers (REJECTED)</strong><a class="headerlink" href="#2-intervalsperiodic-timers-rejected" title="Permanent link">&para;</a></h4>
+<p><strong>Why excluded:</strong>
+- ❌ Can be composed from <code>spawn</code> + <code>sleep</code> loop
+- ❌ Not essential for TSP message handling
+- ❌ Adds API surface</p>
+<p><strong>Alternative:</strong> For periodic tasks, spawn a loop with sleep:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">runtime</span><span class="p">.</span><span class="n">spawn</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">        </span><span class="n">runtime</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">        </span><span class="c1">// Do work</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">})</span><span class="o">?</span><span class="p">;</span>
+</code></pre></div></p>
+<hr />
+<h4 id="3-task-introspection-rejected"><strong>3. Task Introspection (REJECTED)</strong><a class="headerlink" href="#3-task-introspection-rejected" title="Permanent link">&para;</a></h4>
+<p><strong>Why excluded:</strong>
+- ❌ Not needed for STF functionality
+- ❌ Varies per runtime (Tokio has IDs, Embassy doesn't)
+- ❌ Adds complexity</p>
+<p><strong>Alternative:</strong> If needed, applications manage their own task metadata.</p>
+<hr />
+<h4 id="4-current-time-access-rejected"><strong>4. Current Time Access (REJECTED)</strong><a class="headerlink" href="#4-current-time-access-rejected" title="Permanent link">&para;</a></h4>
+<p><strong>Why excluded:</strong>
+- ❌ Runtime abstraction is about task execution, not timekeeping
+- ❌ Can be done with separate <code>Clock</code> trait if needed
+- ❌ Orthogonal concern</p>
+<p><strong>Alternative:</strong> Use runtime-specific time (<code>tokio::time::Instant</code>, <code>embassy_time::Instant</code>).</p>
+<hr />
+<h4 id="5-channelsync-abstractions-rejected"><strong>5. Channel/Sync Abstractions (REJECTED)</strong><a class="headerlink" href="#5-channelsync-abstractions-rejected" title="Permanent link">&para;</a></h4>
+<p><strong>Why excluded:</strong>
+- ❌ Each runtime has good primitives (<code>tokio::sync</code>, <code>embassy_sync</code>)
+- ❌ Not needed at this abstraction level
+- ❌ Belong in separate crate if needed</p>
+<p><strong>Alternative:</strong> Use runtime-specific channels.</p>
+<hr />
+<h2 id="design-principles-applied">🎯 Design Principles Applied<a class="headerlink" href="#design-principles-applied" title="Permanent link">&para;</a></h2>
+<h3 id="1-dependency-inversion-dip">1. <strong>Dependency Inversion (DIP)</strong><a class="headerlink" href="#1-dependency-inversion-dip" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ High-level code depends on <code>Runtime</code> trait, not Tokio</li>
+<li>✅ Implementations depend on trait</li>
+<li>✅ Eliminates coupling</li>
+</ul>
+<h3 id="2-single-responsibility-srp">2. <strong>Single Responsibility (SRP)</strong><a class="headerlink" href="#2-single-responsibility-srp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <code>stfx-runtime</code> does ONE thing: async task abstraction</li>
+<li>✅ Each implementation crate handles one runtime</li>
+<li>✅ Timekeeping is separate (external)</li>
+</ul>
+<h3 id="3-openclosed-ocp">3. <strong>Open/Closed (OCP)</strong><a class="headerlink" href="#3-openclosed-ocp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Trait is closed for modification</li>
+<li>✅ Open for extension (new implementations)</li>
+<li>✅ New runtimes don't require trait changes</li>
+</ul>
+<h3 id="4-interface-segregation-isp">4. <strong>Interface Segregation (ISP)</strong><a class="headerlink" href="#4-interface-segregation-isp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Only essential methods exposed (spawn, join, cancel, sleep, timeout)</li>
+<li>✅ No forced dependencies on unused features</li>
+<li>✅ Minimal, focused API</li>
+</ul>
+<h3 id="5-liskov-substitution-lsp">5. <strong>Liskov Substitution (LSP)</strong><a class="headerlink" href="#5-liskov-substitution-lsp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Any <code>Runtime</code> impl substitutable for another</li>
+<li>✅ Code written for trait works with all implementations</li>
+<li>✅ No surprising behavioral differences</li>
+</ul>
+<hr />
+<h2 id="future-evolution-path">🔮 Future Evolution Path<a class="headerlink" href="#future-evolution-path" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-now">Phase 1 (Now)<a class="headerlink" href="#phase-1-now" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <code>stfx-runtime</code> core trait (5 methods)</li>
+<li>✅ <code>stfx-runtime-tokio</code> (default, production)</li>
+<li>✅ <code>stfx-runtime-embassy</code> (embedded support)</li>
+<li>✅ <code>stfx-runtime-async-std</code> (compatibility)</li>
+</ul>
+<h3 id="phase-2-if-demand">Phase 2 (If Demand)<a class="headerlink" href="#phase-2-if-demand" title="Permanent link">&para;</a></h3>
+<ul>
+<li>🟡 <code>stfx-runtime-smol</code> (lightweight)</li>
+<li>🟡 <code>stfx-runtime-glommio</code> (high-perf servers)</li>
+<li>🟡 <code>stfx-clock</code> (separate time abstraction, if needed)</li>
+</ul>
+<h3 id="phase-3-future">Phase 3 (Future)<a class="headerlink" href="#phase-3-future" title="Permanent link">&para;</a></h3>
+<ul>
+<li>🟢 <code>stfx-runtime-quic</code> (QUIC-specific optimization)</li>
+<li>🟢 <code>stfx-runtime-custom</code> (user framework integration guide)</li>
+<li>🟢 Ecosystem integrations (Bevy, Warp, etc.)</li>
+</ul>
+<h3 id="intentionally-not-planned">Intentionally NOT Planned<a class="headerlink" href="#intentionally-not-planned" title="Permanent link">&para;</a></h3>
+<ul>
+<li>❌ Channels in core (use runtime-specific)</li>
+<li>❌ Sync primitives (async-first)</li>
+<li>❌ Time/clock traits (separate if needed)</li>
+<li>❌ Complex task graphs (beyond scope)</li>
+</ul>
+<hr />
+<h2 id="references-rationale-sources">📚 References &amp; Rationale Sources<a class="headerlink" href="#references-rationale-sources" title="Permanent link">&para;</a></h2>
+<h3 id="solid-principles">SOLID Principles<a class="headerlink" href="#solid-principles" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>DIP</strong> (Dependency Inversion): Prevents TSP coupling to Tokio</li>
+<li><strong>SRP</strong> (Single Responsibility): Each crate has one reason to change</li>
+<li><strong>OCP</strong> (Open/Closed): New runtimes without modifying trait</li>
+<li><strong>ISP</strong> (Interface Segregation): Only essential methods</li>
+<li><strong>LSP</strong> (Liskov Substitution): All impls behave identically</li>
+</ul>
+<h3 id="stf-architectural-philosophy">STF Architectural Philosophy<a class="headerlink" href="#stf-architectural-philosophy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reusability</strong>: Trait is reusable across projects</li>
+<li><strong>Modularity</strong>: Loose coupling between TSP and runtime</li>
+<li><strong>Extensibility</strong>: Community can add new implementations</li>
+</ul>
+<h3 id="real-world-constraints">Real-World Constraints<a class="headerlink" href="#real-world-constraints" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>IoT/Embedded</strong>: Embassy support is critical</li>
+<li><strong>Cloud/Server</strong>: Tokio is dominant</li>
+<li><strong>Alternatives</strong>: async-std for compatibility</li>
+</ul>
+<h3 id="design-patterns">Design Patterns<a class="headerlink" href="#design-patterns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Strategy Pattern</strong>: Runtime trait, implementations are strategies</li>
+<li><strong>Adapter Pattern</strong>: Embassy adapter uses channels</li>
+<li><strong>Factory Pattern</strong>: Applications choose which runtime to inject</li>
+</ul>
+<hr />
+<h2 id="validation">✅ Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>This design has been validated against:
+- ✅ TSP SDK requirements (spawn, timeout, graceful shutdown)
+- ✅ DIDComm integration needs (optional timeout)
+- ✅ Embedded IoT deployment (Embassy support)
+- ✅ SOLID principles (all 5 satisfied)
+- ✅ STF architectural goals (modularity, extensibility)
+- ✅ Community feedback (SSI ecosystem input)</p>
+<hr />
+<h2 id="conclusion">🎯 Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p><strong>stfx-runtime</strong> represents a carefully balanced design that:
+- 🎯 Solves real problems (TSP runtime coupling, embedded support)
+- 🎯 Maintains simplicity (5 core methods, clear semantics)
+- 🎯 Enables extensibility (new runtimes, future use cases)
+- 🎯 Follows best practices (SOLID, Rust idioms)
+- 🎯 Serves the broader STF ecosystem (modularity, reusability)</p>
+<p>Every design decision trades off simplicity, functionality, and extensibility. This particular balance was chosen to maximize STFX's impact on decentralized identity infrastructure while remaining pragmatic and implementable.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cardosoalexandrecom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/alexandrecardoso" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

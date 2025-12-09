@@ -2,14 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sovereigntrustframework.org/</loc>
-         <lastmod>2025-12-01</lastmod>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/00-RESOLUTION-OVER-MODULARIZATION/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/STFX-CRYPTO-DESIGN-SUMMARY/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/STFX-CRYPTO-DOCUMENTATION-INDEX/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/STFX-CRYPTO-VISUAL-SUMMARY/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/VID-IMPLEMENTATION-ANALYSIS/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/arch_DIP_SOLID/</loc>
+         <lastmod>2025-12-09</lastmod>
     </url>
     <url>
          <loc>https://sovereigntrustframework.org/architecture/</loc>
-         <lastmod>2025-12-01</lastmod>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/architecural_principles/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/references/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-crypto-api-analysis/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-crypto-implementation-layers/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-crypto/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-runtime/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-runtime_decision_analysis/</loc>
+         <lastmod>2025-12-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sovereigntrustframework.org/stfx-transport/</loc>
+         <lastmod>2025-12-09</lastmod>
     </url>
     <url>
          <loc>https://sovereigntrustframework.org/STF-IDENTITY/canonicaldid/</loc>
-         <lastmod>2025-12-01</lastmod>
+         <lastmod>2025-12-09</lastmod>
     </url>
 </urlset>
