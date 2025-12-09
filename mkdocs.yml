@@ -51,6 +51,25 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Architecture: architecture.md
+  - References: references.md
+  - Core Modules:
+      - STFX Crypto: stfx-crypto.md
+      - STFX Runtime: stfx-runtime.md
+      - STFX Transport: stfx-transport.md
+  - Identity:
+      - VID Implementation: VID-IMPLEMENTATION-ANALYSIS.md
+  - Design Documentation:
+      - Crypto API Analysis: stfx-crypto-api-analysis.md
+      - Crypto Design Summary: STFX-CRYPTO-DESIGN-SUMMARY.md
+      - Crypto Implementation Layers: stfx-crypto-implementation-layers.md
+      - Crypto Visual Summary: STFX-CRYPTO-VISUAL-SUMMARY.md
+      - Crypto Documentation Index: STFX-CRYPTO-DOCUMENTATION-INDEX.md
+      - Runtime Decision Analysis: stfx-runtime_decision_analysis.md
+      - Resolution Over Modularization: 00-RESOLUTION-OVER-MODULARIZATION.md
+  - Architectural Principles:
+      - Overview: architecural_principles.md
+      - DIP & SOLID: arch_DIP_SOLID.md
 
 extra:
   social:
