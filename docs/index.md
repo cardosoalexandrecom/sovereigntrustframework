@@ -1,56 +1,178 @@
+---
+title: Sovereign Trust Framework Home Page
+description: Home Page
+---
 # Sovereign Trust Framework (STF)
 
-**Orchestrating Trust Over IP (ToIP) Components for Self-Sovereign Identity (SSI)**
+**Trait-Driven, Modular Foundation for Trust Over IP (ToIP) and Self-Sovereign Identity (SSI)**
+
+---
 
 ## Introduction to the Sovereign Trust Framework (STF)
 
-The Sovereign Trust Framework (STF) is an innovative orchestration layer designed to enhance Self-Sovereign Identity (SSI) systems by integrating and extending components from the Trust Over IP (ToIP) Foundation's stack [[1]](/references/#ref1). STF focuses on policy-driven trust management, enabling secure, privacy-preserving interactions in decentralized ecosystems. It contributes to ToIP by providing modular tools for credential orchestration, trust negotiation, and governance interoperability, without competing with existing standards.
+The **Sovereign Trust Framework (STF)** is an innovative orchestration layer designed to enhance **Self-Sovereign Identity (SSI)** systems by integrating and extending components from the [Trust Over IP (ToIP)](https://trustoverip.org/) Foundation's technology stack. STF focuses on providing modular, trait-driven abstractions for building interoperable, policy-driven trust systems that enable secure, privacy-preserving interactions in decentralized ecosystems.
 
-STF addresses gaps in decentralized trust, such as privacy-preserving feedback and attack resilience, building on protocols like DidTrust [[2]](/references/#ref2). This framework empowers users to control their identifiers, verifiable credentials (VCs), and trust relationships through minimal disclosure and explicit consent.
+STF contributes to ToIP by providing:
+- **Modular trait-based interfaces** for cryptography, identity, runtime, and transport
+- **Protocol-agnostic foundations** supporting TSP, DIDComm, HTTP, BLE, and future protocols
+- **Maximum reusability** of existing battle-tested Rust crates
+- **Deployment flexibility** across servers, cloud, embedded devices, and WASM
+- **Clean abstractions** that facilitate adoption without competing with existing standards
 
-## High-Level Vision
+### ToIP Foundation and the "Hourglass" Model
 
-STF orchestrates ToIP's four-layer model (public utilities, peer-to-peer communication, credential exchange, and ecosystems) with policy-driven enhancements [[1]](/references/#ref1). It integrates Decentralized Identifiers (DIDs), VCs, and trust registries to facilitate dynamic trust negotiation, as seen in real-world SSI applications discussed at the Internet Identity Workshop (IIW) [[3]](/references/#ref3).
+STFX primarily focuses on ToIP's foundational layers (Layer 0 and Layer 1), respecting the **"hourglass" philosophy** adopted by ToIP. This hourglass approach makes **Layer 2 (Trust Spanning Layer)** the central convergence point of the ToIP stack.
 
-![STF Architecture Diagram](assets/stf-architecture.png)  
-*(Placeholder for a layered stack diagram showing STF atop ToIP components. Create using tools like Draw.io and place in the 'assets' folder.)*
+**Key ToIP Requirement:** A ToIP endpoint system MUST communicate with another ToIP endpoint system using the **Trust Spanning Protocol (TSP)** [REQ L2.1].
 
-## Key Principles
+This design creates:
+- **Diversity below Layer 2**: Many cryptographic algorithms, transport mechanisms, and identity formats
+- **Convergence at Layer 2**: Universal messaging protocol (TSP) as the narrow waist
+- **Diversity above Layer 2**: Many applications, use cases, trust frameworks, and governance models
 
-| Principle                  | Description |
-|----------------------------|-------------|
-| Governance-Agnostic       | Supports any governance model without imposing one, aligning with ToIP's flexibility [[1]](/references/#ref1). |
-| Transport-Agnostic        | Works across protocols like DIDComm or HTTP, ensuring broad interoperability. |
-| Policy-Schema-Agnostic    | Accommodates diverse policy formats (e.g., Rego, JSON schemas) for trust rules. |
-| Privacy-Preserving by Default | Incorporates zero-knowledge proofs and minimal disclosure, inspired by DidTrust's SMPC framework [[2]](/references/#ref2). |
-| Composable and Modular    | Builds on open standards for easy integration. |
-| Interoperable and Open    | Relies on W3C DIDs and VCs for global compatibility. |
+STF provides the foundational abstractions enabling this architecture without enforcing specific implementations.
 
-## Why STF Matters
+---
 
-In digital ecosystems, trustworthy data exchange is critical, yet centralized identities risk single points of failure [[2]](/references/#ref2). SSI and ToIP address this but lack robust policy orchestration for trust attacks (e.g., Sybil or bad-mouthing) [[2]](/references/#ref2). STF fills this gap by enabling resilient, privacy-focused trust management, as highlighted in discussions on decentralized trust graphs at IIW [[3]](/references/#ref3).
+## STF High-Level Vision
 
-## Applications
+STF addresses ToIP's requirement [REQ A.2]: *"In a ToIP endpoint system, the higher layers of the ToIP protocol stack MUST communicate with the lower layers via defined interfaces."*
 
-- **Secure Messaging**: Policy-enforced encryption for SSI-based communication.
-- **Regulatory Compliance**: Automated KYC/AML via verifiable credentials, as explored in IIW sessions on SEDI [[3]](/references/#ref3).
-- **Reputation Systems**: Trust scoring in DAOs, resistant to manipulation [[2]](/references/#ref2).
-- **Citizen Services and IoT**: Decentralized access control for public services and devices.
+**Key Observations:**
+- ToIP/SSI is a rapidly evolving area with diverse developments across applications, prototypes, and specifications
+- Current implementations (DIDComm, various DID methods) must be supported while enabling new approaches
+- ToIP Layer 2 centers on TSP, but existing implementations like DIDComm remain important
+- Well-defined layer interfaces are critical for portability, modularity, and evolution
 
-## Resources
+**STF Approach:**
+- Define **trait-based interfaces** for Layer 0 (runtime/transport) and Layer 1 (crypto/identity)
+- Enable Layer 2/3/4 implementations to remain **self-contained, modular, and abstract**
+- Support TSP as primary Layer 2 protocol while accommodating DIDComm and future protocols
+- Maximize **reusability** of existing Rust crates rather than reimplementation
 
-- **Getting Started**: Tutorials on DIDs, VCs, and policies.
-- **[Architecture](architecture.md)**: Detailed layers and protocols.
-- **Use Cases**: Diagrams and examples.
-- **FAQ/Glossary**: Key terms defined.
+Since ToIP has no official layer interfaces, STF defines foundational trait interfaces based on TSP requirements and SSI best practices.
 
-Explore the full documentation in the navigation menu.
+### Implementation: STFX Crates
 
-## Join the STF Community
+STF is implemented through a collection of **STFX** (STF eXtensions) Rust crates that provide concrete trait definitions and implementations following the two-layer pattern.
 
+---
 
-STF is an open framework. Contributions, feedback, and proposals from developers, researchers, organizations, and ecosystem partners are welcome.
+## Core Design Principles
 
+STF follows **SOLID principles** with a focus on:
+
+- **Single Responsibility**: Each trait has one clear purpose
+- **Interface Segregation**: Clients depend only on traits they use (e.g., `Signer` ≠ `SignatureVerifier`)
+- **Dependency Inversion**: Depend on traits, not concrete implementations
+
+### Two-Layer Pattern
+- **Layer 1 (Base Traits)**: Minimal, ISP-compliant abstractions
+- **Layer 2 (Helper Wrappers)**: Convenience structs combining traits
+
+---
+
+## STF Modules (STFX Crates)
+
+STF provides **five foundational modules** implemented as STFX crates:
+
+| Module | Purpose | Documentation |
+|--------|---------|---------------|
+| **stfx-crypto** | Cryptographic operations (signing, encryption, hashing, KDF) | [stfx-crypto.md](./stfx-crypto.md) |
+| **stfx-vid** | Verifiable identity (creation, resolution, verification) | [VID Analysis](./VID-IMPLEMENTATION-ANALYSIS.md) |
+| **stfx-runtime** | Async execution abstraction (Tokio, Embassy, async-std) | [stfx-runtime.md](./stfx-runtime.md) |
+| **stfx-transport** | Transport mechanisms (HTTP, BLE, NFC, WebSockets) | [stfx-transport.md](./stfx-transport.md) |
+| **Trust Decision Engines** | Trust evaluation frameworks (future component) | TBD |
+
+---
+
+## ToIP Alignment
+
+STF implements the complete ToIP technology stack foundation:
+
+| ToIP Layer | STF Module (STFX Crate) |
+|-----------|-------------|
+| **Layer 0: Foundation** | `stfx-runtime`, `stfx-transport` |
+| **Layer 1: Trust Support** | `stfx-crypto`, `stfx-vid` |
+| **Layer 2: Trust Spanning** | Integration kits (TSP, DIDComm) |
+| **Layer 3: Trust Tasks** | Trust Decision Engines (future) |
+| **Layer 4: Applications** | Built on STF Layers 0-3 |
+
+### ToIP "Hourglass" Philosophy
+
+STF respects ToIP's **hourglass model** where **Layer 2 (Trust Spanning)** is the narrow waist:
+- **Below Layer 2**: Maximum diversity (many crypto algorithms, transports, identity formats)
+- **Layer 2**: Convergence on universal messaging — ToIP requires endpoints communicate via **Trust Spanning Protocol (TSP)** [REQ L2.1]
+- **Above Layer 2**: Application diversity (many use cases, trust frameworks, governance models)
+
+### ToIP Layer 1: Trust Support Functions
+
+ToIP Layer 1 provides "trust support functions" that STF abstracts through `stfx-crypto` and `stfx-vid` crates:
+
+**Machine-to-Machine Trust:**
+- Cryptographic hardware modules for key material generation
+- Secure storage of secrets and cryptographic materials
+- Secure computing environments
+- Communication functions for deployment environments
+
+**Human-to-Human Trust:**
+- Identity binding mechanisms (biometrics, hardware attestation)
+- Trusted Platform Modules (TPM) and confidential computing
+- Hardware-based trust attestation systems
+
+STF provides trait abstractions enabling these functions while remaining implementation-agnostic.
+
+---
+
+## Integration Kits
+
+**Integration kits** combine STF traits (from STFX crates) into protocol-specific bundles:
+- **TSPCrypto**: Combines signing, verification, encryption for TSP
+- **DIDCommCrypto**: Combines HPKE + ChaCha20 for DIDComm
+- **TSPVIDHandler**: Combines identity traits for TSP
+
+Integration kits live primarily in **protocol repositories** with reference implementations in STF when appropriate.
+
+---
+
+## Architecture
+
+For comprehensive architectural details, including:
+- SOLID principles application
+- Two-layer pattern specifications
+- Module dependency graph
+- Complete ToIP stack mapping
+- Integration kit patterns and governance
+
+See the **[STF Architecture](./architecture.md)** page.
+
+---
+
+## Technical Documentation
+
+### Cryptographic Layer
+- **[stfx-crypto](./stfx-crypto.md)** — Trait specifications and design
+- **[Crypto API Analysis](./stfx-crypto-api-analysis.md)** — Design decisions
+- **[Implementation Layers](./stfx-crypto-implementation-layers.md)** — Layer analysis
+
+### Identity Layer
+- **[VID Implementation Analysis](./VID-IMPLEMENTATION-ANALYSIS.md)** — Identity abstraction design
+- **[Canonical DID](./STF-IDENTITY/canonicaldid.md)** — cDID model
+
+### Runtime & Transport
+- **[stfx-runtime](./stfx-runtime.md)** — Async execution abstraction
+- **[stfx-transport](./stfx-transport.md)** — Transport mechanisms
+
+### Architectural Decisions
+- **[Architecture Overview](./architecture.md)** — Complete architecture
+- **[Architectural Principles](./architecural_principles.md)** — Design principles
+- **[SOLID & DIP](./arch_DIP_SOLID.md)** — SOLID principles application
+
+## References
+
+A list of relevant references can be found in the [References](./references.md) page.
+
+## Ongoing Work
 Visit the GitHub repository at:
 
 **https://github.com/sovereigntrustframework**

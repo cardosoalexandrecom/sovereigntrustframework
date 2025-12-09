@@ -9,6 +9,7 @@ repo_name: cardosoalexandrecom/sovereigntrustframework
 
 theme:
   name: material
+  favicon: img/STF_logo_nobf.png
   palette:
     # Light mode
     - scheme: default
