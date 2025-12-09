@@ -157,7 +157,6 @@ See the **[STF Architecture](./architecture.md)** page.
 
 ### Identity Layer
 - **[VID Implementation Analysis](./VID-IMPLEMENTATION-ANALYSIS.md)** — Identity abstraction design
-- **[Canonical DID](./STF-IDENTITY/canonicaldid.md)** — cDID model
 
 ### Runtime & Transport
 - **[stfx-runtime](./stfx-runtime.md)** — Async execution abstraction
@@ -175,7 +174,7 @@ A list of relevant references can be found in the [References](./references.md) 
 ## Ongoing Work
 Visit the GitHub repository at:
 
-**https://github.com/sovereigntrustframework**
+**[https://github.com/sovereigntrustframework](https://github.com/sovereigntrustframework)**
 
 ## Author & License
 Author: **[Alexandre Cardoso](www.cardosoalexandre.com)** 
